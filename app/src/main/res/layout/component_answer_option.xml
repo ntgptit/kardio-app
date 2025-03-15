@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <LinearLayout
+        android:id="@+id/answer_option_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_answer_option"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/input_field_height"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/padding_md"
+        android:paddingTop="@dimen/padding_sm"
+        android:paddingEnd="@dimen/padding_md"
+        android:paddingBottom="@dimen/padding_sm">
+
+        <TextView
+            android:id="@+id/answer_option_indicator"
+            style="@style/TextAppearance.Kardio.Subtitle2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/bg_answer_indicator"
+            android:gravity="center"
+            android:textColor="@color/text_secondary"
+            tools:text="A" />
+
+        <TextView
+            android:id="@+id/answer_option_text"
+            style="@style/TextAppearance.Kardio.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:layout_weight="1"
+            android:textColor="@color/text_primary"
+            tools:text="This is an answer option" />
+
+    </LinearLayout>
+
+</merge>

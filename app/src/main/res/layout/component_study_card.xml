@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/study_card_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_md">
+
+    <ImageView
+        android:id="@+id/study_card_icon"
+        android:layout_width="@dimen/icon_size_lg"
+        android:layout_height="@dimen/icon_size_lg"
+        android:contentDescription="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_flashcard_icon" />
+
+    <TextView
+        android:id="@+id/study_card_title"
+        style="@style/TextAppearance.Kardio.Subtitle1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_md"
+        android:layout_marginEnd="@dimen/spacing_md"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toStartOf="@+id/study_card_count"
+        app:layout_constraintStart_toEndOf="@+id/study_card_icon"
+        app:layout_constraintTop_toTopOf="@+id/study_card_icon"
+        tools:text="Từ vựng tiếng Anh" />
+
+    <TextView
+        android:id="@+id/study_card_subtitle"
+        style="@style/TextAppearance.Kardio.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_md"
+        android:layout_marginTop="@dimen/spacing_xs"
+        android:layout_marginEnd="@dimen/spacing_md"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toStartOf="@+id/study_card_count"
+        app:layout_constraintStart_toEndOf="@+id/study_card_icon"
+        app:layout_constraintTop_toBottomOf="@+id/study_card_title"
+        tools:text="200 thuật ngữ" />
+
+    <TextView
+        android:id="@+id/study_card_count"
+        style="@style/TextAppearance.Kardio.ItemCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="25" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

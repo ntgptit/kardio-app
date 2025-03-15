@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/flashcard_front"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_sm"
+        app:cardBackgroundColor="@color/background_secondary"
+        app:cardCornerRadius="@dimen/radius_md"
+        app:cardElevation="@dimen/elevation_xs">
+
+        <TextView
+            android:id="@+id/flashcard_front_text"
+            style="@style/TextAppearance.Kardio.Headline4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="200dp"
+            android:padding="@dimen/padding_lg"
+            android:textColor="@color/text_primary"
+            tools:text="Front of the flashcard" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/flashcard_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_sm"
+        app:cardBackgroundColor="@color/background_secondary"
+        app:cardCornerRadius="@dimen/radius_md"
+        app:cardElevation="@dimen/elevation_xs">
+
+        <TextView
+            android:id="@+id/flashcard_back_text"
+            style="@style/TextAppearance.Kardio.Headline4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="200dp"
+            android:padding="@dimen/padding_lg"
+            android:textColor="@color/text_primary"
+            tools:text="Back of the flashcard" />
+
+    </androidx.cardview.widget.CardView>
+
+</merge>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_md">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profile_avatar"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/CircleImageView"
+            app:strokeColor="@color/divider"
+            app:strokeWidth="1dp"
+            tools:src="@drawable/ic_profile_placeholder" />
+
+        <TextView
+            android:id="@+id/profile_username"
+            style="@style/TextAppearance.Kardio.Headline5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_primary"
+            app:layout_constraintBottom_toTopOf="@+id/profile_streak_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profile_avatar"
+            app:layout_constraintTop_toTopOf="@+id/profile_avatar"
+            tools:text="Username" />
+
+        <TextView
+            android:id="@+id/profile_streak_count"
+            style="@style/TextAppearance.Kardio.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:textColor="@color/streak_flame_orange"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_avatar"
+            app:layout_constraintStart_toEndOf="@+id/profile_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/profile_username"
+            tools:text="7" />
+
+        <ImageView
+            android:id="@+id/profile_streak_icon"
+            android:layout_width="@dimen/icon_size_sm"
+            android:layout_height="@dimen/icon_size_sm"
+            android:layout_marginStart="@dimen/spacing_xs"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_streak_flame"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_streak_count"
+            app:layout_constraintStart_toEndOf="@+id/profile_streak_count"
+            app:layout_constraintTop_toTopOf="@+id/profile_streak_count" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</merge>
