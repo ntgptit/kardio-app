@@ -1,281 +1,131 @@
-// File: app/src/main/java/com/kardio/ui/components/inputs/QlzTextField.kt
+// ui/components/inputs/QlzTextField.kt
 package com.kardio.ui.components.inputs
 
 import android.content.Context
-import android.graphics.drawable.GradientDrawable
-import android.text.Editable
-import android.text.TextWatcher
+import android.graphics.drawable.Drawable
+import android.text.InputType
+import android.text.method.PasswordTransformationMethod
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.kardio.R
 
-/**
- * QlzTextField - Text field component tối ưu cho Dark Mode
- * Bao gồm:
- * - Label (optional)
- * - Input field với background style phù hợp dark mode
- * - Hint text
- * - Error text (optional)
- * - Helper text (optional)
- */
 class QlzTextField @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    // Views
-    private lateinit var labelTextView: TextView
-    private lateinit var editText: EditText
-    private lateinit var errorTextView: TextView
-    private lateinit var helperTextView: TextView
-    private lateinit var inputContainer: View
+    private val labelTextView: TextView
+    private val editText: EditText
+    private val errorTextView: TextView
+    private val iconView: ImageView
+    private val requiredIndicator: TextView
 
-    // Properties
-    private var label: String? = null
-    private var hint: String? = null
-    private var helperText: String? = null
-    private var errorText: String? = null
-    private var isShowingError = false
-    private var isEnabled = true
+    private var isPasswordField = false
+    private var isPasswordVisible = false
 
-    // Background
-    private lateinit var normalBackground: GradientDrawable
-    private lateinit var focusedBackground: GradientDrawable
-    private lateinit var disabledBackground: GradientDrawable
-    private lateinit var errorBackground: GradientDrawable
+    // Thuộc tính error
+    var error: String? = null
+        set(value) {
+            field = value
+            updateErrorState()
+        }
 
     init {
-        inflateLayout()
-        setupBackgrounds()
-        obtainAttributes(attrs)
-        setupViews()
-        setupListeners()
-    }
-
-    private fun inflateLayout() {
+        // Inflate layout
         val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.component_text_field, this, true)
+        inflater.inflate(R.layout.component_text_field, this, true)
 
-        labelTextView = view.findViewById(R.id.text_field_label)
-        editText = view.findViewById(R.id.text_field_edit_text)
-        errorTextView = view.findViewById(R.id.text_field_error)
-        helperTextView = view.findViewById(R.id.text_field_helper)
-        inputContainer = view.findViewById(R.id.text_field_container)
-    }
+        // Initialize views
+        labelTextView = findViewById(R.id.text_field_label)
+        editText = findViewById(R.id.text_field_edit_text)
+        errorTextView = findViewById(R.id.text_field_error)
+        iconView = findViewById(R.id.text_field_icon)
+        requiredIndicator = findViewById(R.id.text_field_required)
 
-    private fun setupBackgrounds() {
-        // Normal state
-        normalBackground = GradientDrawable().apply {
-            shape = GradientDrawable.RECTANGLE
-            cornerRadius = resources.getDimension(R.dimen.radius_sm)
-            setColor(ContextCompat.getColor(context, R.color.background_input))
-        }
-
-        // Focused state - thêm viền accent color
-        focusedBackground = GradientDrawable().apply {
-            shape = GradientDrawable.RECTANGLE
-            cornerRadius = resources.getDimension(R.dimen.radius_sm)
-            setColor(ContextCompat.getColor(context, R.color.background_input))
-            setStroke(
-                resources.getDimensionPixelSize(R.dimen.input_field_stroke_width),
-                ContextCompat.getColor(context, R.color.accent)
-            )
-        }
-
-        // Disabled state - giảm alpha
-        disabledBackground = GradientDrawable().apply {
-            shape = GradientDrawable.RECTANGLE
-            cornerRadius = resources.getDimension(R.dimen.radius_sm)
-            setColor(ContextCompat.getColor(context, R.color.background_input))
-            alpha = 128 // 50% transparency
-        }
-
-        // Error state - viền màu error
-        errorBackground = GradientDrawable().apply {
-            shape = GradientDrawable.RECTANGLE
-            cornerRadius = resources.getDimension(R.dimen.radius_sm)
-            setColor(ContextCompat.getColor(context, R.color.background_input))
-            setStroke(
-                resources.getDimensionPixelSize(R.dimen.input_field_stroke_width),
-                ContextCompat.getColor(context, R.color.error)
-            )
-        }
-    }
-
-    private fun obtainAttributes(attrs: AttributeSet?) {
-        if (attrs == null) return
-
+        // Load attributes
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.QlzTextField)
         try {
-            label = typedArray.getString(R.styleable.QlzTextField_qlzLabel)
-            hint = typedArray.getString(R.styleable.QlzTextField_android_hint)
-            helperText = typedArray.getString(R.styleable.QlzTextField_qlzHelperText)
-            errorText = typedArray.getString(R.styleable.QlzTextField_qlzErrorText)
-            isEnabled = typedArray.getBoolean(R.styleable.QlzTextField_android_enabled, true)
+            // Set label
+            if (typedArray.hasValue(R.styleable.QlzTextField_qlzLabel)) {
+                labelTextView.text = typedArray.getString(R.styleable.QlzTextField_qlzLabel)
+                labelTextView.visibility = View.VISIBLE
+            } else {
+                labelTextView.visibility = View.GONE
+            }
+
+            // Set icon
+            if (typedArray.hasValue(R.styleable.QlzTextField_qlzIcon)) {
+                val iconResId = typedArray.getResourceId(R.styleable.QlzTextField_qlzIcon, 0)
+                if (iconResId != 0) {
+                    iconView.setImageResource(iconResId)
+                    iconView.visibility = View.VISIBLE
+                } else {
+                    iconView.visibility = View.GONE
+                }
+            } else {
+                iconView.visibility = View.GONE
+            }
+
+            // Set hint
+            if (typedArray.hasValue(R.styleable.QlzTextField_qlzHint)) {
+                editText.hint = typedArray.getString(R.styleable.QlzTextField_qlzHint)
+            } else if (typedArray.hasValue(R.styleable.QlzTextField_android_hint)) {
+                editText.hint = typedArray.getString(R.styleable.QlzTextField_android_hint)
+            }
+
+            // Check if required
+            val isRequired = typedArray.getBoolean(R.styleable.QlzTextField_qlzRequired, false)
+            requiredIndicator.visibility = if (isRequired) View.VISIBLE else View.GONE
+
+            // Check if password field
+            isPasswordField = typedArray.getBoolean(R.styleable.QlzTextField_qlzIsPassword, false)
+            if (isPasswordField) {
+                editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                setupPasswordToggle()
+            }
+
+            // Set initial error
+            error = typedArray.getString(R.styleable.QlzTextField_qlzErrorText)
+
         } finally {
             typedArray.recycle()
         }
     }
 
-    private fun setupViews() {
-        // Set label text
-        if (!label.isNullOrEmpty()) {
-            labelTextView.text = label
-            labelTextView.visibility = View.VISIBLE
-        } else {
-            labelTextView.visibility = View.GONE
-        }
-
-        // Set hint
-        editText.hint = hint
-
-        // Set helper text
-        if (!helperText.isNullOrEmpty()) {
-            helperTextView.text = helperText
-            helperTextView.visibility = View.VISIBLE
-        } else {
-            helperTextView.visibility = View.GONE
-        }
-
-        // Set error text if exists
-        if (!errorText.isNullOrEmpty()) {
-            errorTextView.text = errorText
-            showError(true)
-        } else {
-            showError(false)
-        }
-
-        // Set enabled state
-        setEnabled(isEnabled)
-
-        // Set default background
-        inputContainer.background = normalBackground
+    private fun setupPasswordToggle() {
+        // Setup password visibility toggle if needed
     }
 
-    private fun setupListeners() {
-        editText.setOnFocusChangeListener { _, hasFocus ->
-            updateBackground(hasFocus)
-        }
-
-        editText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Clear error when text changes
-                if (isShowingError) {
-                    showError(false)
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
-    }
-
-    private fun updateBackground(hasFocus: Boolean) {
-        if (!isEnabled) {
-            inputContainer.background = disabledBackground
-            return
-        }
-
-        if (isShowingError) {
-            inputContainer.background = errorBackground
-            return
-        }
-
-        inputContainer.background = if (hasFocus) focusedBackground else normalBackground
-    }
-
-    // Public methods
-
-    /**
-     * Show or hide error message
-     */
-    fun showError(show: Boolean, errorMessage: String? = null) {
-        isShowingError = show
-
-        if (show) {
-            if (errorMessage != null) {
-                errorText = errorMessage
-                errorTextView.text = errorMessage
-            }
-            errorTextView.visibility = View.VISIBLE
-            helperTextView.visibility = View.GONE
-        } else {
+    private fun updateErrorState() {
+        if (error.isNullOrEmpty()) {
             errorTextView.visibility = View.GONE
-            helperTextView.visibility = if (helperText.isNullOrEmpty()) View.GONE else View.VISIBLE
+        } else {
+            errorTextView.text = error
+            errorTextView.visibility = View.VISIBLE
         }
-
-        updateBackground(editText.hasFocus())
     }
 
     /**
-     * Set the text of the input field
+     * Get the EditText
+     */
+    fun getEditText(): EditText = editText
+
+    /**
+     * Get the text from the EditText
+     */
+    fun getText(): String = editText.text.toString()
+
+    /**
+     * Set the text in the EditText
      */
     fun setText(text: String) {
         editText.setText(text)
-    }
-
-    /**
-     * Get the current text from the input field
-     */
-    fun getText(): String {
-        return editText.text.toString()
-    }
-
-    /**
-     * Set the hint text
-     */
-    fun setHint(hintText: String) {
-        hint = hintText
-        editText.hint = hintText
-    }
-
-    /**
-     * Set the helper text
-     */
-    fun setHelperText(text: String?) {
-        helperText = text
-        helperTextView.text = text
-
-        if (text.isNullOrEmpty()) {
-            helperTextView.visibility = View.GONE
-        } else if (!isShowingError) {
-            helperTextView.visibility = View.VISIBLE
-        }
-    }
-
-    /**
-     * Set the label text
-     */
-    fun setLabel(text: String?) {
-        label = text
-        labelTextView.text = text
-
-        if (text.isNullOrEmpty()) {
-            labelTextView.visibility = View.GONE
-        } else {
-            labelTextView.visibility = View.VISIBLE
-        }
-    }
-
-    override fun setEnabled(enabled: Boolean) {
-        super.setEnabled(enabled)
-        isEnabled = enabled
-        editText.isEnabled = enabled
-        updateBackground(editText.hasFocus())
-    }
-
-    fun setInputType(inputType: Int) {
-        editText.inputType = inputType
-    }
-
-    fun addTextChangedListener(watcher: TextWatcher) {
-        editText.addTextChangedListener(watcher)
     }
 }

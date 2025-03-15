@@ -1,6 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_primary"
+    android:fillViewport="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <com.kardio.ui.components.inputs.QlzTextField
+            android:id="@+id/email_text_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            app:qlzIcon="@drawable/ic_email_outline"
+            app:qlzLabel="Email"
+            app:qlzRequired="true" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <com.kardio.ui.components.inputs.QlzTextField
+            android:id="@+id/password_text_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            app:qlzIcon="@drawable/ic_lock_outline"
+            app:qlzIsPassword="true"
+            app:qlzLabel="Mật khẩu"
+            app:qlzRequired="true" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/forgot_password_link"
+                style="@style/TextAppearance.Kardio.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="?attr/selectableItemBackground"
+                android:padding="4dp"
+                android:text="Quên mật khẩu?"
+                android:textColor="@color/accent" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/error_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/error"
+            android:visibility="gone"
+            tools:text="Lỗi đăng nhập"
+            tools:visibility="visible" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+        <com.kardio.ui.components.buttons.QlzPrimaryButton
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:qlzButtonText="Đăng nhập" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextAppearance.Kardio.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chưa có tài khoản? "
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:id="@+id/register_link"
+                style="@style/TextAppearance.Kardio.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:paddingStart="4dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="4dp"
+                android:paddingBottom="4dp"
+                android:text="Đăng ký"
+                android:textColor="@color/accent" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

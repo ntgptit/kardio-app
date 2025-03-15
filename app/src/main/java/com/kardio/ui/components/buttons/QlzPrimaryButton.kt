@@ -1,90 +1,165 @@
-// File: app/src/main/java/com/kardio/ui/components/buttons/QlzPrimaryButton.kt
+// ui/components/buttons/QlzPrimaryButton.kt
 package com.kardio.ui.components.buttons
 
-import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
-import android.view.MotionEvent
-import androidx.appcompat.widget.AppCompatButton
+import android.view.View
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.kardio.R
-import com.kardio.utils.helpers.AnimationUtils
 
-/**
- * QlzPrimaryButton - Primary button component theo thiết kế Dark Mode
- * Sử dụng màu primary_button (#4255FF) từ theme
- */
 class QlzPrimaryButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : AppCompatButton(context, attrs, defStyleAttr) {
+) : FrameLayout(context, attrs, defStyleAttr) {
 
-    private var isAnimationEnabled = true
-    private var isHapticEnabled = true
+    private val textView: TextView
+    private val progressBar: ProgressBar
+    private val iconView: ImageView
+
+    // Di chuyển khai báo cornerRadius lên trước khối init
+    private val cornerRadius = resources.getDimension(R.dimen.button_corner_radius)
+
+    var isLoading: Boolean = false
+        set(value) {
+            field = value
+            updateLoadingState()
+        }
 
     init {
-        // Setup mặc định
-        applyStyle()
-        setupClickAnimation()
+        // Inflate layout
+        View.inflate(context, R.layout.component_primary_button, this)
 
-        // Parse custom attributes nếu có
+        // Find views
+        textView = findViewById(R.id.button_text)
+        progressBar = findViewById(R.id.button_progress)
+        iconView = findViewById(R.id.button_icon)
+
+        // Get attributes
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.QlzPrimaryButton)
         try {
-            isAnimationEnabled = typedArray.getBoolean(
-                R.styleable.QlzPrimaryButton_qlzAnimationEnabled,
-                true
+            // Set button text
+            if (typedArray.hasValue(R.styleable.QlzPrimaryButton_qlzButtonText)) {
+                textView.text = typedArray.getString(R.styleable.QlzPrimaryButton_qlzButtonText)
+            }
+
+            // Set text color
+            if (typedArray.hasValue(R.styleable.QlzPrimaryButton_qlzTextColor)) {
+                textView.setTextColor(typedArray.getColor(
+                    R.styleable.QlzPrimaryButton_qlzTextColor,
+                    ContextCompat.getColor(context, R.color.text_primary)
+                ))
+            }
+
+            // Set icon if available
+            if (typedArray.hasValue(R.styleable.QlzPrimaryButton_icon)) {
+                val iconRes = typedArray.getResourceId(R.styleable.QlzPrimaryButton_icon, 0)
+                if (iconRes != 0) {
+                    iconView.setImageResource(iconRes)
+                    iconView.visibility = View.VISIBLE
+
+                    // Apply icon tint if specified
+                    if (typedArray.hasValue(R.styleable.QlzPrimaryButton_iconTint)) {
+                        val tintColor = typedArray.getColor(
+                            R.styleable.QlzPrimaryButton_iconTint,
+                            textView.currentTextColor
+                        )
+                        iconView.setColorFilter(tintColor)
+                    } else {
+                        // Use text color by default
+                        iconView.setColorFilter(textView.currentTextColor)
+                    }
+                } else {
+                    iconView.visibility = View.GONE
+                }
+            } else {
+                iconView.visibility = View.GONE
+            }
+
+            // Set background color
+            val backgroundColor = typedArray.getColor(
+                R.styleable.QlzPrimaryButton_qlzBackgroundColor,
+                ContextCompat.getColor(context, R.color.primary_button)
             )
-            isHapticEnabled = typedArray.getBoolean(
-                R.styleable.QlzPrimaryButton_qlzHapticFeedback,
-                true
+
+            // Apply background with rounded corners
+            val background = GradientDrawable().apply {
+                shape = GradientDrawable.RECTANGLE
+                setColor(backgroundColor)
+                cornerRadius = this@QlzPrimaryButton.cornerRadius
+            }
+            this.background = background
+
+            // Set loading state
+            isLoading = typedArray.getBoolean(
+                R.styleable.QlzPrimaryButton_qlzIsLoading,
+                false
             )
         } finally {
             typedArray.recycle()
         }
+
+        // Initialize loading state
+        updateLoadingState()
     }
 
-    private fun applyStyle() {
-        // Thiết lập style mặc định từ theme
-        background = ContextCompat.getDrawable(context, R.drawable.bg_button_primary)
-        setTextColor(ContextCompat.getColor(context, R.color.text_primary))
-        isAllCaps = false
-
-        // Padding và kích thước
-        val horizontalPadding = resources.getDimensionPixelSize(R.dimen.button_padding_horizontal)
-        val verticalPadding = resources.getDimensionPixelSize(R.dimen.button_padding_vertical)
-        setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding)
-
-        // Typography
-        setTextAppearance(context, R.style.TextAppearance_Kardio_Button)
-
-        // Elevation nhẹ cho dark mode
-        elevation = resources.getDimension(R.dimen.elevation_xs)
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private fun setupClickAnimation() {
-        // Sử dụng press state change để trigger animation
-        setOnTouchListener { _, event ->
-            if (isAnimationEnabled) {
-                when (event.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        AnimationUtils.applyButtonClickAnimation(this, context)
-                    }
-                }
-            }
-            // Không consume event để onClick vẫn hoạt động
-            false
+    /**
+     * Update the button's appearance based on loading state
+     */
+    private fun updateLoadingState() {
+        if (isLoading) {
+            textView.visibility = View.INVISIBLE
+            iconView.visibility = View.INVISIBLE
+            progressBar.visibility = View.VISIBLE
+            isEnabled = false
+        } else {
+            textView.visibility = View.VISIBLE
+            iconView.visibility = if (iconView.drawable != null) View.VISIBLE else View.GONE
+            progressBar.visibility = View.GONE
+            isEnabled = true
         }
     }
 
-    // Phương thức cho phép bật/tắt animation
-    fun setAnimationEnabled(enabled: Boolean) {
-        isAnimationEnabled = enabled
+    /**
+     * Set the button text
+     */
+    fun setText(text: String) {
+        textView.text = text
     }
 
-    // Phương thức cho phép bật/tắt haptic feedback
-    override fun setHapticFeedbackEnabled(enabled: Boolean) {
-        isHapticEnabled = enabled
+    /**
+     * Get the button text
+     */
+    fun getText(): String {
+        return textView.text.toString()
+    }
+
+    /**
+     * Set button icon
+     */
+    fun setIcon(resourceId: Int) {
+        if (resourceId != 0) {
+            iconView.setImageResource(resourceId)
+            iconView.visibility = View.VISIBLE
+        } else {
+            iconView.visibility = View.GONE
+        }
+    }
+
+    /**
+     * Set icon tint color
+     */
+    fun setIconTint(color: Int) {
+        iconView.setColorFilter(color)
+    }
+
+    override fun setEnabled(enabled: Boolean) {
+        super.setEnabled(enabled)
+        alpha = if (enabled) 1.0f else 0.5f
     }
 }

@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-  
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_outline"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/nav_solutions"
+        android:icon="@drawable/ic_lightbulb_outline"
+        android:title="@string/solutions" />
+    <item
+        android:id="@+id/nav_create"
+        android:icon="@drawable/ic_add_circle_outline"
+        android:title="@string/create" />
+    <item
+        android:id="@+id/nav_library"
+        android:icon="@drawable/ic_folder_outline"
+        android:title="@string/library" />
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_person_outline"
+        android:title="@string/profile" />
 </menu>

@@ -9,11 +9,18 @@
     <attr name="qlzShowDivider" format="boolean" />
     <attr name="qlzBackgroundColor" format="color|reference" />
     <attr name="qlzCornerRadius" format="dimension" />
+    <attr name="qlzRequired" format="boolean" />
+    <attr name="qlzIsLoading" format="boolean" />
+    <attr name="qlzButtonText" format="string" />
 
     <!-- Button Components -->
     <declare-styleable name="QlzPrimaryButton">
-        <attr name="qlzAnimationEnabled" />
-        <attr name="qlzHapticFeedback" />
+        <attr name="qlzButtonText" />
+        <attr name="qlzTextColor" format="color|reference" />
+        <attr name="qlzBackgroundColor"/>
+        <attr name="qlzIsLoading"/>
+        <attr name="icon" format="reference" />
+        <attr name="iconTint" format="color|reference" />
     </declare-styleable>
 
     <declare-styleable name="QlzSecondaryButton">
@@ -78,6 +85,10 @@
         <attr name="qlzLabel" format="string" />
         <attr name="qlzHelperText" format="string" />
         <attr name="qlzErrorText" format="string" />
+        <attr name="qlzIcon" />
+        <attr name="qlzHint" format="string" />
+        <attr name="qlzRequired" />
+        <attr name="qlzIsPassword" format="boolean" />
         <attr name="android:hint" />
         <attr name="android:enabled" />
     </declare-styleable>
@@ -89,13 +100,13 @@
     <!-- Feedback Components -->
     <declare-styleable name="QlzLoadingIndicator">
         <attr name="qlzLoadingMessage" format="string" />
-        <attr name="qlzIsLoading" format="boolean" />
+        <attr name="qlzIsLoading" />
     </declare-styleable>
 
     <declare-styleable name="QlzEmptyStateView">
         <attr name="qlzTitle" />
         <attr name="qlzDescription" format="string" />
-        <attr name="qlzButtonText" format="string" />
+        <attr name="qlzButtonText"/>
         <attr name="qlzIcon" />
     </declare-styleable>
 

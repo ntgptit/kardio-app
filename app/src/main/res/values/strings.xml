@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">Kardio</string>
+
+    <string name="profile_image_description">Profile image</string>
+    <string name="welcome_title">Cách tốt nhất để học. Đăng ký miễn phí.</string>
+    <string name="welcome_subtitle">Bằng việc đăng ký, bạn chấp nhận Điều khoản dịch vụ và Chính sách quyền riêng tư của Quizlet</string>
+    <string name="continue_with_google">Tiếp tục với Google</string>
+    <string name="sign_up_with_email">Đăng ký bằng email</string>
+    <string name="already_have_account">Đã có tài khoản?</string>
+    <string name="login">Đăng nhập</string>
+
+    <!-- Titles -->
+    <string name="app_title">QLZ Flash Cards</string>
+
+    <!-- Bottom Navigation -->
+    <string name="home">Trang chủ</string>
+    <string name="solutions">Lời giải</string>
+    <string name="create">Tạo</string>
+    <string name="library">Thư viện</string>
+    <string name="profile">Hồ sơ</string>
+
+    <!-- Settings Menu -->
+    <string name="settings">Cài đặt</string>
+    <string name="logout">Đăng xuất</string>
+
+    <!-- Create Options -->
+    <string name="create_study_module">Học phần</string>
+    <string name="create_flashcards_subtitle">Tạo bộ thẻ ghi nhớ mới</string>
+    <string name="create_folder">Thư mục</string>
+    <string name="organize_modules_subtitle">Tổ chức học phần của bạn</string>
+    <string name="create_class">Lớp học</string>
+    <string name="create_learning_space_subtitle">Tạo không gian học tập chung</string>
+
+    <!-- Solutions Tab -->
+    <string name="solutions_development_message">Đang phát triển tính năng giúp bạn giải đáp các bài tập</string>
 </resources>

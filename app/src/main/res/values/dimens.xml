@@ -160,4 +160,9 @@
 
     <!-- Toast -->
     <dimen name="toast_margin_bottom">64dp</dimen>
+
+    <dimen name="avatar_size_small">100dp</dimen>
+    <dimen name="avatar_size_normal">120dp</dimen>
+    <dimen name="app_bar_elevation">4dp</dimen>
+    <dimen name="button_corner_radius">8dp</dimen>
 </resources>

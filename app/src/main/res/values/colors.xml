@@ -29,6 +29,13 @@
 
     <!-- Màu nhấn mạnh (Accent) -->
     <color name="accent">#4255FF</color>
+    <color name="primary">#4255FF</color>
+
+    <!-- Màu thông báo -->
+    <color name="success">#4CAF50</color>
+    <color name="error">#F44336</color>
+    <color name="warning">#FF9800</color>
+    <color name="secondary">#2196F3</color>
 
     <!-- Màu biểu tượng "Plus" trên badge -->
     <color name="badge_plus">#FFFFFF</color>
@@ -59,8 +66,12 @@
     <!-- Màu biểu tượng và sự kiện -->
     <color name="icon_primary">#FFFFFF</color>
     <color name="icon_secondary">#72778F</color>
-    <color name="success">#4CAF50</color>
-    <color name="error">#F44336</color>
-    <color name="warning">#FF9800</color>
 
+    <!-- Màu Surface là màu nền thứ cấp -->
+    <color name="surface">#1E2642</color>
+    <color name="darkSurface">#1E2642</color>
+
+    <!-- Alpha versions cho overlay -->
+    <color name="primary_alpha20">#334255FF</color>
+    <color name="surface_alpha90">#E61E2642</color>
 </resources>

@@ -1,5 +1,5 @@
 // features/auth/data/remote/AuthApi.kt
-package com.kardio.features.auth.data.remote
+package com.kardio.features.auth.data.remote.api
 
 import com.kardio.features.auth.data.repository.AuthRepositoryImpl.ForgotPasswordRequest
 import com.kardio.features.auth.data.repository.AuthRepositoryImpl.LoginRequest
