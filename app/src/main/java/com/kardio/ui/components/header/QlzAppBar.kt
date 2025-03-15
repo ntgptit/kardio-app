@@ -1,16 +1,13 @@
-// ui/components/header/HomeAppBar.kt
+// File: app/src/main/java/com/kardio/ui/components/header/QlzAppBar.kt
 package com.kardio.ui.components.header
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.kardio.R
 
-class HomeAppBar @JvmOverloads constructor(
+class QlzAppBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -21,37 +18,21 @@ class HomeAppBar @JvmOverloads constructor(
     }
 
     private fun setupAppBar() {
-        // Set gradient background
-        background = ContextCompat.getDrawable(context, R.drawable.bg_app_bar)
+        // Sử dụng màu nền đơn giản, giống với bottom bar
+        setBackgroundColor(ContextCompat.getColor(context, R.color.background_primary))
 
-        // Set elevation
-        elevation = resources.getDimension(R.dimen.app_bar_elevation)
+        // Elevation bằng 0 để tránh hiệu ứng bóng đổ
+        elevation = 0f
 
-        // Set layout params
-        layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            resources.getDimensionPixelSize(R.dimen.toolbar_height)
-        )
+        // Loại bỏ các content insets để ConstraintLayout có thể mở rộng toàn màn hình
+        setContentInsetsAbsolute(0, 0)
+        setContentInsetsRelative(0, 0)
 
-        // Set content insets
-        setContentInsetsRelative(
-            resources.getDimensionPixelSize(R.dimen.spacing_md),
-            resources.getDimensionPixelSize(R.dimen.spacing_md)
-        )
-
-        // Adjust padding
-        val horizontalPadding = resources.getDimensionPixelSize(R.dimen.spacing_md)
+        // Chỉ giữ padding dọc, bỏ padding ngang
         val verticalPadding = resources.getDimensionPixelSize(R.dimen.spacing_sm)
-        setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding)
-    }
+        setPadding(0, verticalPadding, 0, verticalPadding)
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        // Make sure the height is at least the toolbar height
-        val minHeight = resources.getDimensionPixelSize(R.dimen.toolbar_height)
-        val heightSpec = MeasureSpec.makeMeasureSpec(
-            Math.max(MeasureSpec.getSize(heightMeasureSpec), minHeight),
-            MeasureSpec.EXACTLY
-        )
-        super.onMeasure(widthMeasureSpec, heightSpec)
+        // Thiết lập chiều cao mặc định
+        minimumHeight = resources.getDimensionPixelSize(R.dimen.toolbar_height)
     }
 }

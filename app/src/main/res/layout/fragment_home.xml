@@ -8,85 +8,114 @@
     android:background="@color/background_primary"
     android:fitsSystemWindows="true">
 
-    <com.kardio.ui.components.header.HomeAppBar
+    <com.kardio.ui.components.header.QlzAppBar
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_gravity="center_vertical">
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_app_title_icon"
-                android:padding="4dp">
+            <!-- Logo & App Title - Căn trái -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/logo_container"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_flash_on"
-                    app:tint="@color/primary" />
-            </FrameLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_logo_premium" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_flash_on"
+                        app:tint="@color/white" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- App Name with Custom Font -->
             <TextView
+                android:id="@+id/app_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:letterSpacing="0.05"
+                android:layout_marginStart="12dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.03"
                 android:text="@string/app_title"
                 android:textColor="@color/text_primary"
                 android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                app:layout_constraintBottom_toBottomOf="@id/logo_container"
+                app:layout_constraintStart_toEndOf="@id/logo_container"
+                app:layout_constraintTop_toTopOf="@id/logo_container" />
 
-        <ImageButton
-            android:id="@+id/notification_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="4dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_notifications_outline"
-            app:tint="@color/text_secondary" />
+            <!-- Notification Button - Căn phải -->
+            <ImageButton
+                android:id="@+id/notification_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="2dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_notifications_outline"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/settings_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/text_secondary" />
 
-        <ImageButton
-            android:id="@+id/settings_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="4dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_settings_outline"
-            app:tint="@color/text_secondary" />
+            <!-- Settings Button - Căn phải -->
+            <ImageButton
+                android:id="@+id/settings_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_settings_outline"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/text_secondary" />
 
-    </com.kardio.ui.components.header.HomeAppBar>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.kardio.ui.components.header.QlzAppBar>
+    <View
+        android:id="@+id/app_bar_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider"
+        app:layout_constraintTop_toBottomOf="@id/app_bar"/>
 
     <!-- Tab Content Containers with ScrollView -->
-    <FrameLayout
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/dashboard_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#22FF0000"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_bar">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="DASHBOARD CONTENT"
-            android:textSize="24sp"
-            android:textColor="@color/text_primary"
-            android:gravity="center"
-            android:padding="16dp"/>
-    </FrameLayout>
+        <include layout="@layout/layout_dashboard_tab" />
+    </androidx.core.widget.NestedScrollView>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/solutions_container"
@@ -130,15 +159,24 @@
         <include layout="@layout/layout_profile_tab" />
     </androidx.core.widget.NestedScrollView>
 
+    <View
+        android:id="@+id/bottom_bar_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider"
+        app:layout_constraintTop_toBottomOf="@id/app_bar"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/surface"
-        android:paddingBottom="0dp"
+        android:background="@color/background_primary"
+        app:labelVisibilityMode="labeled"
         app:itemIconTint="@color/bottom_nav_item_color"
         app:itemTextColor="@color/bottom_nav_item_color"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

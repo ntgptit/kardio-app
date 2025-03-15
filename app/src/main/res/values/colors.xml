@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Màu cơ bản -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
     <!-- Màu sắc chủ đạo dựa trên Quizlet -->
 
     <!-- Màu nền chính - Deep Navy -->

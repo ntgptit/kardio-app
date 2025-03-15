@@ -33,7 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         // Setup window insets
-        setupWindowInsets()
+//        setupWindowInsets()
     }
 
     private fun setupWindowInsets() {
@@ -92,37 +92,37 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
 
             // Setup notifications
-            binding.notificationButton.setOnClickListener {
-                // Handle notification click
-            }
+//            binding.notificationButton.setOnClickListener {
+//                // Handle notification click
+//            }
 
             // Setup settings menu
-            binding.settingsButton.setOnClickListener {
-                showSettingsMenu()
-            }
+//            binding.settingsButton.setOnClickListener {
+//                showSettingsMenu()
+//            }
         }
     }
 
-    private fun showSettingsMenu() {
-        val popup = android.widget.PopupMenu(requireContext(), binding.settingsButton)
-        popup.menuInflater.inflate(R.menu.settings_menu, popup.menu)
-
-        popup.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.menu_settings -> {
-                    // Navigate to settings
-                    true
-                }
-                R.id.menu_logout -> {
-                    // Handle logout
-                    true
-                }
-                else -> false
-            }
-        }
-
-        popup.show()
-    }
+//    private fun showSettingsMenu() {
+//        val popup = android.widget.PopupMenu(requireContext(), binding.settingsButton)
+//        popup.menuInflater.inflate(R.menu.settings_menu, popup.menu)
+//
+//        popup.setOnMenuItemClickListener { menuItem ->
+//            when (menuItem.itemId) {
+//                R.id.menu_settings -> {
+//                    // Navigate to settings
+//                    true
+//                }
+//                R.id.menu_logout -> {
+//                    // Handle logout
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
+//
+//        popup.show()
+//    }
 
     private fun showCreateModal() {
         val dialog = BottomSheetDialog(requireContext(), R.style.ThemeOverlay_App_BottomSheetDialog)
