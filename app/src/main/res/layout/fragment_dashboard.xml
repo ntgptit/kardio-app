@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_primary"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/spacing_md"
+        android:paddingTop="@dimen/spacing_md"
+        android:paddingBottom="@dimen/spacing_lg">
+
+        <!-- App Title -->
+        <TextView
+            android:id="@+id/app_title"
+            style="@style/TextAppearance.Kardio.Headline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quizlet Plus"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Notification Icon -->
+        <ImageButton
+            android:id="@+id/notification_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/notifications"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_primary"
+            android:src="@drawable/ic_notifications_outline" />
+
+        <!-- Notification Badge -->
+        <TextView
+            android:id="@+id/notification_badge"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/bg_notification_badge"
+            android:gravity="center"
+            android:text="3"
+            android:textColor="@color/text_primary"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@id/notification_button"
+            app:layout_constraintTop_toTopOf="@id/notification_button"
+            android:translationX="6dp"
+            android:translationY="-6dp" />
+
+        <!-- Search Bar -->
+        <include
+            android:id="@+id/search_container"
+            layout="@layout/component_search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:layout_constraintTop_toBottomOf="@id/app_title" />
+
+        <!-- Section Title: Thư mục -->
+        <TextView
+            android:id="@+id/folder_section_title"
+            style="@style/TextAppearance.Kardio.Headline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:text="Thư mục"
+            android:textColor="@color/text_primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_container" />
+
+        <!-- Folders Container -->
+        <include
+            android:id="@+id/folders_container"
+            layout="@layout/component_folder_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:layout_constraintTop_toBottomOf="@id/folder_section_title" />
+
+        <!-- Section Title: Thành tựu -->
+        <TextView
+            android:id="@+id/achievement_section_title"
+            style="@style/TextAppearance.Kardio.Headline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:text="Thành tựu"
+            android:textColor="@color/text_primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/folders_container" />
+
+        <!-- Achievement Card -->
+        <include
+            android:id="@+id/streak_card"
+            layout="@layout/component_streak_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:layout_constraintTop_toBottomOf="@id/achievement_section_title" />
+
+        <!-- Section Title: Học phần -->
+        <TextView
+            android:id="@+id/study_section_title"
+            style="@style/TextAppearance.Kardio.Headline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:text="Học phần"
+            android:textColor="@color/text_primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/streak_card" />
+
+        <!-- Study Module Card -->
+        <include
+            android:id="@+id/vitamin_study_card"
+            layout="@layout/item_study_module"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:layout_constraintTop_toBottomOf="@id/study_section_title" />
+
+        <!-- Section Title: Lớp học -->
+        <TextView
+            android:id="@+id/class_section_title"
+            style="@style/TextAppearance.Kardio.Headline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:text="Lớp học"
+            android:textColor="@color/text_primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vitamin_study_card" />
+
+        <!-- Class Card -->
+        <include
+            android:id="@+id/korean_class_card"
+            layout="@layout/item_class"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:layout_constraintTop_toBottomOf="@id/class_section_title" />
+
+        <!-- Loading Indicator -->
+        <com.kardio.ui.components.feedback.QlzLoadingIndicator
+            android:id="@+id/loading_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:qlzLoadingMessage="Loading dashboard..." />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

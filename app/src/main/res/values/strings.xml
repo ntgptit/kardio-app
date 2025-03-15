@@ -84,4 +84,7 @@
         <item>@string/library_category_flashcards</item>
         <item>@string/library_category_classes</item>
     </string-array>
+
+
+    <string name="notifications">Thông báo</string>
 </resources>
