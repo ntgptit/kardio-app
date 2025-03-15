@@ -157,4 +157,7 @@
 
     <dimen name="neumorphism_shadow_distance">6dp</dimen>
     <dimen name="neumorphism_shadow_radius">6dp</dimen>
+
+    <!-- Toast -->
+    <dimen name="toast_margin_bottom">64dp</dimen>
 </resources>
