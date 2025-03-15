@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Animation and Transition Related Values -->
+
+    <!-- Animation Durations in Milliseconds (200-400ms) -->
+    <integer name="animation_duration_very_fast">150</integer>
+    <integer name="animation_duration_fast">200</integer>
+    <integer name="animation_duration_medium">300</integer>
+    <integer name="animation_duration_slow">400</integer>
+
+    <!-- Animation Durations for Reduced Motion Mode -->
+    <integer name="animation_duration_reduced_motion">150</integer>
+
+    <!-- Animation Interpolators (Easing Functions) -->
+    <string name="interpolator_standard">cubic-bezier(0.4, 0.0, 0.2, 1)</string> <!-- Standard Curve -->
+    <string name="interpolator_decelerate">cubic-bezier(0.0, 0.0, 0.2, 1)</string> <!-- Deceleration Curve -->
+    <string name="interpolator_accelerate">cubic-bezier(0.4, 0.0, 1, 1)</string> <!-- Acceleration Curve -->
+    <string name="interpolator_sharp">cubic-bezier(0.4, 0.0, 0.6, 1)</string> <!-- Sharp Curve -->
+
+    <!-- Animation Scale Factors -->
+    <item name="animation_press_scale" format="float" type="dimen">0.95</item>
+    <item name="animation_hover_scale" format="float" type="dimen">1.05</item>
+    <item name="animation_bounce_scale" format="float" type="dimen">1.1</item>
+
+    <!-- Glowing Animation Values for Dark Mode -->
+    <item name="animation_glow_opacity_min" format="float" type="dimen">0.2</item>
+    <item name="animation_glow_opacity_max" format="float" type="dimen">0.4</item>
+
+    <!-- Haptic Feedback and Animation Combined Timing -->
+    <integer name="haptic_animation_delay">50</integer>
+
+    <!-- Stagger Delays for List Animations -->
+    <integer name="stagger_delay_short">20</integer>
+    <integer name="stagger_delay_medium">40</integer>
+    <integer name="stagger_delay_long">60</integer>
+
+    <!-- Animation Configuration for Elements -->
+    <array name="animation_map">
+        <item>
+            <string>loading</string>
+            <integer>@integer/animation_duration_medium</integer>
+            <string>@string/interpolator_standard</string>
+        </item>
+        <item>
+            <string>button</string>
+            <integer>@integer/animation_duration_fast</integer>
+            <string>@string/interpolator_standard</string>
+        </item>
+        <item>
+            <string>dialog</string>
+            <integer>@integer/animation_duration_medium</integer>
+            <string>@string/interpolator_decelerate</string>
+        </item>
+        <item>
+            <string>transition</string>
+            <integer>@integer/animation_duration_medium</integer>
+            <string>@string/interpolator_sharp</string>
+        </item>
+        <item>
+            <string>card</string>
+            <integer>@integer/animation_duration_fast</integer>
+            <string>@string/interpolator_standard</string>
+        </item>
+        <item>
+            <string>glow</string>
+            <integer>@integer/animation_duration_slow</integer>
+            <string>@string/interpolator_standard</string>
+        </item>
+    </array>
+</resources>

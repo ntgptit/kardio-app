@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Typography đơn giản hóa - Sử dụng font hệ thống -->
+
+    <!-- Base font style -->
+    <style name="TextAppearance.Kardio" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <!-- Headers (Bold) -->
+    <style name="TextAppearance.Kardio.HeadlineBold" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">sans-serif-bold</item>
+        <item name="android:fontFamily">sans-serif-bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.Kardio.Headline1" parent="TextAppearance.Kardio.HeadlineBold">
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="TextAppearance.Kardio.Headline2" parent="TextAppearance.Kardio.HeadlineBold">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <!-- Headers (Medium) -->
+    <style name="TextAppearance.Kardio.HeadlineMedium" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.Kardio.Headline3" parent="TextAppearance.Kardio.HeadlineMedium">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="TextAppearance.Kardio.Headline4" parent="TextAppearance.Kardio.HeadlineMedium">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextAppearance.Kardio.Headline5" parent="TextAppearance.Kardio.HeadlineMedium">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.Kardio.Headline6" parent="TextAppearance.Kardio.HeadlineMedium">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Body & Regular Text -->
+    <style name="TextAppearance.Kardio.BodyBase" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="TextAppearance.Kardio.Body1" parent="TextAppearance.Kardio.BodyBase">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="lineHeight">24sp</item>
+    </style>
+
+    <style name="TextAppearance.Kardio.Body2" parent="TextAppearance.Kardio.BodyBase">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="lineHeight">20sp</item>
+    </style>
+
+    <style name="TextAppearance.Kardio.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="lineHeight">24sp</item>
+    </style>
+
+    <style name="TextAppearance.Kardio.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="lineHeight">20sp</item>
+    </style>
+
+    <!-- Buttons and Labels -->
+    <style name="TextAppearance.Kardio.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="TextAppearance.Kardio.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_tertiary</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+
+    <style name="TextAppearance.Kardio.ItemCount" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.Kardio.Badge" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+</resources>

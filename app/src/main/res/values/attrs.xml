@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Custom theme attributes -->
+    <attr name="dividerColor" format="color|reference" />
+    <attr name="rippleColor" format="color|reference" />
+    <attr name="scrimColor" format="color|reference" />
+
+    <!-- Custom attributes for Neumorphism -->
+    <declare-styleable name="NeumorphicCardView">
+        <attr name="neumorphShapeType" format="enum">
+            <enum name="flat" value="0" />
+            <enum name="pressed" value="1" />
+            <enum name="basin" value="2" />
+        </attr>
+        <attr name="neumorphStrokeWidth" format="dimension" />
+        <attr name="neumorphStrokeColor" format="color|reference" />
+        <attr name="neumorphBackgroundColor" format="color|reference" />
+        <attr name="neumorphLightShadowColor" format="color|reference" />
+        <attr name="neumorphDarkShadowColor" format="color|reference" />
+        <attr name="neumorphShadowElevation" format="dimension" />
+        <attr name="neumorphCornerRadius" format="dimension" />
+    </declare-styleable>
+
+    <!-- Custom attributes for Glassmorphism -->
+    <declare-styleable name="GlassmorphicCardView">
+        <attr name="glassmorphBackgroundColor" format="color|reference" />
+        <attr name="glassmorphBorderColor" format="color|reference" />
+        <attr name="glassmorphBorderWidth" format="dimension" />
+        <attr name="glassmorphBlurRadius" format="dimension" />
+        <attr name="glassmorphCornerRadius" format="dimension" />
+    </declare-styleable>
+
+    <!-- Custom attributes for Adaptive Theme -->
+    <declare-styleable name="AdaptiveThemeHelper">
+        <attr name="adaptiveThemeEnabled" format="boolean" />
+        <attr name="adaptiveContrastLevel" format="float" />
+        <attr name="adaptiveLightSensorThreshold" format="integer" />
+    </declare-styleable>
+
+    <!-- Custom attributes for Glow Effect -->
+    <declare-styleable name="GlowEffectView">
+        <attr name="glowColor" format="color|reference" />
+        <attr name="glowRadius" format="dimension" />
+        <attr name="glowIntensity" format="float" />
+        <attr name="glowEnabled" format="boolean" />
+    </declare-styleable>
+
+    <!-- Custom attributes for Colored Shadows -->
+    <declare-styleable name="ColoredShadowView">
+        <attr name="shadowColor" format="color|reference" />
+        <attr name="shadowAlpha" format="float" />
+        <attr name="shadowOffsetX" format="dimension" />
+        <attr name="shadowOffsetY" format="dimension" />
+        <attr name="shadowRadius" format="dimension" />
+    </declare-styleable>
+
+    <!-- Custom attributes for Haptic Feedback -->
+    <declare-styleable name="HapticFeedbackButton">
+        <attr name="hapticFeedbackEnabled" format="boolean" />
+        <attr name="hapticFeedbackType" format="enum">
+            <enum name="light" value="0" />
+            <enum name="medium" value="1" />
+            <enum name="heavy" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <!-- Custom attributes for Animated Buttons -->
+    <declare-styleable name="AnimatedButton">
+        <attr name="animationDuration" format="integer" />
+        <attr name="animationType" format="enum">
+            <enum name="bounce" value="0" />
+            <enum name="scale" value="1" />
+            <enum name="ripple" value="2" />
+            <enum name="glow" value="3" />
+        </attr>
+        <attr name="animationEnabled" format="boolean" />
+    </declare-styleable>
+
+    <!-- Custom attributes for Reduced Motion Support -->
+    <declare-styleable name="ReducedMotionHelper">
+        <attr name="respectReducedMotionSettings" format="boolean" />
+        <attr name="reducedAnimationDuration" format="integer" />
+    </declare-styleable>
+
+    <!-- Custom attributes for Color Blindness Support -->
+    <declare-styleable name="ColorBlindnessHelper">
+        <attr name="colorBlindnessType" format="enum">
+            <enum name="none" value="0" />
+            <enum name="protanopia" value="1" /> <!-- Red-blindness -->
+            <enum name="deuteranopia" value="2" /> <!-- Green-blindness -->
+            <enum name="tritanopia" value="3" /> <!-- Blue-blindness -->
+        </attr>
+        <attr name="useHighContrastColors" format="boolean" />
+    </declare-styleable>
+</resources>

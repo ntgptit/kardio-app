@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Màu sắc chủ đạo dựa trên Quizlet -->
+
+    <!-- Màu nền chính - Deep Navy -->
+    <color name="background_primary">#0F1429</color>
+
+    <!-- Màu nền thứ cấp (dùng cho card, panel) - Lighter Navy -->
+    <color name="background_secondary">#1E2642</color>
+
+    <!-- Màu nền ô nhập, ô tìm kiếm - Lighter Navy -->
+    <color name="background_input">#232A4B</color>
+
+    <!-- Màu chữ chính - White -->
+    <color name="text_primary">#FFFFFF</color>
+
+    <!-- Màu chữ phụ - Light Gray -->
+    <color name="text_secondary">#B0B4C6</color>
+
+    <!-- Màu chữ nhạt - Gray -->
+    <color name="text_tertiary">#72778F</color>
+
+    <!-- Màu nút chính - Blue -->
+    <color name="primary_button">#4255FF</color>
+
+    <!-- Màu nút phụ - Transparent with White Border -->
+    <color name="secondary_button_stroke">#FFFFFF</color>
+    <color name="secondary_button_background">#1A1A2E</color>
+
+    <!-- Màu nhấn mạnh (Accent) -->
+    <color name="accent">#4255FF</color>
+
+    <!-- Màu biểu tượng "Plus" trên badge -->
+    <color name="badge_plus">#FFFFFF</color>
+    <color name="badge_background">#767890</color>
+
+    <!-- Màu biểu tượng streak (ngọn lửa) -->
+    <color name="streak_flame_orange">#FF9B27</color>
+    <color name="streak_flame_yellow">#FFCB47</color>
+
+    <!-- Màu icon thẻ học tập -->
+    <color name="flashcard_icon">#2EACDC</color>
+
+    <!-- Màu icon menu được chọn -->
+    <color name="nav_item_active">#FFFFFF</color>
+    <color name="nav_item_inactive">#72778F</color>
+
+    <!-- Màu tab được chọn -->
+    <color name="tab_selected">#FFFFFF</color>
+    <color name="tab_indicator">#4255FF</color>
+    <color name="tab_unselected">#72778F</color>
+
+    <!-- Màu phân cách (divider) -->
+    <color name="divider">#2A2E43</color>
+
+    <!-- Độ trong suốt -->
+    <color name="scrim">#80000000</color>
+
+    <!-- Màu biểu tượng và sự kiện -->
+    <color name="icon_primary">#FFFFFF</color>
+    <color name="icon_secondary">#72778F</color>
+    <color name="success">#4CAF50</color>
+    <color name="error">#F44336</color>
+    <color name="warning">#FF9800</color>
+
+</resources>

@@ -1,0 +1,91 @@
+# Thư mục build
+/build/
+/app/build/
+
+# Thư mục của IDE (Android Studio)
+.idea/
+*.iml
+
+# Tệp cấu hình môi trường cục bộ
+/local.properties
+
+# Tệp Gradle cache
+.gradle/
+**/gradle.xml
+**/gradle-app.setting
+
+# Dữ liệu của hệ thống
+.DS_Store
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+
+# Tệp lock và log
+*.log
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Tệp APK và mapping
+*.apk
+*.ap_
+*.aab
+*/captures/
+*/outputs/mapping/
+
+# Tệp được tạo khi biên dịch
+*.dex
+*.class
+
+# Tệp của NDK
+*.so
+*.o
+*.lo
+*.la
+*.a
+*.la
+*.lo
+
+# Cấu hình của Google Play
+/google-services.json
+
+# Tệp cấu hình Firebase
+/firebase/
+
+# Thư mục Flutter (nếu có sử dụng Flutter trong Android)
+.flutter-plugins
+.flutter-plugins-dependencies
+.metal
+.packages
+.pub-cache
+.pub
+/ios/Flutter/App.framework
+/ios/Flutter/Flutter.framework
+/ios/.symlinks
+/ios/Pods
+
+# Tệp keystore (khóa ký ứng dụng - không đẩy lên Git)
+/*.jks
+/*.keystore
+
+# Tệp tạm của Fastlane (nếu sử dụng)
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+
+# Tệp của Kotlin/Jetpack Compose
+*.kts
+/.caches/
+/.idea/kotlinc.xml
+.idea/misc.xml
+
+# Gradle Wrapper files (tùy chọn, nếu bạn muốn giữ lại thì xóa dòng này)
+gradlew
+gradlew.bat
+gradle-wrapper.jar
+gradle/wrapper/
+
+# Node modules (nếu có sử dụng React Native)
+node_modules/
