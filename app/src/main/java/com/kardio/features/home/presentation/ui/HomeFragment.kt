@@ -15,6 +15,7 @@ import com.kardio.databinding.FragmentHomeBinding
 import com.kardio.databinding.LayoutBottomSheetCreateOptionsBinding
 import com.kardio.features.home.presentation.viewmodel.HomeViewModel
 import com.kardio.ui.components.extensions.setIconTint
+import com.kardio.utils.InsetsCompatWrapper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -26,6 +27,38 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(inflater, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Setup window insets
+        setupWindowInsets()
+    }
+
+    private fun setupWindowInsets() {
+        // Sử dụng helper class để xử lý insets
+        InsetsCompatWrapper.setupInsetsForHomeScreen(
+            rootView = binding.root,
+            appBar = binding.appBar,
+            bottomNav = binding.bottomNavBar
+        )
+
+        // Thiết lập padding cho các tab containers
+        val containers = listOf(
+            binding.dashboardContainer,
+            binding.solutionsContainer,
+            binding.libraryContainer,
+            binding.profileContainer
+        )
+
+        // Đảm bảo các container không bị che khuất bởi navigation bar
+        containers.forEach { container ->
+            InsetsCompatWrapper.setupMarginsForView(
+                view = container,
+                applyBottom = true
+            )
+        }
     }
 
     override fun setupViews() {
@@ -50,7 +83,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             menuItem.itemId != R.id.nav_create
         }
     }
-
 
     private fun setupAppBarActions() {
         with(binding.appBar) {

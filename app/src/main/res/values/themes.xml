@@ -21,9 +21,12 @@
         <item name="colorSurfaceVariant">@color/background_secondary</item>
         <item name="colorOnSurfaceVariant">@color/text_secondary</item>
 
-        <item name="android:statusBarColor">@color/background_primary</item>
-        <item name="android:navigationBarColor">@color/background_primary</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
 
         <!-- Typography -->
         <item name="textAppearanceDisplayLarge">@style/TextAppearance.Kardio.Headline1</item>
@@ -46,6 +49,8 @@
         <item name="searchViewStyle">@style/Widget.Kardio.SearchView</item>
         <item name="extendedFloatingActionButtonStyle">@style/Widget.Kardio.FloatingActionButton</item>
 
+        <!-- Edge-to-edge support -->
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
     </style>
 
     <!-- Material 3 CardView -->
@@ -62,6 +67,8 @@
         <item name="android:background">@color/background_primary</item>
         <item name="itemIconTint">@color/nav_item_selector</item>
         <item name="itemTextColor">@color/nav_item_selector</item>
+        <item name="android:paddingTop">@dimen/spacing_xs</item>
+        <item name="android:paddingBottom">@dimen/spacing_xs</item>
     </style>
 
     <!-- TabLayout -->

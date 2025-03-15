@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/values-sw360dp/dimens.xml -->
+<resources>
+    <!-- Điều chỉnh kích thước cho màn hình từ 360dp trở lên -->
+    <dimen name="spacing_xxs">3dp</dimen>
+    <dimen name="spacing_xs">5dp</dimen>
+    <dimen name="spacing_sm">10dp</dimen>
+    <dimen name="spacing_md">18dp</dimen>
+    <dimen name="spacing_lg">26dp</dimen>
+    <dimen name="spacing_xl">34dp</dimen>
+
+    <!-- Điều chỉnh kích thước các component -->
+    <dimen name="toolbar_height">60dp</dimen>
+    <dimen name="bottom_navigation_height">60dp</dimen>
+    <dimen name="avatar_size_small">110dp</dimen>
+    <dimen name="avatar_size_normal">130dp</dimen>
+</resources>

@@ -2,15 +2,19 @@
 package com.kardio.ui.components.navigation
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.kardio.R
+import timber.log.Timber
 
 /**
  * QlzTabBar - Scrollable tab bar tối ưu cho Dark Mode
@@ -30,44 +34,69 @@ class QlzTabBar @JvmOverloads constructor(
     private var onTabSelectedListener: ((Int) -> Unit)? = null
 
     init {
-        isHorizontalScrollBarEnabled = false
-        inflateLayout()
-        setupFromAttributes(attrs)
+        // Thêm try-catch để bắt lỗi trong quá trình khởi tạo
+        try {
+            inflateLayout()
+            setupFromAttributes(attrs)
+        } catch (e: Exception) {
+            // Log lỗi để dễ debug
+            Timber.tag("QlzTabBar").e("Error initializing: ${e.message}")
+            e.printStackTrace()
+        }
     }
 
     private fun inflateLayout() {
-        val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.component_tab_bar, this, true)
+        // Inflate layout một cách an toàn
+        try {
+            val inflater = LayoutInflater.from(context)
+            val view = inflater.inflate(R.layout.component_tab_bar, this, true)
 
-        tabContainer = view.findViewById(R.id.tab_container)
-        tabIndicator = view.findViewById(R.id.tab_indicator)
+            tabContainer = view.findViewById(R.id.tab_container)
+            tabIndicator = view.findViewById(R.id.tab_indicator)
+        } catch (e: Exception) {
+            Timber.tag("QlzTabBar").e("Error inflating layout: ${e.message}")
+            throw e
+        }
     }
 
     private fun setupFromAttributes(attrs: AttributeSet?) {
         if (attrs == null) return
 
-        val typedArray = context.obtainStyledAttributes(
-            attrs, R.styleable.QlzTabBar
-        )
-
         try {
-            // Get tab entries if defined in XML
-            val entriesResId = typedArray.getResourceId(
-                R.styleable.QlzTabBar_qlzEntries, 0
+            val typedArray = context.obtainStyledAttributes(
+                attrs, R.styleable.QlzTabBar
             )
 
-            if (entriesResId != 0) {
-                val entries = resources.getStringArray(entriesResId)
-                setTabs(entries.toList())
+            try {
+                // Kiểm tra đảm bảo resource tồn tại trước khi sử dụng
+                if (typedArray.hasValue(R.styleable.QlzTabBar_qlzEntries)) {
+                    val entriesResId = typedArray.getResourceId(
+                        R.styleable.QlzTabBar_qlzEntries, 0
+                    )
+
+                    if (entriesResId != 0) {
+                        try {
+                            val entries = resources.getStringArray(entriesResId)
+                            setTabs(entries.toList())
+                        } catch (e: Resources.NotFoundException) {
+                            Timber.tag("QlzTabBar")
+                                .e("String array resource not found: $entriesResId")
+                            // Fallback to empty tabs instead of crashing
+                            setTabs(emptyList())
+                        }
+                    }
+                }
+
+                // Xử lý các thuộc tính khác
+                selectedTabIndex = typedArray.getInteger(
+                    R.styleable.QlzTabBar_qlzSelectedTabIndex, 0
+                )
+            } finally {
+                typedArray.recycle()
             }
-
-            // Get selected index
-            selectedTabIndex = typedArray.getInteger(
-                R.styleable.QlzTabBar_qlzSelectedTabIndex, 0
-            )
-
-        } finally {
-            typedArray.recycle()
+        } catch (e: Exception) {
+            Timber.tag("QlzTabBar").e("Error setting up attributes: ${e.message}")
+            throw e
         }
     }
 
@@ -156,10 +185,12 @@ class QlzTabBar @JvmOverloads constructor(
         val indicatorWidth = selectedTab.width
         val indicatorLeft = selectedTab.left
 
-        val layoutParams = tabIndicator.layoutParams as LinearLayout.LayoutParams
-        layoutParams.width = indicatorWidth
-        layoutParams.setMargins(indicatorLeft, 0, 0, 0)
-        tabIndicator.layoutParams = layoutParams
+        // Sử dụng ViewGroup.MarginLayoutParams là base class an toàn nhất
+        // cho tất cả loại LayoutParams có hỗ trợ margins
+        val params = tabIndicator.layoutParams as ViewGroup.MarginLayoutParams
+        params.width = indicatorWidth
+        params.leftMargin = indicatorLeft
+        tabIndicator.layoutParams = params
 
         if (animate) {
             tabIndicator.animate()

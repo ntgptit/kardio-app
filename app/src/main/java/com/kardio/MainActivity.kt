@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Thiết lập edge-to-edge UI
+        // Thiết lập edge-to-edge UI - làm cho nội dung phía dưới status bar và navigation bar
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         // Setup ViewBinding
@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+
+        // Nếu cần, có thể thêm Navigation Listener ở đây để xử lý các destination khác nhau
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Existing strings -->
     <string name="app_name">Kardio</string>
-
     <string name="profile_image_description">Profile image</string>
     <string name="welcome_title">Cách tốt nhất để học. Đăng ký miễn phí.</string>
     <string name="welcome_subtitle">Bằng việc đăng ký, bạn chấp nhận Điều khoản dịch vụ và Chính sách quyền riêng tư của Quizlet</string>
@@ -33,4 +34,54 @@
 
     <!-- Solutions Tab -->
     <string name="solutions_development_message">Đang phát triển tính năng giúp bạn giải đáp các bài tập</string>
+
+
+    <!-- New Dashboard Labels -->
+    <string name="dashboard_recent_title">Học gần đây</string>
+    <string name="dashboard_popular_title">Phổ biến</string>
+    <string name="dashboard_view_all">Xem tất cả</string>
+    <string name="dashboard_search_hint">Tìm kiếm học phần</string>
+
+    <!-- Dashboard Tab Categories -->
+    <string name="dashboard_category_all">Tất cả</string>
+    <string name="dashboard_category_recent">Gần đây</string>
+    <string name="dashboard_category_starred">Đánh dấu</string>
+    <string name="dashboard_category_classes">Lớp học</string>
+
+
+
+    <!-- String Arrays -->
+    <string-array name="dashboard_categories">
+        <item>@string/dashboard_category_all</item>
+        <item>@string/dashboard_category_recent</item>
+        <item>@string/dashboard_category_starred</item>
+        <item>@string/dashboard_category_classes</item>
+    </string-array>
+
+    <!-- Library Tab -->
+    <string name="library_empty_title">Thư viện trống</string>
+    <string name="library_empty_description">Bạn chưa có học phần nào trong thư viện</string>
+    <string name="library_create_new">Tạo học phần mới</string>
+    <string name="library_search_hint">Tìm kiếm trong thư viện</string>
+    <string name="library_category_all">Tất cả</string>
+    <string name="library_category_folders">Thư mục</string>
+    <string name="library_category_flashcards">Thẻ ghi nhớ</string>
+    <string name="library_category_classes">Lớp học</string>
+    <string name="library_updated">Cập nhật %1$s</string>
+
+    <!-- Profile Tab -->
+    <string name="profile_edit">Chỉnh sửa hồ sơ</string>
+    <string name="profile_settings">Cài đặt</string>
+    <string name="profile_sign_out">Đăng xuất</string>
+    <string name="profile_streak_days">Ngày học liên tiếp</string>
+    <string name="profile_terms_learned">Thuật ngữ đã học</string>
+    <string name="profile_modules_count">Học phần</string>
+
+    <!-- String Arrays for Library Tab -->
+    <string-array name="library_categories">
+        <item>@string/library_category_all</item>
+        <item>@string/library_category_folders</item>
+        <item>@string/library_category_flashcards</item>
+        <item>@string/library_category_classes</item>
+    </string-array>
 </resources>

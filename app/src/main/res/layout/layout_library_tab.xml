@@ -1,18 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/spacing_md"
+    android:paddingVertical="@dimen/spacing_lg">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- Search field -->
+    <com.kardio.ui.components.inputs.QlzSearchField
+        android:id="@+id/library_search_field"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Library Content"
-        android:textColor="@color/text_primary"
-        android:textSize="20sp"
+        android:hint="Tìm kiếm trong thư viện"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Tab bar for library filters -->
+    <com.kardio.ui.components.navigation.QlzTabBar
+        android:id="@+id/library_tab_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_md"
+        app:layout_constraintTop_toBottomOf="@id/library_search_field"
+        app:qlzEntries="@array/library_categories"
+        app:qlzSelectedTabIndex="0" />
+
+    <!-- Empty state when no items -->
+    <com.kardio.ui.components.feedback.QlzEmptyStateView
+        android:id="@+id/empty_state"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/library_tab_bar"
+        app:qlzButtonText="Tạo học phần mới"
+        app:qlzDescription="Bạn chưa có học phần nào trong thư viện"
+        app:qlzIcon="@drawable/ic_empty_state"
+        app:qlzTitle="Thư viện trống" />
+
+    <!-- RecyclerView for library items (would be populated dynamically) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/library_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/spacing_md"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/library_tab_bar"
+        tools:listitem="@layout/item_library_card"
+        tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

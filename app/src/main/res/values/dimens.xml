@@ -69,6 +69,7 @@
     <dimen name="button_padding_horizontal">24dp</dimen>
     <dimen name="button_padding_vertical">12dp</dimen>
     <dimen name="button_icon_padding">8dp</dimen>
+    <dimen name="button_corner_radius">8dp</dimen>
 
     <!-- Card -->
     <dimen name="card_margin">8dp</dimen>
@@ -161,8 +162,16 @@
     <!-- Toast -->
     <dimen name="toast_margin_bottom">64dp</dimen>
 
+    <!-- App Specific Dimensions -->
     <dimen name="avatar_size_small">100dp</dimen>
     <dimen name="avatar_size_normal">120dp</dimen>
     <dimen name="app_bar_elevation">4dp</dimen>
-    <dimen name="button_corner_radius">8dp</dimen>
+
+    <!-- Dashboard Specific -->
+    <dimen name="dashboard_card_width">250dp</dimen>
+    <dimen name="dashboard_card_height">130dp</dimen>
+
+    <!-- Window Insets Compensation -->
+    <dimen name="status_bar_height">24dp</dimen>
+    <dimen name="navigation_bar_height">48dp</dimen>
 </resources>

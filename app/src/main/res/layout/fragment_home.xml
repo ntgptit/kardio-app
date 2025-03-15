@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_primary">
+    android:background="@color/background_primary"
+    android:fitsSystemWindows="true">
 
     <com.kardio.ui.components.header.HomeAppBar
         android:id="@+id/app_bar"
@@ -65,23 +67,32 @@
 
     </com.kardio.ui.components.header.HomeAppBar>
 
-    <!-- Tab Content Containers -->
+    <!-- Tab Content Containers with ScrollView -->
     <FrameLayout
         android:id="@+id/dashboard_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#22FF0000"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_bar">
 
-        <include layout="@layout/layout_dashboard_tab" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DASHBOARD CONTENT"
+            android:textSize="24sp"
+            android:textColor="@color/text_primary"
+            android:gravity="center"
+            android:padding="16dp"/>
     </FrameLayout>
 
-    <FrameLayout
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/solutions_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fillViewport="true"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav_bar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,12 +100,13 @@
         app:layout_constraintTop_toBottomOf="@id/app_bar">
 
         <include layout="@layout/layout_solutions_tab" />
-    </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
 
-    <FrameLayout
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/library_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fillViewport="true"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav_bar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,12 +114,13 @@
         app:layout_constraintTop_toBottomOf="@id/app_bar">
 
         <include layout="@layout/layout_library_tab" />
-    </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
 
-    <FrameLayout
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/profile_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fillViewport="true"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav_bar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,13 +128,14 @@
         app:layout_constraintTop_toBottomOf="@id/app_bar">
 
         <include layout="@layout/layout_profile_tab" />
-    </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/surface"
+        android:paddingBottom="0dp"
         app:itemIconTint="@color/bottom_nav_item_color"
         app:itemTextColor="@color/bottom_nav_item_color"
         app:layout_constraintBottom_toBottomOf="parent"

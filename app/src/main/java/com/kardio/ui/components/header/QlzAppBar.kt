@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.kardio.R
@@ -29,7 +30,28 @@ class HomeAppBar @JvmOverloads constructor(
         // Set layout params
         layoutParams = ViewGroup.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+            resources.getDimensionPixelSize(R.dimen.toolbar_height)
         )
+
+        // Set content insets
+        setContentInsetsRelative(
+            resources.getDimensionPixelSize(R.dimen.spacing_md),
+            resources.getDimensionPixelSize(R.dimen.spacing_md)
+        )
+
+        // Adjust padding
+        val horizontalPadding = resources.getDimensionPixelSize(R.dimen.spacing_md)
+        val verticalPadding = resources.getDimensionPixelSize(R.dimen.spacing_sm)
+        setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding)
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        // Make sure the height is at least the toolbar height
+        val minHeight = resources.getDimensionPixelSize(R.dimen.toolbar_height)
+        val heightSpec = MeasureSpec.makeMeasureSpec(
+            Math.max(MeasureSpec.getSize(heightMeasureSpec), minHeight),
+            MeasureSpec.EXACTLY
+        )
+        super.onMeasure(widthMeasureSpec, heightSpec)
     }
 }

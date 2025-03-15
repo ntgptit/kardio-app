@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/values-sw600dp/dimens.xml (Tablet) -->
+<resources>
+    <!-- Điều chỉnh kích thước cho tablet -->
+    <dimen name="spacing_xxs">5dp</dimen>
+    <dimen name="spacing_xs">8dp</dimen>
+    <dimen name="spacing_sm">16dp</dimen>
+    <dimen name="spacing_md">24dp</dimen>
+    <dimen name="spacing_lg">32dp</dimen>
+    <dimen name="spacing_xl">40dp</dimen>
+
+    <!-- Điều chỉnh kích thước các component -->
+    <dimen name="toolbar_height">68dp</dimen>
+    <dimen name="bottom_navigation_height">72dp</dimen>
+    <dimen name="avatar_size_small">160dp</dimen>
+    <dimen name="avatar_size_normal">200dp</dimen>
+
+    <!-- Font sizes cho tablet -->
+    <dimen name="text_size_md">18sp</dimen>
+    <dimen name="text_size_lg">20sp</dimen>
+    <dimen name="text_size_xl">24sp</dimen>
+</resources>
