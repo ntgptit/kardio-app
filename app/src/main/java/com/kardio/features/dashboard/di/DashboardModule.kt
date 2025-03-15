@@ -3,6 +3,7 @@ package com.kardio.features.dashboard.di
 import com.kardio.features.dashboard.data.remote.api.DashboardApi
 import com.kardio.features.dashboard.data.repository.DashboardRepositoryImpl
 import com.kardio.features.dashboard.domain.repository.DashboardRepository
+import com.kardio.features.dashboard.domain.usecase.GetDashboardDataUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,10 +23,17 @@ object DashboardModule {
 
     @Provides
     @Singleton
+    fun provideGetDashboardDataUseCase(dashboardRepository: DashboardRepository): GetDashboardDataUseCase {
+        return GetDashboardDataUseCase(dashboardRepository)
+    }
+
+    @Provides
+    @Singleton
     fun provideDashboardRepository(
         dashboardApi: DashboardApi,
         @com.kardio.core.di.IoDispatcher ioDispatcher: kotlinx.coroutines.CoroutineDispatcher
     ): DashboardRepository {
         return DashboardRepositoryImpl(dashboardApi, ioDispatcher)
     }
+
 }
