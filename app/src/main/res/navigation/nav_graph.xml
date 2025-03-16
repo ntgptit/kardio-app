@@ -70,31 +70,69 @@
         android:label="Home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeFragment_to_createStudyModuleFragment"
-            app:destination="@id/createStudyModuleFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_createFolderFragment"
             app:destination="@id/createFolderFragment" />
         <action
             android:id="@+id/action_homeFragment_to_createClassFragment"
             app:destination="@id/createClassFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_folderDetailFragment"
+            app:destination="@id/folderDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_classDetailFragment"
+            app:destination="@id/classDetailFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/createStudyModuleFragment"
-        android:name="com.kardio.features.create.presentation.ui.CreateStudyModuleFragment"
-        android:label="Create Study Module"
-        tools:layout="@layout/fragment_create_study_module" />
-
-    <fragment
         android:id="@+id/createFolderFragment"
-        android:name="com.kardio.features.create.presentation.ui.CreateFolderFragment"
+        android:name="com.kardio.features.library.presentation.ui.CreateFolderFragment"
         android:label="Create Folder"
         tools:layout="@layout/fragment_create_folder" />
 
     <fragment
         android:id="@+id/createClassFragment"
-        android:name="com.kardio.features.create.presentation.ui.CreateClassFragment"
+        android:name="com.kardio.features.library.presentation.ui.CreateClassFragment"
         android:label="Create Class"
         tools:layout="@layout/fragment_create_class" />
+
+    <fragment
+        android:id="@+id/folderDetailFragment"
+        android:name="com.kardio.features.library.presentation.ui.FolderDetailFragment"
+        android:label="Folder Detail"
+        tools:layout="@layout/fragment_folder_detail">
+        <argument
+            android:name="folderId"
+            app:argType="string" />
+        <argument
+            android:name="folderName"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/classDetailFragment"
+        android:name="com.kardio.features.library.presentation.ui.ClassDetailFragment"
+        android:label="Class Detail"
+        tools:layout="@layout/fragment_class_detail">
+        <argument
+            android:name="classId"
+            app:argType="string" />
+        <argument
+            android:name="className"
+            app:argType="string" />
+        <!-- Thêm action đến createStudyModuleFragment -->
+<!--        <action-->
+<!--            android:id="@+id/action_classDetailFragment_to_createStudyModuleFragment"-->
+<!--            app:destination="@id/createStudyModuleFragment" />-->
+    </fragment>
+
+    <!-- Định nghĩa createStudyModuleFragment đã bỏ comment -->
+<!--    <fragment-->
+<!--        android:id="@+id/createStudyModuleFragment"-->
+<!--        android:name="com.kardio.features.library.presentation.ui.CreateStudyModuleFragment"-->
+<!--        android:label="Create Study Module"-->
+<!--        tools:layout="@layout/fragment_create_study_module">-->
+<!--        <argument-->
+<!--            android:name="classId"-->
+<!--            app:argType="string" />-->
+<!--    </fragment>-->
 </navigation>

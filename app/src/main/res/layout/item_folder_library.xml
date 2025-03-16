@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.kardio.ui.components.cards.QlzBaseCard xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/spacing_md">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_md">
+
+        <ImageView
+            android:id="@+id/image_view_folder_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_folder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/accent" />
+
+        <TextView
+            android:id="@+id/text_view_folder_name"
+            style="@style/TextAppearance.Kardio.Headline5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_view_folder_icon"
+            app:layout_constraintTop_toTopOf="@id/image_view_folder_icon"
+            app:layout_constraintBottom_toBottomOf="@id/image_view_folder_icon"
+            tools:text="Language Learning" />
+
+        <TextView
+            android:id="@+id/text_view_folder_description"
+            style="@style/TextAppearance.Kardio.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/text_secondary"
+            app:layout_constraintEnd_toStartOf="@id/text_view_module_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_view_folder_icon"
+            tools:text="Collection of language learning materials" />
+
+        <TextView
+            android:id="@+id/text_view_module_count"
+            style="@style/TextAppearance.Kardio.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chip"
+            android:padding="@dimen/padding_xs"
+            android:textColor="@color/text_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_view_folder_description"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_folder_description"
+            tools:text="15 học phần" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_folder_description">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_view_creator_avatar"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@color/background_secondary"
+                app:shapeAppearanceOverlay="@style/CircleImageView"
+                tools:src="@drawable/ic_profile_placeholder" />
+
+            <TextView
+                android:id="@+id/text_view_creator"
+                style="@style/TextAppearance.Kardio.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_sm"
+                android:textColor="@color/text_secondary"
+                tools:text="username" />
+
+            <View
+                android:id="@+id/view_plus_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginStart="@dimen/spacing_sm"
+                android:background="@drawable/bg_plus_badge"
+                android:paddingStart="@dimen/padding_xs"
+                android:paddingEnd="@dimen/padding_xs"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/padding_xs"
+                android:paddingEnd="@dimen/padding_xs"
+                android:text="PLUS"
+                android:textColor="@color/text_primary"
+                android:textSize="10sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.kardio.ui.components.cards.QlzBaseCard>

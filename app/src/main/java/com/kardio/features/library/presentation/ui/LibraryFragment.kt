@@ -41,7 +41,7 @@ class LibraryFragment : BaseFragment<FragmentLibraryBinding>() {
         binding.fabAdd.setOnClickListener {
             val currentTab = binding.viewPager.currentItem
             when (currentTab) {
-                0 -> navigateToCreateStudyModule()
+//                0 -> navigateToCreateStudyModule()
                 1 -> navigateToCreateFolder()
                 2 -> navigateToCreateClass()
             }
@@ -83,9 +83,9 @@ class LibraryFragment : BaseFragment<FragmentLibraryBinding>() {
     }
 
     // Navigation methods
-    private fun navigateToCreateStudyModule() {
-        findNavController().navigate(R.id.action_homeFragment_to_createStudyModuleFragment)
-    }
+//    private fun navigateToCreateStudyModule() {
+//        findNavController().navigate(R.id.action_homeFragment_to_createStudyModuleFragment)
+//    }
 
     private fun navigateToCreateFolder() {
         findNavController().navigate(R.id.action_homeFragment_to_createFolderFragment)

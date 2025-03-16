@@ -87,4 +87,40 @@
 
 
     <string name="notifications">Thông báo</string>
+
+    <!-- Create Class Screen -->
+    <string name="class_info">THÔNG TIN LỚP HỌC</string>
+    <string name="class_name_label">Tên lớp *</string>
+    <string name="class_name_hint">Nhập tên lớp học</string>
+    <string name="class_description_label">Mô tả</string>
+    <string name="class_description_hint">Mô tả về lớp học này (tùy chọn)</string>
+    <string name="class_settings">CÀI ĐẶT LỚP HỌC</string>
+    <string name="allow_members_to_add">Quyền truy cập cho thành viên</string>
+    <string name="allow_members_to_add_description">Cho phép thành viên thêm học phần và mời thành viên mới</string>
+    <string name="advanced_settings">Thêm cài đặt nâng cao</string>
+    <string name="message_class_created_success">Lớp học đã được tạo thành công</string>
+
+    <!-- Create Folder Screen -->
+    <string name="folder_info">Thông tin thư mục</string>
+    <string name="folder_name_label">Tiêu đề</string>
+    <string name="folder_name_hint">Nhập tiêu đề thư mục</string>
+    <string name="folder_description_label">Mô tả</string>
+    <string name="folder_description_hint">Mô tả về thư mục này (tùy chọn)</string>
+    <string name="message_folder_created_success">Thư mục đã được tạo thành công</string>
+
+    <!-- Common -->
+    <string name="sort">Sắp xếp</string>
+    <string name="add_new_item">Thêm mới</string>
+
+    <!-- Study Sets Filter Options -->
+    <string-array name="study_set_filter_options">
+        <item>Tất cả</item>
+        <item>Của tôi</item>
+        <item>Đã học</item>
+        <item>Đã tải xuống</item>
+    </string-array>
+
+    <!-- Error State -->
+    <string name="error_title">Đã xảy ra lỗi</string>
+    <string name="retry">Thử lại</string>
 </resources>

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.kardio.databinding.ItemFolderBinding
+import com.kardio.databinding.ItemFolderLibraryBinding
 import com.kardio.features.library.domain.model.Folder
 
 class FolderAdapter(
@@ -14,7 +14,7 @@ class FolderAdapter(
 ) : ListAdapter<Folder, FolderAdapter.FolderViewHolder>(FolderDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FolderViewHolder {
-        val binding = ItemFolderBinding.inflate(
+        val binding = ItemFolderLibraryBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -28,12 +28,12 @@ class FolderAdapter(
     }
 
     inner class FolderViewHolder(
-        private val binding: ItemFolderBinding
+        private val binding: ItemFolderLibraryBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.root.setOnClickListener {
-                val position = bindingAdapterPosition
+                val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     onItemClick(getItem(position))
                 }

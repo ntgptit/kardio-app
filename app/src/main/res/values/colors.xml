@@ -83,4 +83,11 @@
     <color name="primary_alpha20">#334255FF</color>
     <color name="surface_alpha90">#E61E2642</color>
 
+    <color name="chip_selected">#4255FF</color>  <!-- Màu xanh chủ đạo khi Chip được chọn -->
+    <color name="chip_unselected">#232A4B</color>  <!-- Màu nền ô nhập khi Chip chưa được chọn -->
+    <color name="chip_text_selected">#FFFFFF</color>  <!-- Màu chữ khi Chip được chọn -->
+    <color name="chip_text_unselected">#B0B4C6</color>  <!-- Màu chữ khi Chip chưa được chọn -->
+    <color name="chip_stroke">#2A2E43</color>  <!-- Màu viền Chip -->
+
+
 </resources>

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.kardio.databinding.ItemClassBinding
+import com.kardio.databinding.ItemClassLibraryBinding
 import com.kardio.features.library.domain.model.ClassModel
 
 class ClassAdapter(
@@ -14,7 +14,7 @@ class ClassAdapter(
 ) : ListAdapter<ClassModel, ClassAdapter.ClassViewHolder>(ClassDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassViewHolder {
-        val binding = ItemClassBinding.inflate(
+        val binding = ItemClassLibraryBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -28,12 +28,12 @@ class ClassAdapter(
     }
 
     inner class ClassViewHolder(
-        private val binding: ItemClassBinding
+        private val binding: ItemClassLibraryBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.root.setOnClickListener {
-                val position = bindingAdapterPosition
+                val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     onItemClick(getItem(position))
                 }

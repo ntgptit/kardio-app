@@ -140,8 +140,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             dialog?.dismiss()
 
             // Sử dụng parent NavController để điều hướng sang fragment khác
-            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_homeFragment_to_createStudyModuleFragment)
+//            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+//                .navigate(R.id.action_homeFragment_to_createStudyModuleFragment)
         }
 
         // Folder Option

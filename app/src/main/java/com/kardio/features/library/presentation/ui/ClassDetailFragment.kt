@@ -37,7 +37,7 @@ class ClassDetailFragment : BaseFragment<FragmentClassDetailBinding>() {
     }
 
     private fun loadClassData() {
-        viewModel.loadClassDetail(args.classId)
+//        viewModel.loadClassDetail(args.classId)
     }
 
     override fun setupViews() {
@@ -51,12 +51,12 @@ class ClassDetailFragment : BaseFragment<FragmentClassDetailBinding>() {
 
         // Setup "Join Class" button
         binding.buttonJoinClass.setOnClickListener {
-            viewModel.joinClass()
+//            viewModel.joinClass()
         }
 
         // Setup "Add Study Module" button
         binding.buttonAddStudyModule.setOnClickListener {
-            navigateToCreateStudyModule()
+//            navigateToCreateStudyModule()
         }
     }
 
@@ -80,7 +80,7 @@ class ClassDetailFragment : BaseFragment<FragmentClassDetailBinding>() {
         // Update error state
         binding.layoutErrorState.root.isVisible = state.error != null && !state.isLoading
 
-        if (state.error != null && !state.error.isNullOrEmpty()) {
+        if (!state.error.isNullOrEmpty()) {
             binding.layoutErrorState.textViewErrorMessage.text = state.error
             QlzSnackbar.showError(requireContext(), state.error)
             viewModel.errorShown()
@@ -115,17 +115,17 @@ class ClassDetailFragment : BaseFragment<FragmentClassDetailBinding>() {
         }
 
         // Show any action messages
-        if (state.actionMessage != null && state.actionMessage.isNotEmpty()) {
+        if (!state.actionMessage.isNullOrEmpty()) {
             QlzSnackbar.showInfo(requireContext(), state.actionMessage)
             viewModel.actionMessageShown()
         }
     }
 
-    private fun navigateToCreateStudyModule() {
-        // Example navigation - adjust according to your nav graph
-        val action = ClassDetailFragmentDirections.actionClassDetailFragmentToCreateStudyModuleFragment(
-            classId = args.classId
-        )
-        findNavController().navigate(action)
-    }
+//    private fun navigateToCreateStudyModule() {
+//        // Example navigation - adjust according to your nav graph
+//        val action = ClassDetailFragmentDirections.actionClassDetailFragmentToCreateStudyModuleFragment(
+//            classId = args.classId
+//        )
+//        findNavController().navigate(action)
+//    }
 }
