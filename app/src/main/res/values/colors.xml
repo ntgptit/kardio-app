@@ -82,14 +82,5 @@
     <!-- Alpha versions cho overlay -->
     <color name="primary_alpha20">#334255FF</color>
     <color name="surface_alpha90">#E61E2642</color>
-    <
-    <
-    <
-    <
-    <
-    <
-    < HEAD
-=======
 
->>>>>>> a2221da (fix Hilt error: In-progress)
 </resources>
