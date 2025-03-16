@@ -21,6 +21,7 @@ import com.kardio.databinding.FragmentHomeBinding
 import com.kardio.databinding.LayoutBottomSheetCreateOptionsBinding
 import com.kardio.features.dashboard.presentation.ui.DashboardFragment
 import com.kardio.features.home.presentation.viewmodel.HomeViewModel
+import com.kardio.features.library.presentation.ui.LibraryFragment
 import com.kardio.ui.components.extensions.setIconTint
 import com.kardio.ui.components.feedback.QlzSnackbar
 import com.kardio.utils.InsetsCompatWrapper
@@ -297,11 +298,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    class LibraryFragment : Fragment() {
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            return inflater.inflate(R.layout.layout_library_tab, container, false)
-        }
-    }
+//    class LibraryFragment : Fragment() {
+//        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//            return inflater.inflate(R.layout.layout_library_tab, container, false)
+//        }
+//    }
 
     class ProfileFragment : Fragment() {
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
