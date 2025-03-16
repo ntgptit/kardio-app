@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -19,8 +17,10 @@ import com.kardio.features.dashboard.domain.model.Class
 import com.kardio.features.dashboard.domain.model.Folder
 import com.kardio.features.dashboard.domain.model.StreakData
 import com.kardio.features.dashboard.domain.model.StudyModule
+import com.kardio.features.dashboard.presentation.adapter.ClassAdapter
 import com.kardio.features.dashboard.presentation.adapter.FolderAdapter
 import com.kardio.features.dashboard.presentation.adapter.StreakDayAdapter
+import com.kardio.features.dashboard.presentation.adapter.StudyModuleAdapter
 import com.kardio.features.dashboard.presentation.viewmodel.DashboardViewModel
 import com.kardio.ui.components.feedback.QlzSnackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +32,11 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     private val viewModel: DashboardViewModel by viewModels()
     private val streakDayAdapter = StreakDayAdapter()
-    private lateinit var folderAdapter: FolderAdapter
+
+    // Adapters for horizontal scrolling lists
+    private lateinit var foldersAdapter: FolderAdapter
+    private lateinit var studyModulesAdapter: StudyModuleAdapter
+    private lateinit var classesAdapter: ClassAdapter
 
     // Views for streak days
     private lateinit var streakDayViews: List<View>
@@ -44,7 +48,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initStreakDayViews()
-        setupFolderRecyclerView()
+        setupAdapters()
         setupListeners()
     }
 
@@ -61,61 +65,58 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
         )
     }
 
-    private fun setupFolderRecyclerView() {
-        folderAdapter = FolderAdapter { folder ->
-            viewModel.navigateToFolder(folder.id)
+    private fun setupAdapters() {
+        // Initialize folders adapter
+        foldersAdapter = FolderAdapter().apply {
+            setOnItemClickListener { folder ->
+                viewModel.navigateToFolder(folder.id)
+            }
         }
 
-        binding.root.findViewById<RecyclerView>(R.id.folders_recycler_view).apply {
-            adapter = folderAdapter
-            // Sử dụng ItemDecoration nếu cần thêm spacing
+        // Initialize study modules adapter
+        studyModulesAdapter = StudyModuleAdapter().apply {
+            setOnItemClickListener { module ->
+                viewModel.navigateToStudyModule(module.id)
+            }
         }
 
-        // Hiển thị RecyclerView và ẩn layout tĩnh
-        binding.root.findViewById<RecyclerView>(R.id.folders_recycler_view).visibility = View.VISIBLE
-        binding.root.findViewById<View>(R.id.folders_container).visibility = View.GONE
+        // Initialize classes adapter
+        classesAdapter = ClassAdapter().apply {
+            setOnItemClickListener { classItem ->
+                viewModel.navigateToClass(classItem.id)
+            }
+        }
+
+        // Setup RecyclerViews
+        val rootView = binding.root
+
+        rootView.findViewById<RecyclerView>(R.id.folders_recycler).apply {
+            adapter = foldersAdapter
+            clipToPadding = false
+        }
+
+        rootView.findViewById<RecyclerView>(R.id.study_modules_recycler).apply {
+            adapter = studyModulesAdapter
+            clipToPadding = false
+        }
+
+        rootView.findViewById<RecyclerView>(R.id.classes_recycler).apply {
+            adapter = classesAdapter
+            clipToPadding = false
+        }
     }
 
     private fun setupListeners() {
         val rootView = binding.root
 
         // Notification badge click
-        rootView.findViewById<View>(R.id.notification_button).setOnClickListener {
+        binding.notificationButton.setOnClickListener {
             QlzSnackbar.showInfo(requireContext(), "Notifications clicked")
         }
 
         // Search click
         rootView.findViewById<View>(R.id.search_placeholder).setOnClickListener {
             QlzSnackbar.showInfo(requireContext(), "Search clicked")
-        }
-
-        // View all folders
-        rootView.findViewById<View>(R.id.view_all_folders).setOnClickListener {
-            QlzSnackbar.showInfo(requireContext(), "View all folders clicked")
-        }
-
-        // View all study modules
-        rootView.findViewById<View>(R.id.view_all_study_modules).setOnClickListener {
-            QlzSnackbar.showInfo(requireContext(), "View all study modules clicked")
-        }
-
-        // View all classes
-        rootView.findViewById<View>(R.id.view_all_classes).setOnClickListener {
-            QlzSnackbar.showInfo(requireContext(), "View all classes clicked")
-        }
-
-        // Study module click
-        rootView.findViewById<View>(R.id.vitamin_study_card).setOnClickListener {
-            if (viewModel.uiState.value.studyModules.isNotEmpty()) {
-                viewModel.navigateToStudyModule(viewModel.uiState.value.studyModules[0].id)
-            }
-        }
-
-        // Class click
-        rootView.findViewById<View>(R.id.korean_class_card).setOnClickListener {
-            if (viewModel.uiState.value.classes.isNotEmpty()) {
-                viewModel.navigateToClass(viewModel.uiState.value.classes[0].id)
-            }
         }
     }
 
@@ -139,11 +140,11 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     private fun handleUiState(state: DashboardViewModel.DashboardUiState) {
         // Show loading if needed
-        binding.root.findViewById<View>(R.id.loading_indicator).visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        binding.loadingIndicator.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 
-        // Update folders with RecyclerView
+        // Update folders
         if (state.folders.isNotEmpty()) {
-            folderAdapter.submitList(state.folders)
+            updateFolders(state.folders)
         }
 
         // Update study modules
@@ -181,31 +182,24 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
         }
     }
 
+    private fun updateFolders(folders: List<Folder>) {
+        // Update folders RecyclerView using adapter
+        foldersAdapter.setItems(folders)
+    }
+
     private fun updateStudyModules(modules: List<StudyModule>) {
-        if (modules.isNotEmpty()) {
-            val module = modules[0]
-            val rootView = binding.root
-            rootView.findViewById<TextView>(R.id.study_module_title).text = module.title
-            rootView.findViewById<TextView>(R.id.study_module_count).text = "${module.termCount} thuật ngữ"
-            rootView.findViewById<TextView>(R.id.study_module_username).text = module.createdByUsername
-            rootView.findViewById<View>(R.id.study_module_plus_badge).visibility =
-                if (module.isCreatedByPlusUser) View.VISIBLE else View.GONE
-        }
+        // Update study modules RecyclerView using adapter
+        studyModulesAdapter.setItems(modules)
     }
 
     private fun updateClasses(classes: List<Class>) {
-        if (classes.isNotEmpty()) {
-            val classData = classes[0]
-            val rootView = binding.root
-            rootView.findViewById<TextView>(R.id.class_title).text = classData.name
-            rootView.findViewById<TextView>(R.id.class_modules_count).text = "${classData.studyModuleCount} học phần"
-            rootView.findViewById<TextView>(R.id.class_members_count).text = "${classData.memberCount} thành viên"
-        }
+        // Update classes RecyclerView using adapter
+        classesAdapter.setItems(classes)
     }
 
     private fun updateStreakData(streakData: StreakData) {
         val rootView = binding.root
-        // Sử dụng findViewById thông qua binding.streakCard
+        // Set streak count and title
         rootView.findViewById<TextView>(R.id.streak_count).text = streakData.currentStreak.toString()
         rootView.findViewById<TextView>(R.id.streak_title).text = "Chuỗi ${streakData.currentStreak} tuần"
 

@@ -44,6 +44,27 @@ class DashboardRepositoryImpl @Inject constructor(
                 iconColor = 0xFF2196F3.toInt(), // Secondary color
                 createdByUsername = "giapnguyen1994",
                 isCreatedByPlusUser = true
+            ),
+            Folder(
+                id = "folder3",
+                name = "Vocabulary",
+                iconColor = 0xFF4CAF50.toInt(), // Success color
+                createdByUsername = "lexicallearner",
+                isCreatedByPlusUser = false
+            ),
+            Folder(
+                id = "folder4",
+                name = "Science",
+                iconColor = 0xFFF44336.toInt(), // Error color
+                createdByUsername = "scientistpro",
+                isCreatedByPlusUser = true
+            ),
+            Folder(
+                id = "folder5",
+                name = "History",
+                iconColor = 0xFFFF9800.toInt(), // Warning color
+                createdByUsername = "historyteacher",
+                isCreatedByPlusUser = false
             )
         )
 
@@ -59,8 +80,29 @@ class DashboardRepositoryImpl @Inject constructor(
                 id = "module2",
                 title = "English Grammar: Tenses",
                 termCount = 20,
-                createdByUsername = "giapnguyen1994",
+                createdByUsername = "englishtutor101",
+                isCreatedByPlusUser = false
+            ),
+            StudyModule(
+                id = "module3",
+                title = "Biology: Cell Structure & Function",
+                termCount = 32,
+                createdByUsername = "biologyprof",
                 isCreatedByPlusUser = true
+            ),
+            StudyModule(
+                id = "module4",
+                title = "Mathematics: Calculus Fundamentals",
+                termCount = 25,
+                createdByUsername = "mathgenius",
+                isCreatedByPlusUser = true
+            ),
+            StudyModule(
+                id = "module5",
+                title = "French: Essential Phrases",
+                termCount = 45,
+                createdByUsername = "frenchteacher",
+                isCreatedByPlusUser = false
             )
         )
 
@@ -70,6 +112,30 @@ class DashboardRepositoryImpl @Inject constructor(
                 name = "Korean_Multicampus",
                 studyModuleCount = 56,
                 memberCount = 8
+            ),
+            Class(
+                id = "class2",
+                name = "Biology AP 2023",
+                studyModuleCount = 42,
+                memberCount = 24
+            ),
+            Class(
+                id = "class3",
+                name = "History 101",
+                studyModuleCount = 31,
+                memberCount = 18
+            ),
+            Class(
+                id = "class4",
+                name = "CS50: Introduction to Programming",
+                studyModuleCount = 68,
+                memberCount = 35
+            ),
+            Class(
+                id = "class5",
+                name = "French Beginners",
+                studyModuleCount = 27,
+                memberCount = 15
             )
         )
 

@@ -5,68 +5,62 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.imageview.ShapeableImageView
 import com.kardio.R
 import com.kardio.features.dashboard.domain.model.Folder
 
-/**
- * Adapter to display folders in a horizontal scrolling list.
- * Supports dynamic loading from API
- */
-class FolderAdapter(
-    private val onFolderClicked: (Folder) -> Unit
-) : ListAdapter<Folder, FolderAdapter.FolderViewHolder>(FolderDiffCallback()) {
+class FolderAdapter : RecyclerView.Adapter<FolderAdapter.FolderViewHolder>() {
+
+    private val items = mutableListOf<Folder>()
+    private var onItemClickListener: ((Folder) -> Unit)? = null
+
+    fun setItems(newItems: List<Folder>) {
+        items.clear()
+        items.addAll(newItems)
+        notifyDataSetChanged()
+    }
+
+    fun setOnItemClickListener(listener: (Folder) -> Unit) {
+        onItemClickListener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FolderViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val itemView = inflater.inflate(R.layout.item_folder, parent, false)
-        return FolderViewHolder(itemView)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_folder, parent, false)
+        return FolderViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: FolderViewHolder, position: Int) {
-        val folder = getItem(position)
-        holder.bind(folder)
+        holder.bind(items[position])
     }
 
+    override fun getItemCount(): Int = items.size
+
     inner class FolderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val cardView: MaterialCardView = itemView as MaterialCardView
-        private val folderIcon: ImageView = itemView.findViewById(R.id.folder_icon)
-        private val folderTitle: TextView = itemView.findViewById(R.id.folder_title)
-        private val folderAvatar: ShapeableImageView = itemView.findViewById(R.id.folder_avatar)
-        private val folderUsername: TextView = itemView.findViewById(R.id.folder_username)
-        private val folderPlusBadge: TextView = itemView.findViewById(R.id.folder_plus_badge)
+        private val iconView: ImageView = itemView.findViewById(R.id.folder_icon)
+        private val titleTextView: TextView = itemView.findViewById(R.id.folder_title)
+        private val usernameTextView: TextView = itemView.findViewById(R.id.folder_username)
+        private val plusBadge: View = itemView.findViewById(R.id.folder_plus_badge)
+        private val avatarView: ShapeableImageView = itemView.findViewById(R.id.folder_avatar)
 
         init {
-            cardView.setOnClickListener {
+            itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    onFolderClicked(getItem(position))
+                    onItemClickListener?.invoke(items[position])
                 }
             }
         }
 
         fun bind(folder: Folder) {
-            folderTitle.text = folder.name
-            folderUsername.text = folder.createdByUsername
-            folderPlusBadge.visibility = if (folder.isCreatedByPlusUser) View.VISIBLE else View.GONE
+            titleTextView.text = folder.name
+            usernameTextView.text = folder.createdByUsername
+            plusBadge.visibility =
+                if (folder.isCreatedByPlusUser) View.VISIBLE else View.GONE
 
             // Set folder icon color
-            folderIcon.setColorFilter(folder.iconColor)
-        }
-    }
-
-    class FolderDiffCallback : DiffUtil.ItemCallback<Folder>() {
-        override fun areItemsTheSame(oldItem: Folder, newItem: Folder): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: Folder, newItem: Folder): Boolean {
-            return oldItem == newItem
+            iconView.setColorFilter(folder.iconColor)
         }
     }
 }

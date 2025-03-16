@@ -21,18 +21,9 @@
             style="@style/TextAppearance.Kardio.Headline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kardio Plus"
+            android:text="Quizlet Plus"
             android:textColor="@color/text_primary"
             android:textStyle="bold"
-            android:paddingStart="@dimen/spacing_sm"
-            android:paddingEnd="@dimen/spacing_md"
-            android:paddingVertical="@dimen/spacing_sm"
-            android:background="@drawable/bg_app_title_gradient"
-            android:elevation="2dp"
-            android:shadowColor="#80000000"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,13 +32,10 @@
             android:id="@+id/notification_button"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:padding="6dp"
-            android:scaleType="centerInside"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/notifications"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/app_title"
-            app:layout_constraintBottom_toBottomOf="@id/app_title"
+            app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/text_primary"
             android:src="@drawable/ic_notifications_outline" />
 
@@ -56,17 +44,15 @@
             android:id="@+id/notification_badge"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="4dp"
             android:background="@drawable/bg_notification_badge"
-            android:elevation="4dp"
             android:gravity="center"
             android:text="3"
             android:textColor="@color/text_primary"
             android:textSize="10sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/notification_button"
-            app:layout_constraintTop_toTopOf="@id/notification_button" />
+            app:layout_constraintTop_toTopOf="@id/notification_button"
+            android:translationX="6dp"
+            android:translationY="-6dp" />
 
         <!-- Search Bar -->
         <include
@@ -89,43 +75,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_container" />
 
-        <!-- "View All" text for Folders section -->
-        <TextView
-            android:id="@+id/view_all_folders"
-            style="@style/TextAppearance.Kardio.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dashboard_view_all"
-            android:textColor="@color/accent"
-            android:background="?attr/selectableItemBackground"
-            android:padding="@dimen/padding_xs"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/folder_section_title"
-            app:layout_constraintBottom_toBottomOf="@id/folder_section_title" />
-
-        <!-- Folders Container with HorizontalScrollView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/folders_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_md"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingStart="0dp"
-            android:paddingEnd="@dimen/spacing_md"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/folder_section_title"
-            tools:listitem="@layout/item_folder"
-            tools:itemCount="3" />
-
-        <!-- Fallback for static layout -->
+        <!-- Folders Container -->
         <include
             android:id="@+id/folders_container"
-            layout="@layout/component_folder_grid"
+            layout="@layout/component_folders_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_md"
-            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/folder_section_title" />
 
         <!-- Section Title: Thành tựu -->
@@ -138,7 +94,7 @@
             android:text="Thành tựu"
             android:textColor="@color/text_primary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/folders_recycler_view" />
+            app:layout_constraintTop_toBottomOf="@id/folders_container" />
 
         <!-- Achievement Card -->
         <include
@@ -161,24 +117,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/streak_card" />
 
-        <!-- "View All" text for Study Modules section -->
-        <TextView
-            android:id="@+id/view_all_study_modules"
-            style="@style/TextAppearance.Kardio.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dashboard_view_all"
-            android:textColor="@color/accent"
-            android:background="?attr/selectableItemBackground"
-            android:padding="@dimen/padding_xs"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/study_section_title"
-            app:layout_constraintBottom_toBottomOf="@id/study_section_title" />
-
-        <!-- Study Module Card -->
+        <!-- Study Modules Container -->
         <include
-            android:id="@+id/vitamin_study_card"
-            layout="@layout/item_study_module"
+            android:id="@+id/study_modules_container"
+            layout="@layout/component_study_modules_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_md"
@@ -194,26 +136,12 @@
             android:text="Lớp học"
             android:textColor="@color/text_primary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/vitamin_study_card" />
+            app:layout_constraintTop_toBottomOf="@id/study_modules_container" />
 
-        <!-- "View All" text for Classes section -->
-        <TextView
-            android:id="@+id/view_all_classes"
-            style="@style/TextAppearance.Kardio.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dashboard_view_all"
-            android:textColor="@color/accent"
-            android:background="?attr/selectableItemBackground"
-            android:padding="@dimen/padding_xs"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/class_section_title"
-            app:layout_constraintBottom_toBottomOf="@id/class_section_title" />
-
-        <!-- Class Card -->
+        <!-- Classes Container -->
         <include
-            android:id="@+id/korean_class_card"
-            layout="@layout/item_class"
+            android:id="@+id/classes_container"
+            layout="@layout/component_classes_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_md"
