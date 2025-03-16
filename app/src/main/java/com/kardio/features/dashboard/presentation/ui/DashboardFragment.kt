@@ -55,13 +55,13 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     private fun initStreakDayViews() {
         val rootView = binding.root
         streakDayViews = listOf(
-            rootView.findViewById(R.id.day_9),
-            rootView.findViewById(R.id.day_10),
-            rootView.findViewById(R.id.day_11),
-            rootView.findViewById(R.id.day_12),
-            rootView.findViewById(R.id.day_13),
-            rootView.findViewById(R.id.day_14),
-            rootView.findViewById(R.id.day_15)
+            rootView.findViewById(R.id.day_16),
+            rootView.findViewById(R.id.day_17),
+            rootView.findViewById(R.id.day_18),
+            rootView.findViewById(R.id.day_19),
+            rootView.findViewById(R.id.day_20),
+            rootView.findViewById(R.id.day_21),
+            rootView.findViewById(R.id.day_22)
         )
     }
 

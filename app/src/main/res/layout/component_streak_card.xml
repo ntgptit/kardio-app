@@ -3,50 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/background_secondary"
-    app:cardCornerRadius="@dimen/radius_md"
+    android:layout_margin="@dimen/spacing_md"
+    app:cardBackgroundColor="@color/background_primary"
+    app:cardCornerRadius="@dimen/radius_lg"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/text_tertiary"
     app:cardElevation="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_md">
+        android:padding="@dimen/spacing_lg">
 
         <TextView
             android:id="@+id/streak_title"
             style="@style/TextAppearance.Kardio.Headline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chuỗi 14 tuần"
+            android:text="Chuỗi 15 tuần"
             android:textColor="@color/text_primary"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <FrameLayout
             android:id="@+id/streak_icon_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_sm"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/spacing_md"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/streak_title">
 
             <ImageView
                 android:id="@+id/streak_icon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:src="@drawable/ic_streak_flame"
                 app:tint="@color/streak_flame_orange" />
 
             <TextView
                 android:id="@+id/streak_count"
-                style="@style/TextAppearance.Kardio.Headline2"
+                style="@style/TextAppearance.Kardio.Headline3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="14"
+                android:text="15"
                 android:textColor="@color/text_primary"
                 android:textStyle="bold" />
         </FrameLayout>
@@ -56,12 +59,12 @@
             style="@style/TextAppearance.Kardio.Body2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_sm"
+            android:layout_marginTop="@dimen/spacing_md"
             android:text="Hãy học vào tuần tới để duy trì chuỗi của bạn!"
             android:textAlignment="center"
             android:textColor="@color/text_primary"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/streak_icon_container" />
 
         <LinearLayout
@@ -80,7 +83,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="S"
-                android:textColor="@color/text_primary" />
+                android:textColor="@color/text_secondary" />
 
             <TextView
                 style="@style/TextAppearance.Kardio.Body2"
@@ -89,7 +92,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="M"
-                android:textColor="@color/text_primary" />
+                android:textColor="@color/text_secondary" />
 
             <TextView
                 style="@style/TextAppearance.Kardio.Body2"
@@ -98,7 +101,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="T"
-                android:textColor="@color/text_primary" />
+                android:textColor="@color/text_secondary" />
 
             <TextView
                 style="@style/TextAppearance.Kardio.Body2"
@@ -107,7 +110,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="W"
-                android:textColor="@color/text_primary" />
+                android:textColor="@color/text_secondary" />
 
             <TextView
                 style="@style/TextAppearance.Kardio.Body2"
@@ -116,7 +119,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="T"
-                android:textColor="@color/text_primary" />
+                android:textColor="@color/text_secondary" />
 
             <TextView
                 style="@style/TextAppearance.Kardio.Body2"
@@ -125,7 +128,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="F"
-                android:textColor="@color/text_primary" />
+                android:textColor="@color/text_secondary" />
 
             <TextView
                 style="@style/TextAppearance.Kardio.Body2"
@@ -134,16 +137,18 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="S"
-                android:textColor="@color/text_primary" />
+                android:textColor="@color/text_secondary" />
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/day_tracker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_xs"
-            app:cardBackgroundColor="@color/background_primary"
+            android:layout_marginTop="@dimen/spacing_sm"
+            app:cardBackgroundColor="@color/background_secondary"
             app:cardCornerRadius="@dimen/radius_lg"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/secondary"
             app:cardElevation="0dp"
             app:layout_constraintTop_toBottomOf="@id/week_labels">
 
@@ -155,43 +160,41 @@
                 android:paddingVertical="@dimen/spacing_xs">
 
                 <include layout="@layout/item_streak_day"
-                    android:id="@+id/day_9"
+                    android:id="@+id/day_16"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <include layout="@layout/item_streak_day"
-                    android:id="@+id/day_10"
+                    android:id="@+id/day_17"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <include layout="@layout/item_streak_day"
-                    android:id="@+id/day_11"
+                    android:id="@+id/day_18"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <include layout="@layout/item_streak_day"
-                    android:id="@+id/day_12"
+                    android:id="@+id/day_19"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <include layout="@layout/item_streak_day"
-                    android:id="@+id/day_13"
+                    android:id="@+id/day_20"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
-
                 <include layout="@layout/item_streak_day"
-                    android:id="@+id/day_14"
+                    android:id="@+id/day_21"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
-
                 <include layout="@layout/item_streak_day"
-                    android:id="@+id/day_15"
+                    android:id="@+id/day_22"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -199,3 +202,206 @@
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
+
+
+    <!--<com.google.android.material.card.MaterialCardView-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    app:cardBackgroundColor="@color/background_secondary"-->
+<!--    app:cardCornerRadius="@dimen/radius_md"-->
+<!--    app:cardElevation="0dp">-->
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="@dimen/spacing_md">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/streak_title"-->
+<!--            style="@style/TextAppearance.Kardio.Headline4"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Chuỗi 14 tuần"-->
+<!--            android:textColor="@color/text_primary"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <FrameLayout-->
+<!--            android:id="@+id/streak_icon_container"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/spacing_sm"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/streak_title">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/streak_icon"-->
+<!--                android:layout_width="48dp"-->
+<!--                android:layout_height="48dp"-->
+<!--                android:src="@drawable/ic_streak_flame"-->
+<!--                app:tint="@color/streak_flame_orange" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/streak_count"-->
+<!--                style="@style/TextAppearance.Kardio.Headline2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:text="14"-->
+<!--                android:textColor="@color/text_primary"-->
+<!--                android:textStyle="bold" />-->
+<!--        </FrameLayout>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/streak_message"-->
+<!--            style="@style/TextAppearance.Kardio.Body2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/spacing_sm"-->
+<!--            android:text="Hãy học vào tuần tới để duy trì chuỗi của bạn!"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/text_primary"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/streak_icon_container" />-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/week_labels"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/spacing_md"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/streak_message">-->
+
+<!--            <TextView-->
+<!--                style="@style/TextAppearance.Kardio.Body2"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="S"-->
+<!--                android:textColor="@color/text_primary" />-->
+
+<!--            <TextView-->
+<!--                style="@style/TextAppearance.Kardio.Body2"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="M"-->
+<!--                android:textColor="@color/text_primary" />-->
+
+<!--            <TextView-->
+<!--                style="@style/TextAppearance.Kardio.Body2"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="T"-->
+<!--                android:textColor="@color/text_primary" />-->
+
+<!--            <TextView-->
+<!--                style="@style/TextAppearance.Kardio.Body2"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="W"-->
+<!--                android:textColor="@color/text_primary" />-->
+
+<!--            <TextView-->
+<!--                style="@style/TextAppearance.Kardio.Body2"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="T"-->
+<!--                android:textColor="@color/text_primary" />-->
+
+<!--            <TextView-->
+<!--                style="@style/TextAppearance.Kardio.Body2"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="F"-->
+<!--                android:textColor="@color/text_primary" />-->
+
+<!--            <TextView-->
+<!--                style="@style/TextAppearance.Kardio.Body2"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="S"-->
+<!--                android:textColor="@color/text_primary" />-->
+<!--        </LinearLayout>-->
+
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:id="@+id/day_tracker"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/spacing_xs"-->
+<!--            app:cardBackgroundColor="@color/background_primary"-->
+<!--            app:cardCornerRadius="@dimen/radius_lg"-->
+<!--            app:cardElevation="0dp"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/week_labels">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingVertical="@dimen/spacing_xs">-->
+
+<!--                <include layout="@layout/item_streak_day"-->
+<!--                    android:id="@+id/day_9"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1" />-->
+
+<!--                <include layout="@layout/item_streak_day"-->
+<!--                    android:id="@+id/day_10"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1" />-->
+
+<!--                <include layout="@layout/item_streak_day"-->
+<!--                    android:id="@+id/day_11"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1" />-->
+
+<!--                <include layout="@layout/item_streak_day"-->
+<!--                    android:id="@+id/day_12"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1" />-->
+
+<!--                <include layout="@layout/item_streak_day"-->
+<!--                    android:id="@+id/day_13"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1" />-->
+
+<!--                <include layout="@layout/item_streak_day"-->
+<!--                    android:id="@+id/day_14"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1" />-->
+
+<!--                <include layout="@layout/item_streak_day"-->
+<!--                    android:id="@+id/day_15"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1" />-->
+<!--            </LinearLayout>-->
+<!--        </com.google.android.material.card.MaterialCardView>-->
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--</com.google.android.material.card.MaterialCardView>-->
