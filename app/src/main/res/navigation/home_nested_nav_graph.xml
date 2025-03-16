@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nested_nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.kardio.features.dashboard.presentation.ui.DashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <!-- Add actions if needed -->
+    </fragment>
+
+    <fragment
+        android:id="@+id/solutionsFragment"
+        android:name="com.kardio.features.home.presentation.ui.SolutionsFragment"
+        android:label="Solutions"
+        tools:layout="@layout/layout_solutions_tab"
+        tools:ignore="MissingClass">
+        <!-- Add actions if needed -->
+    </fragment>
+
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="com.kardio.features.home.presentation.ui.LibraryFragment"
+        android:label="Library"
+        tools:layout="@layout/layout_library_tab"
+        tools:ignore="MissingClass">
+        <!-- Add actions if needed -->
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.kardio.features.home.presentation.ui.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/layout_profile_tab"
+        tools:ignore="MissingClass">
+        <!-- Add actions if needed -->
+    </fragment>
+</navigation>

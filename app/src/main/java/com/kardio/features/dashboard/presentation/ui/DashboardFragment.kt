@@ -11,14 +11,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.RecyclerView
 import com.kardio.R
 import com.kardio.core.base.BaseFragment
 import com.kardio.databinding.FragmentDashboardBinding
-import com.kardio.databinding.ComponentStreakCardBinding
 import com.kardio.features.dashboard.domain.model.Class
 import com.kardio.features.dashboard.domain.model.Folder
 import com.kardio.features.dashboard.domain.model.StreakData
 import com.kardio.features.dashboard.domain.model.StudyModule
+import com.kardio.features.dashboard.presentation.adapter.FolderAdapter
 import com.kardio.features.dashboard.presentation.adapter.StreakDayAdapter
 import com.kardio.features.dashboard.presentation.viewmodel.DashboardViewModel
 import com.kardio.ui.components.feedback.QlzSnackbar
@@ -31,12 +32,10 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     private val viewModel: DashboardViewModel by viewModels()
     private val streakDayAdapter = StreakDayAdapter()
+    private lateinit var folderAdapter: FolderAdapter
 
     // Views for streak days
     private lateinit var streakDayViews: List<View>
-
-    // Liên kết binding cho streak card
-    private lateinit var streakCardBinding: ComponentStreakCardBinding
 
     override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentDashboardBinding {
         return FragmentDashboardBinding.inflate(inflater, container, false)
@@ -44,9 +43,8 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Khởi tạo binding cho streak card
-//        streakCardBinding = ComponentStreakCardBinding.bind(binding.streakCard)
         initStreakDayViews()
+        setupFolderRecyclerView()
         setupListeners()
     }
 
@@ -63,10 +61,26 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
         )
     }
 
+    private fun setupFolderRecyclerView() {
+        folderAdapter = FolderAdapter { folder ->
+            viewModel.navigateToFolder(folder.id)
+        }
+
+        binding.root.findViewById<RecyclerView>(R.id.folders_recycler_view).apply {
+            adapter = folderAdapter
+            // Sử dụng ItemDecoration nếu cần thêm spacing
+        }
+
+        // Hiển thị RecyclerView và ẩn layout tĩnh
+        binding.root.findViewById<RecyclerView>(R.id.folders_recycler_view).visibility = View.VISIBLE
+        binding.root.findViewById<View>(R.id.folders_container).visibility = View.GONE
+    }
+
     private fun setupListeners() {
         val rootView = binding.root
+
         // Notification badge click
-        binding.notificationButton.setOnClickListener {
+        rootView.findViewById<View>(R.id.notification_button).setOnClickListener {
             QlzSnackbar.showInfo(requireContext(), "Notifications clicked")
         }
 
@@ -75,23 +89,33 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
             QlzSnackbar.showInfo(requireContext(), "Search clicked")
         }
 
-        // Folder clicks
-        rootView.findViewById<View>(R.id.grammar_folder).setOnClickListener {
-            viewModel.navigateToFolder("folder1")
+        // View all folders
+        rootView.findViewById<View>(R.id.view_all_folders).setOnClickListener {
+            QlzSnackbar.showInfo(requireContext(), "View all folders clicked")
         }
 
-        rootView.findViewById<View>(R.id.other_folder).setOnClickListener {
-            viewModel.navigateToFolder("folder2")
+        // View all study modules
+        rootView.findViewById<View>(R.id.view_all_study_modules).setOnClickListener {
+            QlzSnackbar.showInfo(requireContext(), "View all study modules clicked")
+        }
+
+        // View all classes
+        rootView.findViewById<View>(R.id.view_all_classes).setOnClickListener {
+            QlzSnackbar.showInfo(requireContext(), "View all classes clicked")
         }
 
         // Study module click
-        rootView.findViewById<View>(R.id.study_module_count).setOnClickListener {
-            viewModel.navigateToStudyModule("module1")
+        rootView.findViewById<View>(R.id.vitamin_study_card).setOnClickListener {
+            if (viewModel.uiState.value.studyModules.isNotEmpty()) {
+                viewModel.navigateToStudyModule(viewModel.uiState.value.studyModules[0].id)
+            }
         }
 
         // Class click
-        rootView.findViewById<View>(R.id.class_stats).setOnClickListener {
-            viewModel.navigateToClass("class1")
+        rootView.findViewById<View>(R.id.korean_class_card).setOnClickListener {
+            if (viewModel.uiState.value.classes.isNotEmpty()) {
+                viewModel.navigateToClass(viewModel.uiState.value.classes[0].id)
+            }
         }
     }
 
@@ -115,11 +139,11 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     private fun handleUiState(state: DashboardViewModel.DashboardUiState) {
         // Show loading if needed
-        binding.loadingIndicator.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        binding.root.findViewById<View>(R.id.loading_indicator).visibility = if (state.isLoading) View.VISIBLE else View.GONE
 
-        // Update folders
+        // Update folders with RecyclerView
         if (state.folders.isNotEmpty()) {
-            updateFolders(state.folders)
+            folderAdapter.submitList(state.folders)
         }
 
         // Update study modules
@@ -154,40 +178,6 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
             is DashboardViewModel.DashboardUiEvent.NavigateToClass -> {
                 QlzSnackbar.showInfo(requireContext(), "Navigating to class: ${event.classId}")
             }
-        }
-    }
-
-    private fun updateFolders(folders: List<Folder>) {
-        val rootView = binding.root
-        // Update Grammar folder
-        if (folders.isNotEmpty()) {
-            val folder = folders[0]
-            val grammarFolder = rootView.findViewById<View>(R.id.grammar_folder)
-
-            grammarFolder.findViewById<TextView>(R.id.grammar_folder_title).text = folder.name
-            grammarFolder.findViewById<TextView>(R.id.grammar_folder_username).text = folder.createdByUsername
-            grammarFolder.findViewById<View>(R.id.grammar_folder_plus_badge).visibility =
-                if (folder.isCreatedByPlusUser) View.VISIBLE else View.GONE
-
-            // Set icon color if needed
-            val iconView = grammarFolder.findViewById<ImageView>(R.id.grammar_folder_icon)
-            iconView.setColorFilter(ContextCompat.getColor(requireContext(), R.color.accent))
-        }
-
-        // Update Other folder
-        if (folders.size >= 2) {
-            val folder = folders[1]
-
-            val otherFolder = rootView.findViewById<View>(R.id.other_folder)
-
-            otherFolder.findViewById<TextView>(R.id.other_folder_title).text = folder.name
-            otherFolder.findViewById<TextView>(R.id.other_folder_username).text = folder.createdByUsername
-            otherFolder.findViewById<View>(R.id.other_folder_plus_badge).visibility =
-                if (folder.isCreatedByPlusUser) View.VISIBLE else View.GONE
-
-            // Set icon color if needed
-            val iconView = otherFolder.findViewById<ImageView>(R.id.other_folder_icon)
-            iconView.setColorFilter(ContextCompat.getColor(requireContext(), R.color.secondary))
         }
     }
 

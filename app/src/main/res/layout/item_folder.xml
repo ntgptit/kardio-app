@@ -1,0 +1,74 @@
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/folder_card"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/spacing_md"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/background_secondary"
+    app:cardCornerRadius="@dimen/radius_md"
+    app:cardElevation="4dp"
+    app:rippleColor="?attr/colorControlHighlight">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_md">
+
+        <ImageView
+            android:id="@+id/folder_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_folder"
+            app:tint="@color/accent" />
+
+        <TextView
+            android:id="@+id/folder_title"
+            style="@style/TextAppearance.Kardio.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:textColor="@color/text_primary"
+            tools:text="Grammar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/folder_avatar"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_profile_placeholder"
+                app:shapeAppearanceOverlay="@style/CircleImageView" />
+
+            <TextView
+                android:id="@+id/folder_username"
+                style="@style/TextAppearance.Kardio.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_sm"
+                android:textColor="@color/text_secondary"
+                tools:text="giapnguyen1994" />
+
+            <TextView
+                android:id="@+id/folder_plus_badge"
+                style="@style/TextAppearance.Kardio.Badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_sm"
+                android:background="@drawable/bg_plus_badge"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="3dp"
+                android:text="PLUS"
+                android:textColor="@color/text_primary"
+                android:textSize="9sp" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
