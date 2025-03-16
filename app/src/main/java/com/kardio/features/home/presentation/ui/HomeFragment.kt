@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.kardio.R
@@ -47,6 +49,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         return FragmentHomeBinding.inflate(inflater, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Thêm callback xử lý quay lại
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (childFragmentManager.backStackEntryCount > 0) {
+                    childFragmentManager.popBackStack()
+                } else if (viewModel.uiState.value.selectedTabIndex != 0) {
+                    // Nếu không ở tab đầu tiên, quay về tab đầu
+                    viewModel.changeTab(0)
+                    binding.bottomNavBar.selectedItemId = R.id.nav_home
+                } else {
+                    // Nếu đã ở tab đầu, cho phép activity xử lý back
+                    isEnabled = false
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
+                }
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -66,9 +91,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun setupViews() {
         // Setup Bottom Navigation
         setupBottomNavigation()
-
-        // Setup AppBar actions
-//        setupAppBarActions()
     }
 
     private fun setupBottomNavigation() {
@@ -83,42 +105,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 R.id.nav_library -> viewModel.changeTab(3)
                 R.id.nav_profile -> viewModel.changeTab(4)
             }
+
+            // Xóa tất cả backstack entries khi chuyển tab để tránh behavior không mong muốn
+            childFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+
             true
         }
     }
-
-//    private fun setupAppBarActions() {
-//        // Notification button
-//        binding.notificationButton.setOnClickListener {
-//            QlzSnackbar.showInfo(requireContext(), "Notifications clicked")
-//        }
-//
-//        // Settings button
-//        binding.settingsButton.setOnClickListener {
-//            showSettingsMenu()
-//        }
-//    }
-
-//    private fun showSettingsMenu() {
-//        val popup = android.widget.PopupMenu(requireContext(), binding.settingsButton)
-//        popup.menuInflater.inflate(R.menu.settings_menu, popup.menu)
-//
-//        popup.setOnMenuItemClickListener { menuItem ->
-//            when (menuItem.itemId) {
-//                R.id.menu_settings -> {
-//                    QlzSnackbar.showInfo(requireContext(), "Settings clicked")
-//                    true
-//                }
-//                R.id.menu_logout -> {
-//                    QlzSnackbar.showInfo(requireContext(), "Logout clicked")
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
-//
-//        popup.show()
-//    }
 
     private fun showCreateModal() {
         dialog = BottomSheetDialog(requireContext(), R.style.ThemeOverlay_App_BottomSheetDialog)
@@ -145,7 +138,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         studyModuleOption.setOnClickListener {
             dialog?.dismiss()
-            findNavController().navigate(R.id.action_homeFragment_to_createStudyModuleFragment)
+
+            // Sử dụng parent NavController để điều hướng sang fragment khác
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+                .navigate(R.id.action_homeFragment_to_createStudyModuleFragment)
         }
 
         // Folder Option
@@ -161,7 +157,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         folderOption.setOnClickListener {
             dialog?.dismiss()
-            findNavController().navigate(R.id.action_homeFragment_to_createFolderFragment)
+
+            // Sử dụng parent NavController để điều hướng sang fragment khác
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+                .navigate(R.id.action_homeFragment_to_createFolderFragment)
         }
 
         // Class Option
@@ -177,28 +176,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         classOption.setOnClickListener {
             dialog?.dismiss()
-            findNavController().navigate(R.id.action_homeFragment_to_createClassFragment)
+
+            // Sử dụng parent NavController để điều hướng sang fragment khác
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+                .navigate(R.id.action_homeFragment_to_createClassFragment)
         }
     }
 
     private fun setupWindowInsets() {
         InsetsCompatWrapper.setupInsetsForHomeScreen(
             rootView = binding.root,
-//            appBar = binding.appBar,
             bottomNav = binding.bottomNavBar
         )
     }
 
-        override fun observeData() {
-            viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    viewModel.uiState.collectLatest { state ->
-                        // Update UI based on selected tab
-                        updateSelectedTab(state.selectedTabIndex)
-                    }
+    override fun observeData() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collectLatest { state ->
+                    // Update UI based on selected tab
+                    updateSelectedTab(state.selectedTabIndex)
                 }
             }
         }
+    }
 
     private fun updateSelectedTab(tabIndex: Int) {
         // Update selected item in bottom navigation
@@ -231,24 +232,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         val transaction = childFragmentManager.beginTransaction()
         transaction.setReorderingAllowed(true)
 
-        // Hide current fragment if any
-        currentFragment?.let {
-            transaction.hide(it)
-            transaction.setMaxLifecycle(it, Lifecycle.State.STARTED)
-        }
-
-        // Show selected fragment
-        if (fragment.isAdded) {
-            transaction.show(fragment)
-        } else {
-            transaction.add(R.id.fragment_container, fragment)
-        }
-
-        // Set max lifecycle to RESUMED for active fragment
-        transaction.setMaxLifecycle(fragment, Lifecycle.State.RESUMED)
+        // Thay vì hide/show, sử dụng replace để tránh fragment overlap
+        transaction.replace(R.id.fragment_container, fragment, "tab_$tabIndex")
 
         // Commit transaction
-        transaction.commit()
+        transaction.commitNow() // Sử dụng commitNow để đảm bảo thay đổi được áp dụng ngay lập tức
 
         // Update current fragment reference
         currentFragment = fragment
