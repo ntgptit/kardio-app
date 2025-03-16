@@ -21,7 +21,7 @@
             style="@style/TextAppearance.Kardio.Headline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quizlet Plus"
+            android:text="@string/kardio_plus"
             android:textColor="@color/text_primary"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"

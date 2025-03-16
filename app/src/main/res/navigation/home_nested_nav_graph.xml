@@ -26,7 +26,7 @@
         android:id="@+id/libraryFragment"
         android:name="com.kardio.features.home.presentation.ui.LibraryFragment"
         android:label="Library"
-        tools:layout="@layout/layout_library_tab"
+        tools:layout="@layout/fragment_library"
         tools:ignore="MissingClass">
         <!-- Add actions if needed -->
     </fragment>

@@ -123,4 +123,6 @@
     <!-- Error State -->
     <string name="error_title">Đã xảy ra lỗi</string>
     <string name="retry">Thử lại</string>
+    <string name="kardio_plus">Kardio Plus</string>
+    <string name="study_set_list">Danh sách học phần</string>
 </resources>
