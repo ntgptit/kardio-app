@@ -41,17 +41,22 @@ class FolderAdapter(
         }
 
         fun bind(folder: Folder) {
-            binding.textViewFolderName.text = folder.name
-            binding.textViewFolderDescription.text = folder.description.takeIf { it.isNotEmpty() }
+            binding.textFolderName.text = folder.name
+
+            // Nếu folder.description không rỗng, hiển thị nó, ngược lại hiển thị số học phần
+            binding.textFolderName.text = folder.description.takeIf { it.isNotEmpty() }
                 ?: "Thư mục chứa ${folder.moduleCount} học phần"
-            binding.textViewModuleCount.text = "${folder.moduleCount} học phần"
-            binding.textViewCreator.text = folder.creatorName
-            binding.viewPlusBadge.visibility = if (folder.hasPlusBadge) {
+
+            binding.textCreator.text = folder.creatorName
+
+            // Hiển thị hoặc ẩn badge "Plus"
+            binding.textPlusBadge.visibility = if (folder.hasPlusBadge) {
                 android.view.View.VISIBLE
             } else {
                 android.view.View.GONE
             }
         }
+
     }
 
     class FolderDiffCallback : DiffUtil.ItemCallback<Folder>() {

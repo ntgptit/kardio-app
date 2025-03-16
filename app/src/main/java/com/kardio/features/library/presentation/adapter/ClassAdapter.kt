@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kardio.databinding.ItemClassLibraryBinding
 import com.kardio.features.library.domain.model.ClassModel
+import com.kardio.R
 
 class ClassAdapter(
     private val onItemClick: (ClassModel) -> Unit
@@ -41,26 +42,24 @@ class ClassAdapter(
         }
 
         fun bind(classModel: ClassModel) {
-            binding.textViewClassName.text = classModel.name
-            binding.textViewClassDescription.text = classModel.description.takeIf { it.isNotEmpty() }
-                ?: "Lớp học chứa ${classModel.studyModulesCount} học phần"
-            binding.textViewModuleCount.text = "${classModel.studyModulesCount} học phần"
+            binding.textGroupName.text = classModel.name
 
-            // Check if creator name exists
-            if (classModel.creatorName != null && classModel.creatorName.isNotEmpty()) {
-                binding.textViewCreator.text = "Tạo bởi: ${classModel.creatorName}"
-                binding.textViewCreator.visibility = android.view.View.VISIBLE
-            } else {
-                binding.textViewCreator.visibility = android.view.View.GONE
-            }
+            // Hiển thị số học phần
+            binding.textModuleCount.text = "${classModel.studyModulesCount} học phần"
 
-            // Show permission indicator
-            binding.imageViewPermission.visibility = if (classModel.allowMembersToAdd) {
-                android.view.View.VISIBLE
-            } else {
-                android.view.View.GONE
-            }
+            // Không có `textViewClassDescription` trong XML nên loại bỏ
+            // Kiểm tra nếu có creatorName thì hiển thị, ngược lại ẩn đi
+//            if (!classModel.creatorName.isNullOrEmpty()) {
+//                binding.text.text = "Tạo bởi: ${classModel.creatorName}"
+//                binding.textCreator.visibility = android.view.View.VISIBLE
+//            } else {
+//                binding.textCreator.visibility = android.view.View.GONE
+//            }
+
+            // Hiển thị hoặc ẩn icon quyền (imageViewPermission) nếu allowMembersToAdd = true
+            binding.imageGroupIcon.setImageResource(R.drawable.ic_group)  // Đảm bảo icon hiển thị đúng
         }
+
     }
 
     class ClassDiffCallback : DiffUtil.ItemCallback<ClassModel>() {

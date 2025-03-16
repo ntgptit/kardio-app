@@ -1,116 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.kardio.ui.components.cards.QlzBaseCard xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/spacing_md">
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="@color/background_secondary"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:strokeColor="@color/divider"
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_md">
+        android:padding="16dp">
 
+        <!-- Biểu tượng thư mục -->
         <ImageView
-            android:id="@+id/image_view_folder_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/image_folder_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:src="@drawable/ic_folder"
+            app:tint="@color/icon_primary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/accent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Tên thư mục -->
         <TextView
-            android:id="@+id/text_view_folder_name"
-            style="@style/TextAppearance.Kardio.Headline5"
+            android:id="@+id/text_folder_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_md"
-            android:ellipsize="end"
-            android:maxLines="1"
+            android:text="Folder Name"
+            android:textAppearance="?attr/textAppearanceHeadline6"
             android:textColor="@color/text_primary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/image_view_folder_icon"
-            app:layout_constraintTop_toTopOf="@id/image_view_folder_icon"
-            app:layout_constraintBottom_toBottomOf="@id/image_view_folder_icon"
-            tools:text="Language Learning" />
-
-        <TextView
-            android:id="@+id/text_view_folder_description"
-            style="@style/TextAppearance.Kardio.Body1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_md"
+            android:textStyle="bold"
+            android:maxLines="1"
             android:ellipsize="end"
-            android:maxLines="2"
-            android:textColor="@color/text_secondary"
-            app:layout_constraintEnd_toStartOf="@id/text_view_module_count"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_view_folder_icon"
-            tools:text="Collection of language learning materials" />
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/image_folder_icon"
+            app:layout_constraintTop_toTopOf="@id/image_folder_icon"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/text_view_module_count"
-            style="@style/TextAppearance.Kardio.Body2"
+        <!-- Layout chứa Avatar + Tên + Badge -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_chip"
-            android:padding="@dimen/padding_xs"
-            android:textColor="@color/text_primary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/text_view_folder_description"
-            app:layout_constraintBottom_toBottomOf="@id/text_view_folder_description"
-            tools:text="15 học phần" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_md"
-            android:gravity="center_vertical"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center_vertical"
+            android:layout_marginTop="12dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_folder_description">
+            app:layout_constraintTop_toBottomOf="@id/text_folder_name">
 
+            <!-- Ảnh đại diện -->
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/image_view_creator_avatar"
+                android:id="@+id/image_creator_avatar"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:background="@color/background_secondary"
                 app:shapeAppearanceOverlay="@style/CircleImageView"
-                tools:src="@drawable/ic_profile_placeholder" />
+                android:src="@drawable/user_avatar"
+                android:contentDescription="Avatar" />
 
+            <!-- Tên người dùng -->
             <TextView
-                android:id="@+id/text_view_creator"
-                style="@style/TextAppearance.Kardio.Body2"
+                android:id="@+id/text_creator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_sm"
+                android:text="giapnguyen1994"
+                android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="@color/text_secondary"
-                tools:text="username" />
+                android:layout_marginStart="8dp"/>
 
-            <View
-                android:id="@+id/view_plus_badge"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:layout_marginStart="@dimen/spacing_sm"
-                android:background="@drawable/bg_plus_badge"
-                android:paddingStart="@dimen/padding_xs"
-                android:paddingEnd="@dimen/padding_xs"
-                android:visibility="gone"
-                tools:visibility="visible" />
-
+            <!-- Badge "Plus" -->
             <TextView
+                android:id="@+id/text_plus_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/padding_xs"
-                android:paddingEnd="@dimen/padding_xs"
-                android:text="PLUS"
-                android:textColor="@color/text_primary"
-                android:textSize="10sp"
-                android:visibility="gone"
-                tools:visibility="visible" />
+                android:text="Plus"
+                android:textColor="@color/badge_plus"
+                android:textSize="12sp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:background="@drawable/bg_plus_badge"
+                android:layout_marginStart="8dp"
+                android:visibility="gone"/>
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-</com.kardio.ui.components.cards.QlzBaseCard>
+</com.google.android.material.card.MaterialCardView>

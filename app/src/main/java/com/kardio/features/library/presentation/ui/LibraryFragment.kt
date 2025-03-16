@@ -37,16 +37,21 @@ class LibraryFragment : BaseFragment<FragmentLibraryBinding>() {
     }
 
     override fun setupViews() {
-        // Setup add button
-        binding.fabAdd.setOnClickListener {
+        // Kiểm tra adapter của ViewPager để tránh lỗi khi chưa khởi tạo
+        binding.btnAdd.setOnClickListener {
+            val totalTabs = binding.viewPager.adapter?.itemCount ?: 0
             val currentTab = binding.viewPager.currentItem
+
+            if (totalTabs == 0 || currentTab >= totalTabs) return@setOnClickListener
+
             when (currentTab) {
-//                0 -> navigateToCreateStudyModule()
-                1 -> navigateToCreateFolder()
-                2 -> navigateToCreateClass()
+//                0 -> navigateToCreateStudyModule() // Xử lý khi tab "Học phần" được chọn
+                1 -> navigateToCreateFolder()      // Xử lý khi tab "Thư mục" được chọn
+                2 -> navigateToCreateClass()       // Xử lý khi tab "Lớp học" được chọn
             }
         }
     }
+
 
     private fun setupViewPager() {
         // Setup ViewPager with TabLayout

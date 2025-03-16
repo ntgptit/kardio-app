@@ -41,15 +41,16 @@ class StudySetAdapter(
         }
 
         fun bind(studySet: StudySet) {
-            binding.textViewTitle.text = studySet.title
-            binding.textViewWordCount.text = "${studySet.wordCount} từ vựng"
-            binding.textViewCreator.text = studySet.creatorName
-            binding.viewPlusBadge.visibility = if (studySet.hasPlusBadge) {
+            binding.textTitle.text = studySet.title
+            binding.textWordCount.text = "${studySet.wordCount} thuật ngữ"
+            binding.textCreator.text = studySet.creatorName
+            binding.textPlusBadge.visibility = if (studySet.hasPlusBadge) {
                 android.view.View.VISIBLE
             } else {
                 android.view.View.GONE
             }
         }
+
     }
 
     class StudySetDiffCallback : DiffUtil.ItemCallback<StudySet>() {

@@ -18,11 +18,14 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_classes"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:clipToPadding="false"
-            android:padding="@dimen/spacing_md"
+            android:nestedScrollingEnabled="false"
+            android:padding="@dimen/spacing_sm"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_class" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/item_class_library" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <include

@@ -1,129 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.kardio.ui.components.cards.QlzBaseCard xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/spacing_md">
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="@color/background_secondary"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:strokeColor="@color/divider"
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_md">
+        android:padding="16dp">
 
+        <!-- Biểu tượng nhóm -->
         <ImageView
-            android:id="@+id/image_view_class_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_school_outline"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/secondary" />
-
-        <TextView
-            android:id="@+id/text_view_class_name"
-            style="@style/TextAppearance.Kardio.Headline5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_md"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="@color/text_primary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/image_view_class_icon"
-            app:layout_constraintTop_toTopOf="@id/image_view_class_icon"
-            tools:text="English Class 101" />
-
-        <TextView
-            android:id="@+id/text_view_class_description"
-            style="@style/TextAppearance.Kardio.Body2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_md"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="@color/text_secondary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/image_view_class_icon"
-            app:layout_constraintTop_toBottomOf="@id/text_view_class_name"
-            tools:text="Basic English class" />
-
-        <LinearLayout
-            android:id="@+id/layout_stats"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_md"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_view_class_icon">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/spacing_md"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_folder"
-                    app:tint="@color/text_secondary" />
-
-                <TextView
-                    android:id="@+id/text_view_module_count"
-                    style="@style/TextAppearance.Kardio.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_xs"
-                    android:textColor="@color/text_secondary"
-                    tools:text="15 học phần" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_people"
-                    app:tint="@color/text_secondary" />
-
-                <TextView
-                    android:id="@+id/text_view_members_count"
-                    style="@style/TextAppearance.Kardio.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_xs"
-                    android:textColor="@color/text_secondary"
-                    tools:text="8 thành viên" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/text_view_creator"
-            style="@style/TextAppearance.Kardio.Body2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_sm"
-            android:textColor="@color/text_secondary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_stats"
-            tools:text="Tạo bởi: teacherEnglish" />
-
-        <ImageView
-            android:id="@+id/image_view_permission"
+            android:id="@+id/image_group_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_add"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:tint="@color/text_secondary"
-            tools:visibility="visible" />
+            android:src="@drawable/ic_group"
+            app:tint="@color/icon_primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <!-- Tên nhóm -->
+        <TextView
+            android:id="@+id/text_group_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Korean_Multicampus"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/image_group_icon"
+            app:layout_constraintTop_toTopOf="@id/image_group_icon"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Số học phần -->
+        <TextView
+            android:id="@+id/text_module_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="80 học phần"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="@color/text_secondary"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@id/text_group_name"
+            app:layout_constraintTop_toBottomOf="@id/text_group_name"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-</com.kardio.ui.components.cards.QlzBaseCard>
+</com.google.android.material.card.MaterialCardView>
