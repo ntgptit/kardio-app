@@ -4,6 +4,9 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
 
     <!-- Màu sắc chủ đạo dựa trên Quizlet -->
 
@@ -79,4 +82,14 @@
     <!-- Alpha versions cho overlay -->
     <color name="primary_alpha20">#334255FF</color>
     <color name="surface_alpha90">#E61E2642</color>
+    <
+    <
+    <
+    <
+    <
+    <
+    < HEAD
+=======
+
+>>>>>>> a2221da (fix Hilt error: In-progress)
 </resources>

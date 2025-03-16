@@ -10,8 +10,12 @@ easyimage = "3.2.0"
 easypermissions = "3.0.0"
 espressoCoreVersion = "3.5.1"
 hiltAndroid = "2.51"
+hiltAndroidGradlePlugin = "2.44"
+hiltAndroidVersion = "2.48"
 hiltNavigationCompose = "1.2.0"
 kotlin = "2.0.21"
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -62,6 +66,9 @@ converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.r
 easyimage = { module = "com.github.jkwiecien:EasyImage", version.ref = "easyimage" }
 easypermissions = { module = "pub.devrel:easypermissions", version.ref = "easypermissions" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidVersion" }
+hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hiltAndroidGradlePlugin" }
+hilt-android-v248 = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
