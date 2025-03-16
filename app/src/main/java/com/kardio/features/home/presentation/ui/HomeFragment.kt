@@ -68,7 +68,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         setupBottomNavigation()
 
         // Setup AppBar actions
-        setupAppBarActions()
+//        setupAppBarActions()
     }
 
     private fun setupBottomNavigation() {
@@ -87,38 +87,38 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun setupAppBarActions() {
-        // Notification button
-        binding.notificationButton.setOnClickListener {
-            QlzSnackbar.showInfo(requireContext(), "Notifications clicked")
-        }
+//    private fun setupAppBarActions() {
+//        // Notification button
+//        binding.notificationButton.setOnClickListener {
+//            QlzSnackbar.showInfo(requireContext(), "Notifications clicked")
+//        }
+//
+//        // Settings button
+//        binding.settingsButton.setOnClickListener {
+//            showSettingsMenu()
+//        }
+//    }
 
-        // Settings button
-        binding.settingsButton.setOnClickListener {
-            showSettingsMenu()
-        }
-    }
-
-    private fun showSettingsMenu() {
-        val popup = android.widget.PopupMenu(requireContext(), binding.settingsButton)
-        popup.menuInflater.inflate(R.menu.settings_menu, popup.menu)
-
-        popup.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.menu_settings -> {
-                    QlzSnackbar.showInfo(requireContext(), "Settings clicked")
-                    true
-                }
-                R.id.menu_logout -> {
-                    QlzSnackbar.showInfo(requireContext(), "Logout clicked")
-                    true
-                }
-                else -> false
-            }
-        }
-
-        popup.show()
-    }
+//    private fun showSettingsMenu() {
+//        val popup = android.widget.PopupMenu(requireContext(), binding.settingsButton)
+//        popup.menuInflater.inflate(R.menu.settings_menu, popup.menu)
+//
+//        popup.setOnMenuItemClickListener { menuItem ->
+//            when (menuItem.itemId) {
+//                R.id.menu_settings -> {
+//                    QlzSnackbar.showInfo(requireContext(), "Settings clicked")
+//                    true
+//                }
+//                R.id.menu_logout -> {
+//                    QlzSnackbar.showInfo(requireContext(), "Logout clicked")
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
+//
+//        popup.show()
+//    }
 
     private fun showCreateModal() {
         dialog = BottomSheetDialog(requireContext(), R.style.ThemeOverlay_App_BottomSheetDialog)
@@ -184,7 +184,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun setupWindowInsets() {
         InsetsCompatWrapper.setupInsetsForHomeScreen(
             rootView = binding.root,
-            appBar = binding.appBar,
+//            appBar = binding.appBar,
             bottomNav = binding.bottomNavBar
         )
     }

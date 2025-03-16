@@ -21,14 +21,14 @@ object InsetsCompatWrapper {
      */
     fun setupInsetsForHomeScreen(
         rootView: View,
-        appBar: View,
+//        appBar: View,
         bottomNav: View
     ) {
         ViewCompat.setOnApplyWindowInsetsListener(rootView) { _, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
 
             // Apply top padding to AppBar
-            appBar.updatePadding(top = systemBars.top)
+//            appBar.updatePadding(top = systemBars.top)
 
             // Apply bottom padding to BottomNavigationView
             bottomNav.updatePadding(bottom = systemBars.bottom)
