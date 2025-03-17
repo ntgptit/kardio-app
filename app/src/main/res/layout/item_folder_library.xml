@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -22,70 +21,82 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_folder"
-            app:tint="@color/icon_primary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/icon_primary" />
 
         <!-- Tên thư mục -->
         <TextView
             android:id="@+id/text_folder_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="Folder Name"
             android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textColor="@color/text_primary"
-            android:textStyle="bold"
-            android:maxLines="1"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_folder_icon" />
+
+        <!-- Số học phần -->
+        <TextView
+            android:id="@+id/text_module_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:ellipsize="end"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/image_folder_icon"
-            app:layout_constraintTop_toTopOf="@id/image_folder_icon"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:maxLines="1"
+            android:text="50 học phần"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/image_folder_icon"
+            app:layout_constraintTop_toBottomOf="@id/text_folder_name" />
 
         <!-- Layout chứa Avatar + Tên + Badge -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
             android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_folder_name">
+            app:layout_constraintTop_toBottomOf="@id/text_module_count">
 
             <!-- Ảnh đại diện -->
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image_creator_avatar"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                app:shapeAppearanceOverlay="@style/CircleImageView"
+                android:contentDescription="Avatar"
                 android:src="@drawable/user_avatar"
-                android:contentDescription="Avatar" />
+                app:shapeAppearanceOverlay="@style/CircleImageView" />
 
             <!-- Tên người dùng -->
             <TextView
                 android:id="@+id/text_creator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:text="giapnguyen1994"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="@color/text_secondary"
-                android:layout_marginStart="8dp"/>
+                android:textColor="@color/white" />
 
             <!-- Badge "Plus" -->
             <TextView
                 android:id="@+id/text_plus_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Plus"
-                android:textColor="@color/badge_plus"
-                android:textSize="12sp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:background="@drawable/bg_plus_badge"
                 android:layout_marginStart="8dp"
-                android:visibility="gone"/>
+                android:background="@drawable/bg_plus_badge"
+                android:paddingStart="8dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="2dp"
+                android:text="Plus"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:visibility="gone" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

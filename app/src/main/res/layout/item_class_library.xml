@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -22,39 +21,37 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_group"
-            app:tint="@color/icon_primary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/icon_primary" />
 
         <!-- Tên nhóm -->
         <TextView
             android:id="@+id/text_group_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="Korean_Multicampus"
             android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textColor="@color/text_primary"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/image_group_icon"
-            app:layout_constraintTop_toTopOf="@id/image_group_icon"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_group_icon" />
 
         <!-- Số học phần -->
         <TextView
             android:id="@+id/text_module_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="80 học phần"
             android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="@color/text_secondary"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@id/text_group_name"
-            app:layout_constraintTop_toBottomOf="@id/text_group_name"/>
+            android:textColor="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/image_group_icon"
+            app:layout_constraintTop_toBottomOf="@id/text_group_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
