@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:contentDescription="@string/accessibility_progress_bar">
+
+    <View
+        android:id="@+id/progressBackground"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/progress_bar_height"
+        android:background="@color/background_secondary" />
+
+    <View
+        android:id="@+id/progressForeground"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/progress_bar_height"
+        android:background="@color/accent"
+        tools:layout_width="150dp" />
+</FrameLayout>

@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_primary">
+
+    <com.kardio.ui.components.header.QlzAppBar
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:navigationIconTint="@color/text_primary"
+        app:title="Cài đặt tùy chọn"
+        app:titleTextColor="@color/text_primary" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/padding_md"
+            android:paddingBottom="@dimen/padding_xl">
+
+            <!-- Ngôn ngữ -->
+            <TextView
+                style="@style/TextAppearance.Kardio.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xl"
+                android:text="NGÔN NGỮ"
+                android:textColor="@color/text_secondary"
+                android:textStyle="bold" />
+
+            <com.kardio.ui.components.cards.QlzBaseCard
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:stateListAnimator="@animator/card_state_list_animator">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Ngôn ngữ thuật ngữ -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layoutTermLanguage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:contentDescription="Chọn ngôn ngữ thuật ngữ"
+                        android:focusable="true"
+                        android:padding="@dimen/padding_md">
+
+                        <TextView
+                            style="@style/TextAppearance.Kardio.Body1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Thuật ngữ"
+                            android:textColor="@color/text_primary"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/tvTermLanguage"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvTermLanguage"
+                            style="@style/TextAppearance.Kardio.Body1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/spacing_xs"
+                            android:textColor="@color/accent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/ivTermArrow"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Tiếng Việt" />
+
+                        <ImageView
+                            android:id="@+id/ivTermArrow"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="Chọn"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/text_secondary" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="@dimen/padding_md"
+                        android:background="@color/divider" />
+
+                    <!-- Ngôn ngữ định nghĩa -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layoutDefinitionLanguage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:contentDescription="Chọn ngôn ngữ định nghĩa"
+                        android:focusable="true"
+                        android:padding="@dimen/padding_md">
+
+                        <TextView
+                            style="@style/TextAppearance.Kardio.Body1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Định nghĩa"
+                            android:textColor="@color/text_primary"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/tvDefinitionLanguage"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvDefinitionLanguage"
+                            style="@style/TextAppearance.Kardio.Body1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/spacing_xs"
+                            android:textColor="@color/accent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/ivDefinitionArrow"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Tiếng Anh" />
+
+                        <ImageView
+                            android:id="@+id/ivDefinitionArrow"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="Chọn"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/text_secondary" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </com.kardio.ui.components.cards.QlzBaseCard>
+
+            <!-- Tùy chọn -->
+            <TextView
+                style="@style/TextAppearance.Kardio.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xl"
+                android:text="TÙY CHỌN"
+                android:textColor="@color/text_secondary"
+                android:textStyle="bold" />
+
+            <com.kardio.ui.components.cards.QlzBaseCard
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:stateListAnimator="@animator/card_state_list_animator">
+
+                <!-- Gợi ý tự động -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_md">
+
+                    <TextView
+                        android:id="@+id/tvAutoSuggest"
+                        style="@style/TextAppearance.Kardio.Body1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Gợi ý tự động"
+                        android:textColor="@color/text_primary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/switchAutoSuggest"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switchAutoSuggest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Bật/tắt gợi ý tự động"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.kardio.ui.components.cards.QlzBaseCard>
+
+            <!-- Quyền riêng tư -->
+            <TextView
+                style="@style/TextAppearance.Kardio.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xl"
+                android:text="QUYỀN RIÊNG TƯ"
+                android:textColor="@color/text_secondary"
+                android:textStyle="bold" />
+
+            <com.kardio.ui.components.cards.QlzBaseCard
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:stateListAnimator="@animator/card_state_list_animator">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Ai có thể xem -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layoutViewPermission"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:contentDescription="Chọn quyền xem"
+                        android:focusable="true"
+                        android:padding="@dimen/padding_md">
+
+                        <TextView
+                            style="@style/TextAppearance.Kardio.Body1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Ai có thể xem"
+                            android:textColor="@color/text_primary"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/tvViewPermission"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvViewPermission"
+                            style="@style/TextAppearance.Kardio.Body1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/spacing_xs"
+                            android:textColor="@color/accent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/ivViewArrow"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Mọi người" />
+
+                        <ImageView
+                            android:id="@+id/ivViewArrow"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="Chọn"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/text_secondary" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="@dimen/padding_md"
+                        android:background="@color/divider" />
+
+                    <!-- Ai có thể sửa -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layoutEditPermission"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:contentDescription="Chọn quyền chỉnh sửa"
+                        android:focusable="true"
+                        android:padding="@dimen/padding_md">
+
+                        <TextView
+                            style="@style/TextAppearance.Kardio.Body1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Ai có thể sửa"
+                            android:textColor="@color/text_primary"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/tvEditPermission"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvEditPermission"
+                            style="@style/TextAppearance.Kardio.Body1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/spacing_xs"
+                            android:textColor="@color/accent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/ivEditArrow"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Chỉ tôi" />
+
+                        <ImageView
+                            android:id="@+id/ivEditArrow"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="Chọn"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/text_secondary" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </com.kardio.ui.components.cards.QlzBaseCard>
+
+            <!-- Nút xóa học phần -->
+            <com.kardio.ui.components.buttons.QlzSecondaryButton
+                android:id="@+id/btnDeleteModule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xl"
+                android:layout_marginBottom="@dimen/spacing_xl"
+                android:contentDescription="Xóa học phần này"
+                android:text="Xóa học phần"
+                android:textColor="@color/error" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Đang tải"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
+</androidx.constraintlayout.widget.ConstraintLayout>

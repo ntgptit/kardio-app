@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_primary">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <com.kardio.ui.components.header.QlzAppBar
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIconTint="@color/text_primary"
+            app:titleTextColor="@color/text_primary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/padding_md"
+            android:paddingBottom="@dimen/padding_xl">
+
+            <!-- Flashcard Carousel -->
+            <com.kardio.ui.components.cards.QlzNeumorphicCard
+                android:id="@+id/flashcard_preview"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:contentDescription="Flashcard preview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- Empty State for no flashcards -->
+                    <TextView
+                        android:id="@+id/text_empty_flashcards"
+                        style="@style/TextAppearance.Kardio.Headline6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Chưa có thẻ ghi nhớ nào"
+                        android:textColor="@color/text_primary"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <!-- ViewPager for Flashcards -->
+                    <include
+                        android:id="@+id/flashcards_carousel"
+                        layout="@layout/component_flashcard_carousel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </FrameLayout>
+            </com.kardio.ui.components.cards.QlzNeumorphicCard>
+
+            <!-- Module Title -->
+            <TextView
+                android:id="@+id/text_module_title"
+                style="@style/TextAppearance.Kardio.Headline5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:gravity="center"
+                android:textColor="@color/text_primary"
+                app:layout_constraintTop_toBottomOf="@id/flashcard_preview"
+                tools:text="Module Title" />
+
+            <!-- Creator Info Row -->
+            <include
+                android:id="@+id/creator_info_container"
+                layout="@layout/component_creator_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                app:layout_constraintTop_toBottomOf="@id/text_module_title" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:background="@color/divider"
+                app:layout_constraintTop_toBottomOf="@id/creator_info_container" />
+
+            <!-- Study Options -->
+            <TextView
+                android:id="@+id/text_study_options_title"
+                style="@style/TextAppearance.Kardio.Subtitle1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:text="Các chế độ học"
+                android:textColor="@color/text_primary"
+                app:layout_constraintTop_toBottomOf="@id/divider" />
+
+            <!-- Study Options Container -->
+            <include
+                android:id="@+id/study_mode_options_container"
+                layout="@layout/component_study_options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_sm"
+                app:layout_constraintTop_toBottomOf="@id/text_study_options_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

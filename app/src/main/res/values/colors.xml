@@ -3,7 +3,7 @@
     <!-- Màu cơ bản -->
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="gray">#B0B0B0</color>
+    <color name="grey">#B0B0B0</color>
     <color name="transparent">#00000000</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_700">#FF3700B3</color>
@@ -89,6 +89,25 @@
     <color name="chip_text_selected">#FFFFFF</color>  <!-- Màu chữ khi Chip được chọn -->
     <color name="chip_text_unselected">#B0B4C6</color>  <!-- Màu chữ khi Chip chưa được chọn -->
     <color name="chip_stroke">#2A2E43</color>  <!-- Màu viền Chip -->
+
+    <!-- Background colors for option icons -->
+    <color name="option_bg_blue">#E6F7FF</color>
+    <color name="option_bg_green">#E6F9F0</color>
+    <color name="option_bg_purple">#EDE7F6</color>
+    <color name="option_bg_orange">#FFF0E6</color>
+
+    <!-- Icon colors -->
+    <color name="icon_blue">#2196F3</color>
+    <color name="icon_green">#4CAF50</color>
+    <color name="icon_purple">#9C27B0</color>
+    <color name="icon_orange">#FF9800</color>
+
+    <!-- Flashcard specific colors -->
+    <color name="flashcard_front_bg">#1E2642</color>
+    <color name="flashcard_back_bg">#232A4B</color>
+    <color name="progress_bar_background">#2A2E43</color>
+    <color name="counter_learned_border">#4CAF50</color>
+    <color name="counter_not_learned_border">#FF9800</color>
 
 
 </resources>

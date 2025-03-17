@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_primary">
+
+    <!-- Custom AppBar with Progress Indicator -->
+    <com.kardio.ui.components.header.QlzAppBar
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="Flashcard Study Mode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:navigationIconTint="@color/text_primary" />
+
+    <!-- Progress Bar -->
+    <include
+        android:id="@+id/progress_container"
+        layout="@layout/component_flashcard_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/app_bar" />
+
+    <!-- Counters -->
+    <LinearLayout
+        android:id="@+id/counter_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/padding_md"
+        android:paddingVertical="@dimen/padding_sm"
+        app:layout_constraintTop_toBottomOf="@id/progress_container">
+
+        <!-- Not Learned Counter -->
+        <include
+            android:id="@+id/not_learned_counter"
+            layout="@layout/component_flashcard_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_sm" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Learned Counter -->
+        <include
+            android:id="@+id/learned_counter"
+            layout="@layout/component_flashcard_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!-- Flashcard Container -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/flashcard_pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/spacing_lg"
+        android:contentDescription="Flashcards"
+        app:layout_constraintBottom_toTopOf="@id/info_text_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/counter_container" />
+
+    <!-- Info Text Container -->
+    <LinearLayout
+        android:id="@+id/info_text_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_sm"
+        app:layout_constraintBottom_toTopOf="@id/actions_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            style="@style/TextAppearance.Kardio.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chạm vào thẻ để lật"
+            android:textColor="@color/text_primary" />
+
+        <TextView
+            style="@style/TextAppearance.Kardio.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:text="Vuốt phải: Đã biết | Vuốt trái: Đang học"
+            android:textColor="@color/text_secondary" />
+    </LinearLayout>
+
+    <!-- Bottom Action Buttons -->
+    <include
+        android:id="@+id/actions_container"
+        layout="@layout/component_flashcard_actions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_lg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

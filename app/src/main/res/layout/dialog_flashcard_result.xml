@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_xl">
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/TextAppearance.Kardio.Headline6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Chúc mừng! Bạn đã hoàn thành phiên học."
+        android:textColor="@color/text_primary"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.67" />
+
+    <!-- Learned Stats -->
+    <TextView
+        android:id="@+id/tv_learned_value"
+        style="@style/TextAppearance.Kardio.Headline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xl"
+        android:textColor="@color/success"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:text="5" />
+
+    <TextView
+        android:id="@+id/tv_learned_label"
+        style="@style/TextAppearance.Kardio.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xs"
+        android:text="Đã thuộc"
+        android:textColor="@color/text_primary"
+        app:layout_constraintEnd_toEndOf="@id/tv_learned_value"
+        app:layout_constraintStart_toStartOf="@id/tv_learned_value"
+        app:layout_constraintTop_toBottomOf="@id/tv_learned_value" />
+
+    <!-- Not Learned Stats -->
+    <TextView
+        android:id="@+id/tv_not_learned_value"
+        style="@style/TextAppearance.Kardio.Headline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xl"
+        android:textColor="@color/warning"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_right"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_left"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:text="3" />
+
+    <TextView
+        android:id="@+id/tv_not_learned_label"
+        style="@style/TextAppearance.Kardio.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xs"
+        android:text="Chưa thuộc"
+        android:textColor="@color/text_primary"
+        app:layout_constraintEnd_toEndOf="@id/tv_not_learned_value"
+        app:layout_constraintStart_toStartOf="@id/tv_not_learned_value"
+        app:layout_constraintTop_toBottomOf="@id/tv_not_learned_value" />
+
+    <!-- Completion Stats -->
+    <TextView
+        android:id="@+id/tv_completion_value"
+        style="@style/TextAppearance.Kardio.Headline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xl"
+        android:textColor="@color/primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_right"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:text="80%" />
+
+    <TextView
+        android:id="@+id/tv_completion_label"
+        style="@style/TextAppearance.Kardio.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xs"
+        android:text="Hoàn thành"
+        android:textColor="@color/text_primary"
+        app:layout_constraintEnd_toEndOf="@id/tv_completion_value"
+        app:layout_constraintStart_toStartOf="@id/tv_completion_value"
+        app:layout_constraintTop_toBottomOf="@id/tv_completion_value" />
+
+    <!-- Action Buttons -->
+    <com.kardio.ui.components.buttons.QlzSecondaryButton
+        android:id="@+id/btn_restart"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xl"
+        android:layout_marginEnd="@dimen/spacing_sm"
+        android:contentDescription="Bắt đầu lại"
+        android:text="Bắt đầu lại"
+        app:drawableStartCompat="@drawable/ic_refresh"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_right"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_not_learned_label" />
+
+    <com.kardio.ui.components.buttons.QlzPrimaryButton
+        android:id="@+id/btn_continue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_sm"
+        android:layout_marginTop="@dimen/spacing_xl"
+        android:contentDescription="Tiếp tục"
+        android:text="Tiếp tục"
+        app:icon="@drawable/ic_arrow_forward"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_right"
+        app:layout_constraintTop_toBottomOf="@id/tv_completion_label" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

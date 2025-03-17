@@ -125,4 +125,52 @@
     <string name="retry">Thử lại</string>
     <string name="kardio_plus">Kardio Plus</string>
     <string name="study_set_list">Danh sách học phần</string>
+
+    <!-- Flashcard resources -->
+    <string name="play_audio">Phát âm thanh</string>
+    <string name="mark_difficult">Đánh dấu là khó</string>
+    <string name="tap_to_flip">Chạm để lật thẻ</string>
+    <string name="definition_label">Định nghĩa:</string>
+    <string name="example_label">Ví dụ:</string>
+    <string name="selected_indicator">Đã chọn</string>
+    <string name="permission_selected_indicator">Quyền đã chọn</string>
+    <string name="module_icon_description">Biểu tượng học phần</string>
+    <string name="module_options_description">Tùy chọn học phần</string>
+    <string name="study_option_icon_description">Biểu tượng phương pháp học</string>
+    <string name="navigate_forward">Đi đến</string>
+    <string name="action_button_description">Nút hành động</string>
+    <string name="fullscreen_mode_description">Xem ở chế độ toàn màn hình</string>
+    <string name="fullscreen">Toàn màn hình</string>
+    <string name="search">Tìm kiếm</string>
+    <string name="more">Thêm</string>
+
+    <!-- Study option labels -->
+    <string name="flashcards_option">Thẻ ghi nhớ</string>
+    <string name="learn_option">Học</string>
+    <string name="quiz_option">Kiểm tra</string>
+    <string name="match_option">Ghép thẻ</string>
+    <string name="blast_option">Blast</string>
+
+    <!-- Permission options -->
+    <string name="permission_everyone">Mọi người</string>
+    <string name="permission_only_me">Chỉ tôi</string>
+    <string name="permission_class_members">Thành viên lớp</string>
+    <string name="permission_with_password">Người có mật khẩu</string>
+
+    <!-- Language labels -->
+    <string name="vietnamese">Tiếng Việt</string>
+    <string name="english">Tiếng Anh</string>
+    <string name="korean">Tiếng Hàn</string>
+    <string name="japanese">Tiếng Nhật</string>
+    <string name="chinese">Tiếng Trung</string>
+    <string name="french">Tiếng Pháp</string>
+    <string name="german">Tiếng Đức</string>
+    <string name="spanish">Tiếng Tây Ban Nha</string>
+    <string name="russian">Tiếng Nga</string>
+
+    <!-- Study module info -->
+    <string name="module_info_format">Học phần • %1$d thuật ngữ • Tác giả: %2$s</string>
+    <string name="created_by">Tạo bởi: %s</string>
+    <string name="terms_count">%d thuật ngữ</string>
+    <string name="last_updated">Cập nhật %s</string>
 </resources>
