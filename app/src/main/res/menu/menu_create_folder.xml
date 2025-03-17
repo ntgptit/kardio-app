@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Nút "Tạo thư mục" hiển thị trên Toolbar -->
+    <item
+        android:id="@+id/action_create_folder"
+        android:title="@string/create_folder"
+        android:icon="@drawable/ic_check"
+        app:showAsAction="ifRoom" />
+
+</menu>

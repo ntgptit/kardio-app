@@ -1,103 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background_primary">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="@color/background_primary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIconTint="@color/text_primary"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:title="@string/create_folder"
-        app:titleTextColor="@color/text_primary" />
+        android:paddingEnd="16dp"
+        tools:ignore="RtlSymmetry">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <!-- Toolbar với nút "Tạo thư mục" -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/spacing_md">
+            android:background="@color/background_primary"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIconTint="@color/text_primary"
+            app:title="@string/create_folder"
+            app:titleTextColor="@color/text_primary"
+            app:menu="@menu/menu_create_folder"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-            <com.kardio.ui.components.cards.QlzBaseCard
-                android:id="@+id/card_folder_info"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_md"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+        <!-- Ô nhập tiêu đề -->
+        <com.kardio.ui.components.inputs.QlzTextField
+            android:id="@+id/text_field_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
+            app:qlzHint="@string/folder_name_hint"
+            app:qlzIcon="@drawable/ic_folder_outline"
+            app:qlzLabel="@string/folder_name_label"
+            app:qlzRequired="true"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/padding_md">
-
-                    <TextView
-                        style="@style/TextAppearance.Kardio.Headline5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/folder_info"
-                        android:textColor="@color/text_primary" />
-
-                    <com.kardio.ui.components.inputs.QlzTextField
-                        android:id="@+id/text_field_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_md"
-                        app:qlzHint="@string/folder_name_hint"
-                        app:qlzIcon="@drawable/ic_folder_outline"
-                        app:qlzLabel="@string/folder_name_label"
-                        app:qlzRequired="true" />
-
-                    <com.kardio.ui.components.inputs.QlzTextField
-                        android:id="@+id/text_field_description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_md"
-                        app:qlzHint="@string/folder_description_hint"
-                        app:qlzIcon="@drawable/ic_description_outlined"
-                        app:qlzLabel="@string/folder_description_label" />
-
-                </LinearLayout>
-
-            </com.kardio.ui.components.cards.QlzBaseCard>
-
-            <com.kardio.ui.components.buttons.QlzPrimaryButton
-                android:id="@+id/button_create"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_xl"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/card_folder_info" />
-
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_xl"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/button_create"
-                app:layout_constraintBottom_toBottomOf="parent" /> <!-- Thêm ràng buộc đáy -->
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

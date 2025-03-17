@@ -1,11 +1,10 @@
-// File: app/src/main/java/com/kardio/features/library/presentation/ui/CreateFolderFragment.kt
 package com.kardio.features.library.presentation.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.view.isVisible
+import android.view.*
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +16,6 @@ import com.kardio.databinding.FragmentCreateFolderBinding
 import com.kardio.features.library.presentation.viewmodel.CreateFolderViewModel
 import com.kardio.ui.components.feedback.QlzSnackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -25,81 +23,116 @@ class CreateFolderFragment : BaseFragment<FragmentCreateFolderBinding>() {
 
     private val viewModel: CreateFolderViewModel by viewModels()
 
-    override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentCreateFolderBinding {
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentCreateFolderBinding {
         return FragmentCreateFolderBinding.inflate(inflater, container, false)
     }
 
-    override fun setupViews() {
-        // Setup toolbar
-        binding.toolbar.setNavigationOnClickListener {
-            findNavController().navigateUp()
-        }
-
-        // Setup create button
-        binding.buttonCreate.setOnClickListener {
-            createFolder()
-        }
-
-        // Setup text field listeners
-        binding.textFieldName.getEditText().setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                viewModel.clearValidationError()
-            }
-        }
-    }
-
-    override fun observeData() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collectLatest { state ->
-                    updateUi(state)
-                }
-            }
-        }
-    }
-
-    private fun updateUi(state: CreateFolderViewModel.CreateFolderUiState) {
-        // Update loading state
-        binding.progressBar.isVisible = state.isCreating
-        binding.buttonCreate.isEnabled = !state.isCreating
-
-        // Handle validation error
-        if (state.validationError != null) {
-            binding.textFieldName.error = state.validationError
-        } else {
-            binding.textFieldName.error = null
-        }
-
-        // Handle error
-        if (state.error != null) {
-            QlzSnackbar.showError(requireContext(), state.error)
-            viewModel.errorShown()
-        }
-    }
-
-    private fun createFolder() {
-        val name = binding.textFieldName.getText().toString().trim()
-        val description = binding.textFieldDescription.getText().toString().trim()
-
-        viewModel.createFolder(name, description)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Observe one-time events
+        setupToolbar()
+        setupInputField()
+        setupWindowInsets()
+        observeUiState()
+        observeEvents()
+    }
+
+    private fun setupToolbar() {
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.action_create_folder -> {
+                    // Xử lý khi người dùng nhấn vào "Tạo class"
+                    submitFolderCreation()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun setupInputField() {
+        binding.textFieldName.getEditText().setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                viewModel.clearValidationError()
+                // Cuộn mượt mà đến vị trí text field
+                binding.scrollView.smoothScrollTo(0, binding.textFieldName.top)
+            }
+        }
+    }
+
+    private fun setupWindowInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            binding.toolbar.updatePadding(top = systemBars.top)
+            binding.scrollView.updatePadding(bottom = systemBars.bottom)
+            insets
+        }
+    }
+
+    private fun observeUiState() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    binding.textFieldName.isEnabled = !state.isCreating
+                    binding.textFieldName.error = state.validationError
+                    state.error?.let { error ->
+                        QlzSnackbar.showError(requireContext(), error)
+                        viewModel.errorShown()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun observeEvents() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.events.collect { event ->
                     when (event) {
                         is CreateFolderViewModel.CreateFolderUiEvent.FolderCreated -> {
-                            QlzSnackbar.showSuccess(requireContext(),
-                                getString(R.string.message_folder_created_success))
+                            QlzSnackbar.showSuccess(
+                                requireContext(),
+                                getString(R.string.message_folder_created_success)
+                            )
                             findNavController().navigateUp()
                         }
                     }
                 }
             }
+        }
+    }
+
+    private fun submitFolderCreation() {
+        val folderName = binding.textFieldName.getText().toString().trim()
+        viewModel.createFolder(
+            name = folderName,
+            description = ""
+        )
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_create_folder, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_create_folder -> {
+                submitFolderCreation()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

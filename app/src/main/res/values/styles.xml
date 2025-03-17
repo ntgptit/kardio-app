@@ -5,4 +5,20 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <!-- Theme mặc định với Material 3 -->
+<!--    <style name="Theme.MyApp" parent="Theme.Material3.DayNight">-->
+<!--        <item name="colorPrimary">@color/md_theme_primary</item>-->
+<!--        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>-->
+<!--        <item name="colorSurface">@color/md_theme_surface</item>-->
+<!--        <item name="colorOnSurface">@color/md_theme_onSurface</item>-->
+<!--    </style>-->
+
+<!--    &lt;!&ndash; Kiểu chữ Title Medium theo Material 3 &ndash;&gt;-->
+<!--    <style name="Material3.TitleMedium">-->
+<!--        <item name="android:textSize">18sp</item>-->
+<!--        <item name="android:textColor">?attr/colorOnSurface</item>-->
+<!--        <item name="android:fontFamily">@font/roboto_medium</item>-->
+<!--        <item name="android:lineHeight">24sp</item>-->
+<!--    </style>-->
 </resources>
