@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_sm">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_creator_avatar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="Avatar người tạo"
+        android:src="@drawable/ic_profile_placeholder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/CircleImageView" />
+
+    <TextView
+        android:id="@+id/text_creator_name"
+        style="@style/TextAppearance.Kardio.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_sm"
+        android:layout_marginEnd="@dimen/spacing_sm"
+        android:textColor="@color/text_secondary"
+        app:layout_constraintBottom_toBottomOf="@id/image_creator_avatar"
+        app:layout_constraintEnd_toStartOf="@id/text_created_date"
+        app:layout_constraintStart_toEndOf="@id/image_creator_avatar"
+        app:layout_constraintTop_toTopOf="@id/image_creator_avatar"
+        tools:text="giapnguyen1994" />
+
+    <TextView
+        android:id="@+id/text_created_date"
+        style="@style/TextAppearance.Kardio.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_tertiary"
+        app:layout_constraintBottom_toBottomOf="@id/image_creator_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/image_creator_avatar"
+        tools:text="Cập nhật 2 ngày trước" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

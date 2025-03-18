@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Thẻ ghi nhớ -->
+    <com.kardio.ui.components.cards.QlzBaseCard
+        android:id="@+id/option_flashcards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_sm">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_md">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/icon_container_flashcards"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:cardBackgroundColor="@color/primary_alpha20"
+                app:cardCornerRadius="@dimen/radius_sm"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Biểu tượng thẻ ghi nhớ"
+                    android:src="@drawable/ic_flashcard_icon"
+                    app:tint="@color/accent" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_md"
+                android:layout_marginEnd="@dimen/spacing_md"
+                android:text="@string/flashcards_option"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/icon_arrow_flashcards"
+                app:layout_constraintStart_toEndOf="@id/icon_container_flashcards"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/icon_arrow_flashcards"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="Đi đến"
+                android:src="@drawable/ic_arrow_forward"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/text_secondary" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.kardio.ui.components.cards.QlzBaseCard>
+
+    <!-- Học -->
+    <com.kardio.ui.components.cards.QlzBaseCard
+        android:id="@+id/option_learn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_sm">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_md">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/icon_container_learn"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:cardBackgroundColor="#E6F9F0"
+                app:cardCornerRadius="@dimen/radius_sm"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Biểu tượng học"
+                    android:src="@drawable/ic_rocket_launch"
+                    app:tint="@color/success" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_md"
+                android:layout_marginEnd="@dimen/spacing_md"
+                android:text="@string/learn_option"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/icon_arrow_learn"
+                app:layout_constraintStart_toEndOf="@id/icon_container_learn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/icon_arrow_learn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="Đi đến"
+                android:src="@drawable/ic_arrow_forward"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/text_secondary" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.kardio.ui.components.cards.QlzBaseCard>
+
+    <!-- Kiểm tra -->
+    <com.kardio.ui.components.cards.QlzBaseCard
+        android:id="@+id/option_quiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_sm">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_md">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/icon_container_quiz"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:cardBackgroundColor="#FFF0E6"
+                app:cardCornerRadius="@dimen/radius_sm"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Biểu tượng kiểm tra"
+                    android:src="@drawable/ic_quiz"
+                    app:tint="@color/warning" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_md"
+                android:layout_marginEnd="@dimen/spacing_md"
+                android:text="@string/quiz_option"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/icon_arrow_quiz"
+                app:layout_constraintStart_toEndOf="@id/icon_container_quiz"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/icon_arrow_quiz"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="Đi đến"
+                android:src="@drawable/ic_arrow_forward"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/text_secondary" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.kardio.ui.components.cards.QlzBaseCard>
+
+    <!-- Ghép thẻ -->
+    <com.kardio.ui.components.cards.QlzBaseCard
+        android:id="@+id/option_match"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_sm">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_md">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/icon_container_match"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:cardBackgroundColor="#EDE7F6"
+                app:cardCornerRadius="@dimen/radius_sm"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Biểu tượng ghép thẻ"
+                    android:src="@drawable/ic_compare_arrows"
+                    app:tint="#9C27B0" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_md"
+                android:layout_marginEnd="@dimen/spacing_md"
+                android:text="@string/match_option"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/icon_arrow_match"
+                app:layout_constraintStart_toEndOf="@+id/icon_container_match"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/icon_arrow_match"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="Đi đến"
+                android:src="@drawable/ic_arrow_forward"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/text_secondary" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.kardio.ui.components.cards.QlzBaseCard>
+
+    <!-- Blast -->
+    <com.kardio.ui.components.cards.QlzBaseCard
+        android:id="@+id/option_blast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_md">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/icon_container_blast"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:cardBackgroundColor="#E6F7FF"
+                app:cardCornerRadius="@dimen/radius_sm"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Biểu tượng blast"
+                    android:src="@drawable/ic_play_arrow"
+                    app:tint="@color/secondary" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_md"
+                android:layout_marginEnd="@dimen/spacing_md"
+                android:text="@string/blast_option"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/icon_arrow_blast"
+                app:layout_constraintStart_toEndOf="@id/icon_container_blast"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/icon_arrow_blast"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="Đi đến"
+                android:src="@drawable/ic_arrow_forward"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/text_secondary" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.kardio.ui.components.cards.QlzBaseCard>
+
+</LinearLayout>

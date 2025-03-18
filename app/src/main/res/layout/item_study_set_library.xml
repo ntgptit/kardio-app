@@ -37,7 +37,7 @@
             android:layout_marginTop="4dp"
             android:text="74 thuật ngữ"
             android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="@color/gray"
+            android:textColor="@color/grey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_title" />
 
