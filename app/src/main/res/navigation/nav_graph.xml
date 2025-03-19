@@ -5,6 +5,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/welcomeFragment">
 
+    <!-- Các fragment hiện có giữ nguyên -->
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.kardio.features.welcome.presentation.ui.WelcomeFragment"
@@ -81,6 +82,10 @@
         <action
             android:id="@+id/action_homeFragment_to_classDetailFragment"
             app:destination="@id/classDetailFragment" />
+        <!-- Thêm action đến ModuleDetailFragment -->
+        <action
+            android:id="@+id/action_homeFragment_to_moduleDetailFragment"
+            app:destination="@id/moduleDetailFragment" />
     </fragment>
 
     <fragment
@@ -106,6 +111,10 @@
         <argument
             android:name="folderName"
             app:argType="string" />
+        <!-- Thêm action đến ModuleDetailFragment -->
+        <action
+            android:id="@+id/action_folderDetailFragment_to_moduleDetailFragment"
+            app:destination="@id/moduleDetailFragment" />
     </fragment>
 
     <fragment
@@ -119,20 +128,42 @@
         <argument
             android:name="className"
             app:argType="string" />
-        <!-- Thêm action đến createStudyModuleFragment -->
-<!--        <action-->
-<!--            android:id="@+id/action_classDetailFragment_to_createStudyModuleFragment"-->
-<!--            app:destination="@id/createStudyModuleFragment" />-->
+        <!-- Action đã có -->
+        <action
+            android:id="@+id/action_classDetailFragment_to_moduleDetailFragment"
+            app:destination="@id/moduleDetailFragment" />
     </fragment>
 
-    <!-- Định nghĩa createStudyModuleFragment đã bỏ comment -->
-<!--    <fragment-->
-<!--        android:id="@+id/createStudyModuleFragment"-->
-<!--        android:name="com.kardio.features.library.presentation.ui.CreateStudyModuleFragment"-->
-<!--        android:label="Create Study Module"-->
-<!--        tools:layout="@layout/fragment_create_study_module">-->
-<!--        <argument-->
-<!--            android:name="classId"-->
-<!--            app:argType="string" />-->
-<!--    </fragment>-->
+    <fragment
+        android:id="@+id/studySetFragment"
+        android:name="com.kardio.features.library.presentation.ui.StudySetsFragment"
+        android:label="Study set"
+        tools:layout="@layout/fragment_study_sets">
+        <!-- Action đã có -->
+        <action
+            android:id="@+id/action_studySetFragment_to_moduleDetailFragment"
+            app:destination="@id/moduleDetailFragment" />
+    </fragment>
+
+    <!-- ModuleDetailFragment đã có -->
+    <fragment
+        android:id="@+id/moduleDetailFragment"
+        android:name="com.kardio.features.module.presentation.ui.ModuleDetailFragment"
+        android:label="Module Detail"
+        tools:layout="@layout/fragment_module_detail">
+        <argument
+            android:name="moduleId"
+            app:argType="string" />
+    </fragment>
+
+    <!-- Giữ nguyên các fragment bị comment nếu không cần -->
+    <!-- <fragment
+        android:id="@+id/createStudyModuleFragment"
+        android:name="com.kardio.features.library.presentation.ui.CreateStudyModuleFragment"
+        android:label="Create Study Module"
+        tools:layout="@layout/fragment_create_study_module">
+        <argument
+            android:name="classId"
+            app:argType="string" />
+    </fragment> -->
 </navigation>

@@ -69,7 +69,7 @@ class StudySetsFragment : BaseFragment<FragmentStudySetsBinding>() {
     private fun initRecyclerView() {
         studySetAdapter = StudySetAdapter(
             onItemClick = { studySet ->
-//                navigateToStudySetDetail(studySet)
+                navigateToStudySetDetail(studySet)
             }
         )
 
@@ -114,12 +114,11 @@ class StudySetsFragment : BaseFragment<FragmentStudySetsBinding>() {
         studySetAdapter.submitList(state.studySets)
     }
 
-//    private fun navigateToStudySetDetail(studySet: StudySet) {
-//        // Example navigation - adjust according to your nav graph
-//        val action = HomeFragmentDirections.actionHomeFragmentToStudySetDetailFragment(
-//            studySet.id,
-//            studySet.title
-//        )
-//        findNavController().navigate(action)
-//    }
+    private fun navigateToStudySetDetail(studySet: StudySet) {
+        // Example navigation - adjust according to your nav graph
+        val action = StudySetsFragmentDirections.actionStudySetFragmentToModuleDetailFragment(
+            studySet.id,
+        )
+        findNavController().navigate(action)
+    }
 }
