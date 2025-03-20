@@ -1,3 +1,5 @@
+// app/src/main/java/com/kardio/features/home/presentation/ui/HomeFragment.kt
+
 package com.kardio.features.home.presentation.ui
 
 import android.os.Bundle
@@ -13,15 +15,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.kardio.R
 import com.kardio.core.base.BaseFragment
+import com.kardio.core.viewmodel.SharedViewModel
 import com.kardio.databinding.FragmentHomeBinding
 import com.kardio.databinding.LayoutBottomSheetCreateOptionsBinding
-import com.kardio.features.dashboard.presentation.ui.DashboardFragment
-import com.kardio.features.home.presentation.viewmodel.HomeViewModel
-import com.kardio.features.library.presentation.ui.LibraryFragment
-import com.kardio.ui.components.extensions.setIconTint
 import com.kardio.utils.InsetsCompatWrapper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -30,8 +30,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
-    private val viewModel: HomeViewModel by viewModels()
-    private var currentFragment: Fragment? = null
+    // ViewModel được chia sẻ với các Fragment con
+    private val sharedViewModel: SharedViewModel by viewModels()
     private var dialog: BottomSheetDialog? = null
 
     override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentHomeBinding {
@@ -42,12 +42,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         super.onCreate(savedInstanceState)
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (childFragmentManager.backStackEntryCount > 0) {
-                    childFragmentManager.popBackStack()
-                } else if (viewModel.uiState.value.selectedTabIndex != 0) {
-                    viewModel.changeTab(0)
-                    binding.bottomNavBar.selectedItemId = R.id.nav_home
+                val navHostFragment = childFragmentManager.findFragmentById(R.id.fragment_container) as? NavHostFragment
+                val navController = navHostFragment?.navController
+
+                // Nếu không ở dashboard, quay về dashboard
+                if (navController?.currentDestination?.id != R.id.dashboardFragment) {
+                    navController?.navigate(R.id.dashboardFragment)
+                    binding.bottomNavBar.selectedItemId = R.id.dashboardFragment
+                    sharedViewModel.updateSelectedTab(0)
                 } else {
+                    // Nếu đã ở dashboard, cho phép back bình thường
                     isEnabled = false
                     requireActivity().onBackPressedDispatcher.onBackPressed()
                 }
@@ -59,11 +63,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupWindowInsets()
+
+        // Thiết lập NavHost và Bottom Navigation
+        setupNavigation()
+
+        // Khôi phục tab đã chọn nếu có
         if (savedInstanceState != null) {
             val selectedTab = savedInstanceState.getInt("selectedTab", 0)
-            viewModel.changeTab(selectedTab)
+            sharedViewModel.updateSelectedTab(selectedTab)
         } else {
-            viewModel.changeTab(0)
+            sharedViewModel.updateSelectedTab(0)
         }
     }
 
@@ -71,20 +80,60 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         setupBottomNavigation()
     }
 
+    private fun setupNavigation() {
+        val navHostFragment = childFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        // Observer destination changes để cập nhật tab
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.dashboardFragment -> sharedViewModel.updateSelectedTab(0)
+                R.id.solutionsFragment -> sharedViewModel.updateSelectedTab(1)
+                R.id.libraryFragment -> sharedViewModel.updateSelectedTab(3)
+                R.id.profileFragment -> sharedViewModel.updateSelectedTab(4)
+            }
+        }
+    }
+
     private fun setupBottomNavigation() {
         binding.bottomNavBar.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_home -> viewModel.changeTab(0)
-                R.id.nav_solutions -> viewModel.changeTab(1)
+                R.id.dashboardFragment -> {
+                    navigateToTab(R.id.dashboardFragment)
+                    sharedViewModel.updateSelectedTab(0)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.solutionsFragment -> {
+                    navigateToTab(R.id.solutionsFragment)
+                    sharedViewModel.updateSelectedTab(1)
+                    return@setOnItemSelectedListener true
+                }
                 R.id.nav_create -> {
                     showCreateModal()
                     return@setOnItemSelectedListener false
                 }
-                R.id.nav_library -> viewModel.changeTab(3)
-                R.id.nav_profile -> viewModel.changeTab(4)
+                R.id.libraryFragment -> {
+                    navigateToTab(R.id.libraryFragment)
+                    sharedViewModel.updateSelectedTab(3)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.profileFragment -> {
+                    navigateToTab(R.id.profileFragment)
+                    sharedViewModel.updateSelectedTab(4)
+                    return@setOnItemSelectedListener true
+                }
+                else -> false
             }
-            childFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            true
+        }
+    }
+
+    private fun navigateToTab(destinationId: Int) {
+        val navHostFragment = childFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        // Nếu đang không ở destination đích, điều hướng đến đó
+        if (navController.currentDestination?.id != destinationId) {
+            navController.navigate(destinationId)
         }
     }
 
@@ -144,8 +193,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun observeData() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collectLatest { state ->
-                    updateSelectedTab(state.selectedTabIndex)
+                sharedViewModel.selectedTabIndex.collectLatest { tabIndex ->
+                    updateSelectedTab(tabIndex)
                 }
             }
         }
@@ -153,66 +202,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun updateSelectedTab(tabIndex: Int) {
         val selectedItemId = when (tabIndex) {
-            0 -> R.id.nav_home
-            1 -> R.id.nav_solutions
-            3 -> R.id.nav_library
-            4 -> R.id.nav_profile
-            else -> R.id.nav_home
+            0 -> R.id.dashboardFragment
+            1 -> R.id.solutionsFragment
+            3 -> R.id.libraryFragment
+            4 -> R.id.profileFragment
+            else -> R.id.dashboardFragment
         }
+
         if (binding.bottomNavBar.selectedItemId != selectedItemId) {
             binding.bottomNavBar.selectedItemId = selectedItemId
         }
-        showTabContent(tabIndex)
-    }
-
-    private fun showTabContent(tabIndex: Int) {
-        val fragmentTag = "tab_$tabIndex"
-        val fragmentManager = childFragmentManager
-        val transaction = fragmentManager.beginTransaction()
-        transaction.setReorderingAllowed(true)
-
-        // Ẩn Fragment hiện tại nếu có
-        currentFragment?.let { transaction.hide(it) }
-
-        // Tìm hoặc tạo Fragment mới
-        var fragment = fragmentManager.findFragmentByTag(fragmentTag)
-        if (fragment == null) {
-            fragment = when (tabIndex) {
-                0 -> DashboardFragment()
-                1 -> SolutionsFragment()
-                3 -> LibraryFragment()
-                4 -> ProfileFragment()
-                else -> DashboardFragment()
-            }
-            transaction.add(R.id.fragment_container, fragment, fragmentTag)
-        } else {
-            transaction.show(fragment)
-        }
-
-        transaction.commitNow()
-        currentFragment = fragment
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt("selectedTab", viewModel.uiState.value.selectedTabIndex)
+        outState.putInt("selectedTab", sharedViewModel.selectedTabIndex.value)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         dialog?.dismiss()
         dialog = null
-    }
-
-    class SolutionsFragment : Fragment() {
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            return inflater.inflate(R.layout.layout_solutions_tab, container, false)
-        }
-    }
-
-    class ProfileFragment : Fragment() {
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            return inflater.inflate(R.layout.layout_profile_tab, container, false)
-        }
     }
 }

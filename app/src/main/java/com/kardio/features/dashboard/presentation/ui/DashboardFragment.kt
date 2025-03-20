@@ -9,9 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.kardio.R
 import com.kardio.core.base.BaseFragment
+import com.kardio.core.viewmodel.SharedViewModel
 import com.kardio.databinding.FragmentDashboardBinding
 import com.kardio.features.dashboard.domain.model.Class
 import com.kardio.features.dashboard.domain.model.Folder
@@ -22,6 +24,7 @@ import com.kardio.features.dashboard.presentation.adapter.FolderAdapter
 import com.kardio.features.dashboard.presentation.adapter.StreakDayAdapter
 import com.kardio.features.dashboard.presentation.adapter.StudyModuleAdapter
 import com.kardio.features.dashboard.presentation.viewmodel.DashboardViewModel
+import com.kardio.features.home.presentation.ui.HomeFragmentDirections
 import com.kardio.ui.components.feedback.QlzSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -30,10 +33,12 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
+    // Lấy ViewModel từ fragment cha (HomeFragment) và DashboardViewModel
+    private val sharedViewModel: SharedViewModel by viewModels({ requireParentFragment() })
     private val viewModel: DashboardViewModel by viewModels()
-    private val streakDayAdapter = StreakDayAdapter()
 
-    // Adapters for horizontal scrolling lists
+    // Adapters
+    private val streakDayAdapter = StreakDayAdapter()
     private lateinit var foldersAdapter: FolderAdapter
     private lateinit var studyModulesAdapter: StudyModuleAdapter
     private lateinit var classesAdapter: ClassAdapter
@@ -47,21 +52,29 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Thông báo cho SharedViewModel rằng đang ở dashboard
+        sharedViewModel.updateSelectedTab(0)
+
+        setupViews()
+        observeData()
+    }
+
+    override fun setupViews() {
         initStreakDayViews()
         setupAdapters()
         setupListeners()
     }
 
     private fun initStreakDayViews() {
-        val rootView = binding.root
         streakDayViews = listOf(
-            rootView.findViewById(R.id.day_16),
-            rootView.findViewById(R.id.day_17),
-            rootView.findViewById(R.id.day_18),
-            rootView.findViewById(R.id.day_19),
-            rootView.findViewById(R.id.day_20),
-            rootView.findViewById(R.id.day_21),
-            rootView.findViewById(R.id.day_22)
+            binding.streakCard.day16.root,
+            binding.streakCard.day17.root,
+            binding.streakCard.day18.root,
+            binding.streakCard.day19.root,
+            binding.streakCard.day20.root,
+            binding.streakCard.day21.root,
+            binding.streakCard.day22.root
         )
     }
 
@@ -87,35 +100,31 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
             }
         }
 
-        // Setup RecyclerViews
-        val rootView = binding.root
-
-        rootView.findViewById<RecyclerView>(R.id.folders_recycler).apply {
+        // Setup RecyclerViews using ViewBinding
+        binding.foldersContainer.foldersRecycler.apply {
             adapter = foldersAdapter
             clipToPadding = false
         }
 
-        rootView.findViewById<RecyclerView>(R.id.study_modules_recycler).apply {
+        binding.studyModulesContainer.studyModulesRecycler.apply {
             adapter = studyModulesAdapter
             clipToPadding = false
         }
 
-        rootView.findViewById<RecyclerView>(R.id.classes_recycler).apply {
+        binding.classesContainer.classesRecycler.apply {
             adapter = classesAdapter
             clipToPadding = false
         }
     }
 
     private fun setupListeners() {
-        val rootView = binding.root
-
         // Notification badge click
         binding.notificationButton.setOnClickListener {
             QlzSnackbar.showInfo(requireContext(), "Notifications clicked")
         }
 
         // Search click
-        rootView.findViewById<View>(R.id.search_placeholder).setOnClickListener {
+        binding.searchContainer.searchPlaceholder.setOnClickListener {
             QlzSnackbar.showInfo(requireContext(), "Search clicked")
         }
     }
@@ -133,6 +142,15 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.events.collect { event ->
                     handleUiEvent(event)
+                }
+            }
+        }
+
+        // Observe shared data from parent ViewModel if needed
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                sharedViewModel.sharedData.collectLatest { data ->
+                    // Handle shared data if needed
                 }
             }
         }
@@ -171,15 +189,40 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     private fun handleUiEvent(event: DashboardViewModel.DashboardUiEvent) {
         when (event) {
             is DashboardViewModel.DashboardUiEvent.NavigateToFolder -> {
-                QlzSnackbar.showInfo(requireContext(), "Navigating to folder: ${event.folderId}")
+                navigateToFolder(event.folderId)
             }
             is DashboardViewModel.DashboardUiEvent.NavigateToStudyModule -> {
-                QlzSnackbar.showInfo(requireContext(), "Navigating to study module: ${event.moduleId}")
+                navigateToStudyModule(event.moduleId)
             }
             is DashboardViewModel.DashboardUiEvent.NavigateToClass -> {
-                QlzSnackbar.showInfo(requireContext(), "Navigating to class: ${event.classId}")
+                navigateToClass(event.classId)
             }
         }
+    }
+
+    private fun navigateToFolder(folderId: String) {
+        // Use the parent fragment's NavController to navigate
+        val navController = requireActivity().findNavController(R.id.nav_host_fragment)
+        val action = HomeFragmentDirections.actionHomeFragmentToFolderDetailFragment(
+            folderId = folderId,
+            folderName = "" // You may need to get the folder name from your state
+        )
+        navController.navigate(action)
+    }
+
+    private fun navigateToStudyModule(moduleId: String) {
+        val navController = requireActivity().findNavController(R.id.nav_host_fragment)
+        val action = HomeFragmentDirections.actionHomeFragmentToModuleDetailFragment(moduleId)
+        navController.navigate(action)
+    }
+
+    private fun navigateToClass(classId: String) {
+        val navController = requireActivity().findNavController(R.id.nav_host_fragment)
+        val action = HomeFragmentDirections.actionHomeFragmentToClassDetailFragment(
+            classId = classId,
+            className = "" // You may need to get the class name from your state
+        )
+        navController.navigate(action)
     }
 
     private fun updateFolders(folders: List<Folder>) {
@@ -198,10 +241,9 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     }
 
     private fun updateStreakData(streakData: StreakData) {
-        val rootView = binding.root
-        // Set streak count and title
-        rootView.findViewById<TextView>(R.id.streak_count).text = streakData.currentStreak.toString()
-        rootView.findViewById<TextView>(R.id.streak_title).text = "Chuỗi ${streakData.currentStreak} tuần"
+        // Set streak count and title using ViewBinding
+        binding.streakCard.streakCount.text = streakData.currentStreak.toString()
+        binding.streakCard.streakTitle.text = "Chuỗi ${streakData.currentStreak} tuần"
 
         // Update streak days using the adapter
         streakDayAdapter.bindStreakDays(streakDayViews, streakData.weeklyStreak)

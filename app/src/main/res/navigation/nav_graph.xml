@@ -82,10 +82,12 @@
         <action
             android:id="@+id/action_homeFragment_to_classDetailFragment"
             app:destination="@id/classDetailFragment" />
-        <!-- Thêm action đến ModuleDetailFragment -->
         <action
             android:id="@+id/action_homeFragment_to_moduleDetailFragment"
             app:destination="@id/moduleDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_studySetFragment"
+            app:destination="@id/studySetFragment" />
     </fragment>
 
     <fragment
@@ -111,7 +113,6 @@
         <argument
             android:name="folderName"
             app:argType="string" />
-        <!-- Thêm action đến ModuleDetailFragment -->
         <action
             android:id="@+id/action_folderDetailFragment_to_moduleDetailFragment"
             app:destination="@id/moduleDetailFragment" />
@@ -128,7 +129,6 @@
         <argument
             android:name="className"
             app:argType="string" />
-        <!-- Action đã có -->
         <action
             android:id="@+id/action_classDetailFragment_to_moduleDetailFragment"
             app:destination="@id/moduleDetailFragment" />
@@ -139,13 +139,22 @@
         android:name="com.kardio.features.library.presentation.ui.StudySetsFragment"
         android:label="Study set"
         tools:layout="@layout/fragment_study_sets">
-        <!-- Action đã có -->
         <action
             android:id="@+id/action_studySetFragment_to_moduleDetailFragment"
             app:destination="@id/moduleDetailFragment" />
     </fragment>
 
-    <!-- ModuleDetailFragment đã có -->
+    <!-- Thêm fragment libraryFragment với action đến moduleDetailFragment -->
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="com.kardio.features.library.presentation.ui.LibraryFragment"
+        android:label="Library"
+        tools:layout="@layout/fragment_library">
+        <action
+            android:id="@+id/action_libraryFragment_to_moduleDetailFragment"
+            app:destination="@id/moduleDetailFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/moduleDetailFragment"
         android:name="com.kardio.features.module.presentation.ui.ModuleDetailFragment"
@@ -156,14 +165,66 @@
             app:argType="string" />
     </fragment>
 
-    <!-- Giữ nguyên các fragment bị comment nếu không cần -->
-    <!-- <fragment
+    <!-- Thêm global action để điều hướng đến moduleDetailFragment từ bất kỳ đâu -->
+    <action
+        android:id="@+id/global_action_to_moduleDetailFragment"
+        app:destination="@id/moduleDetailFragment" />
+
+    <!-- Các fragment bị comment giữ nguyên hiện trạng -->
+    <!-- Bạn có thể uncomment sau khi implement chúng -->
+    <!--
+    <fragment
         android:id="@+id/createStudyModuleFragment"
-        android:name="com.kardio.features.library.presentation.ui.CreateStudyModuleFragment"
+        android:name="com.kardio.features.module.presentation.ui.CreateStudyModuleFragment"
         android:label="Create Study Module"
         tools:layout="@layout/fragment_create_study_module">
+        <action
+            android:id="@+id/action_createStudyModuleFragment_to_moduleSettingsFragment"
+            app:destination="@id/moduleSettingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/moduleSettingsFragment"
+        android:name="com.kardio.features.module.presentation.ui.ModuleSettingsFragment"
+        android:label="Module Settings"
+        tools:layout="@layout/fragment_module_settings">
         <argument
-            android:name="classId"
+            android:name="moduleId"
+            app:argType="string"
+            android:defaultValue="new" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/flashcardStudyModeFragment"
+        android:name="com.kardio.features.flashcard.presentation.ui.FlashcardStudyModeFragment"
+        android:label="Flashcard Study Mode"
+        tools:layout="@layout/fragment_flashcard_study_mode">
+        <argument
+            android:name="flashcards"
+            app:argType="com.kardio.features.flashcard.domain.model.Flashcard[]" />
+        <argument
+            android:name="initialIndex"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/listStudyModuleOfFolderFragment"
+        android:name="com.kardio.features.module.presentation.ui.ListStudyModuleOfFolderFragment"
+        android:label="List Study Modules"
+        tools:layout="@layout/fragment_list_study_module_of_folder">
+        <argument
+            android:name="folderId"
             app:argType="string" />
-    </fragment> -->
+        <argument
+            android:name="folderName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_listStudyModuleOfFolderFragment_to_moduleDetailFragment"
+            app:destination="@id/moduleDetailFragment" />
+        <action
+            android:id="@+id/action_listStudyModuleOfFolderFragment_to_createStudyModuleFragment"
+            app:destination="@id/createStudyModuleFragment" />
+    </fragment>
+    -->
 </navigation>

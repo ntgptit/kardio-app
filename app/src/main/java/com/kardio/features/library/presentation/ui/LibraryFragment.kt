@@ -15,8 +15,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.kardio.R
 import com.kardio.core.base.BaseFragment
+import com.kardio.core.viewmodel.SharedViewModel
 import com.kardio.databinding.FragmentLibraryBinding
-import com.kardio.features.home.presentation.ui.HomeFragmentDirections
 import com.kardio.features.library.presentation.viewmodel.LibraryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -27,6 +27,9 @@ class LibraryFragment : BaseFragment<FragmentLibraryBinding>() {
 
     private val viewModel: LibraryViewModel by viewModels()
 
+    // Lấy SharedViewModel từ fragment cha (HomeFragment)
+    private val sharedViewModel: SharedViewModel by viewModels({ requireParentFragment() })
+
     override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentLibraryBinding {
         return FragmentLibraryBinding.inflate(inflater, container, false)
     }
@@ -34,6 +37,9 @@ class LibraryFragment : BaseFragment<FragmentLibraryBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewPager()
+
+        // Thông báo cho SharedViewModel rằng đang ở library
+        sharedViewModel.updateSelectedTab(3)
     }
 
     override fun setupViews() {
@@ -51,7 +57,6 @@ class LibraryFragment : BaseFragment<FragmentLibraryBinding>() {
             }
         }
     }
-
 
     private fun setupViewPager() {
         // Setup ViewPager with TabLayout
@@ -82,6 +87,15 @@ class LibraryFragment : BaseFragment<FragmentLibraryBinding>() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collectLatest { state ->
                     // Update UI based on state if needed
+                }
+            }
+        }
+
+        // Observe shared data from SharedViewModel
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                sharedViewModel.sharedData.collectLatest { data ->
+                    // Xử lý dữ liệu shared nếu cần
                 }
             }
         }

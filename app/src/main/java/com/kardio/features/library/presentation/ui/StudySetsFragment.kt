@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -116,9 +117,9 @@ class StudySetsFragment : BaseFragment<FragmentStudySetsBinding>() {
 
     private fun navigateToStudySetDetail(studySet: StudySet) {
         // Example navigation - adjust according to your nav graph
-        val action = StudySetsFragmentDirections.actionStudySetFragmentToModuleDetailFragment(
-            studySet.id,
-        )
-        findNavController().navigate(action)
+         findNavController().navigate(
+             R.id.action_libraryFragment_to_moduleDetailFragment,
+             bundleOf("moduleId" to studySet.id)
+         )
     }
 }
