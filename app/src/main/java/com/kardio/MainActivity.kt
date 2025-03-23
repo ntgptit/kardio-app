@@ -1,38 +1,35 @@
 package com.kardio
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import com.kardio.databinding.ActivityMainBinding
+import com.kardio.navigation.KardioNavHost
+import com.kardio.ui.theme.KardioTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
-
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Thiết lập edge-to-edge UI - làm cho nội dung phía dưới status bar và navigation bar
+        // Configure edge-to-edge
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        // Setup ViewBinding
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        // Setup Navigation
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
-
-        // Nếu cần, có thể thêm Navigation Listener ở đây để xử lý các destination khác nhau
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        setContent {
+            KardioTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    KardioNavHost()
+                }
+            }
+        }
     }
 }

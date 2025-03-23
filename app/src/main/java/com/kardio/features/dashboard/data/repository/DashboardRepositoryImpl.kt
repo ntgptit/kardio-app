@@ -8,27 +8,33 @@ import com.kardio.features.dashboard.domain.model.StreakData
 import com.kardio.features.dashboard.domain.model.StreakDay
 import com.kardio.features.dashboard.domain.model.StudyModule
 import com.kardio.features.dashboard.domain.repository.DashboardRepository
-import com.kardio.core.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/**
+ * Implementation của DashboardRepository
+ */
 class DashboardRepositoryImpl @Inject constructor(
     private val dashboardApi: DashboardApi,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    private val ioDispatcher: CoroutineDispatcher
 ) : DashboardRepository {
 
     override suspend fun getDashboardData(): DashboardData = withContext(ioDispatcher) {
         try {
-            // In a real app, we would fetch this from the API and map response to domain models
-            // For demo, return mock data
+            // Thực tế sẽ gọi API và map dữ liệu
+            // dashboardApi.getDashboardData().toDomain()
+
+            // Hiện tại trả về mock data
             return@withContext createMockDashboardData()
         } catch (e: Exception) {
             throw Exception("Failed to fetch dashboard data: ${e.message}")
         }
     }
 
-    // Mock data creation (in a real app this would come from the API)
+    /**
+     * Tạo dữ liệu giả cho dashboard
+     */
     private fun createMockDashboardData(): DashboardData {
         val folders = listOf(
             Folder(
@@ -140,17 +146,17 @@ class DashboardRepositoryImpl @Inject constructor(
         )
 
         val weeklyStreak = listOf(
-            StreakDay(day = 9, hasCompleted = false),
-            StreakDay(day = 10, hasCompleted = true),
-            StreakDay(day = 11, hasCompleted = false),
-            StreakDay(day = 12, hasCompleted = true),
-            StreakDay(day = 13, hasCompleted = true),
-            StreakDay(day = 14, hasCompleted = false),
-            StreakDay(day = 15, hasCompleted = false)
+            StreakDay(day = 16, hasCompleted = false),
+            StreakDay(day = 17, hasCompleted = true),
+            StreakDay(day = 18, hasCompleted = false),
+            StreakDay(day = 19, hasCompleted = true),
+            StreakDay(day = 20, hasCompleted = true),
+            StreakDay(day = 21, hasCompleted = false),
+            StreakDay(day = 22, hasCompleted = false)
         )
 
         val streakData = StreakData(
-            currentStreak = 14,
+            currentStreak = 15,
             weeklyStreak = weeklyStreak
         )
 

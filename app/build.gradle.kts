@@ -54,14 +54,24 @@ dependencies {
     implementation(libs.androidx.swiperefreshlayout)
 
     // Compose UI
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.activity.compose.v190)
-    implementation(libs.ui)
-    implementation(libs.ui.graphics)
-    implementation(libs.ui.tooling.preview)
-    implementation(libs.material)
-    implementation(libs.androidx.media3.common.ktx)
-    runtimeOnly(libs.androidx.ui.text.google.fonts)
+    implementation(libs.androidx.compose.ui.ui)
+    implementation(libs.androidx.compose.material3.material3)
+    implementation(libs.androidx.compose.ui.ui.tooling.preview)
+    implementation(libs.androidx.activity.compose.v181)
+    implementation(libs.androidx.lifecycle.viewmodel.compose.v262)
+    implementation(libs.androidx.navigation.compose.v275)
+    implementation(libs.androidx.hilt.navigation.compose.v110)
+    implementation(libs.androidx.material3.v112)
+
+    // Compose với Coil để load ảnh
+    implementation(libs.coil.compose.v250)
+
+    // Compose với Accompanist
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.accompanist.pager)
+
+    // Debugging
+    debugImplementation(libs.androidx.compose.ui.ui.tooling)
 
     // Lifecycle, ViewModel & Coroutines
     implementation(libs.androidx.lifecycle.runtime.ktx.v280)
